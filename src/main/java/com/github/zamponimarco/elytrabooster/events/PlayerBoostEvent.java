@@ -21,7 +21,7 @@ public class PlayerBoostEvent extends Event implements Cancellable {
 	private Player player;
 
 	public PlayerBoostEvent(ElytraBooster plugin, Player player, Boost boost) {
-		
+
 		this.player = player;
 
 		BukkitRunnable boostProcess = new BukkitRunnable() {

@@ -68,7 +68,7 @@ public class PortalSettingsInventoryHolder extends ElytraBoosterInventoryHolder 
 		registerClickConsumer(5,
 				getPortalSetting(HeadsUtil.skullFromValue(COOLDOWN_TYPE_HEAD), "cooldownType",
 						portal.getOutline().getCooldownType()),
-				getSettingConsumer("outlineType", portal.getOutline().getCooldownType(),
+				getSettingConsumer("cooldownType", portal.getOutline().getCooldownType(),
 						StringSettingInventoryHolder.class));
 		registerClickConsumer(6,
 				getPortalSetting(HeadsUtil.skullFromValue(COOLDOWN_HEAD), "cooldown", portal.getCooldown()),
