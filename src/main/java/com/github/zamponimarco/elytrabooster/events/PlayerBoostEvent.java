@@ -7,6 +7,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.github.zamponimarco.elytrabooster.actions.factory.ActionFactory;
 import com.github.zamponimarco.elytrabooster.boosts.Boost;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
@@ -24,7 +25,14 @@ public class PlayerBoostEvent extends Event implements Cancellable {
 
 		this.player = player;
 
-		BukkitRunnable boostProcess = new BukkitRunnable() {
+		plugin.getStatusMap().replace(player, true);
+		boost.getBoostActions().forEach(action -> ActionFactory.buildAction(plugin, action, player));
+		player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 20, 1);
+		getBoostProcess(plugin, boost).runTaskTimer(plugin, 0, 1);
+	}
+
+	private BukkitRunnable getBoostProcess(ElytraBooster plugin, Boost boost) {
+		return new BukkitRunnable() {
 
 			double tempVelocity = boost.getInitialVelocity();
 			double d = Math.pow((boost.getFinalVelocity() / boost.getInitialVelocity()),
@@ -51,10 +59,6 @@ public class PlayerBoostEvent extends Event implements Cancellable {
 				tempVelocity *= d;
 			}
 		};
-
-		plugin.getStatusMap().replace(player, true);
-		player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 20, 1);
-		boostProcess.runTaskTimer(plugin, 0, 1);
 	}
 
 	/**
@@ -79,25 +83,16 @@ public class PlayerBoostEvent extends Event implements Cancellable {
 								.create());
 	}
 
-	/**
-	 * Returns the Handler List of the event
-	 */
 	@Override
 	public HandlerList getHandlers() {
 		return HANDLERS_LIST;
 	}
 
-	/**
-	 * Returns whether the event is cancelled
-	 */
 	@Override
 	public boolean isCancelled() {
 		return cancelled;
 	}
 
-	/**
-	 * Sets the cancellation of the event
-	 */
 	@Override
 	public void setCancelled(boolean isCancelled) {
 		cancelled = isCancelled;
@@ -105,10 +100,6 @@ public class PlayerBoostEvent extends Event implements Cancellable {
 
 	public Player getPlayer() {
 		return player;
-	}
-
-	public void setPlayer(Player player) {
-		this.player = player;
 	}
 
 }

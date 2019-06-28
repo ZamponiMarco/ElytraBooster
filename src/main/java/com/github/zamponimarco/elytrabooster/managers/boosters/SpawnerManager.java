@@ -11,11 +11,16 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import com.github.zamponimarco.elytrabooster.boosters.Booster;
-import com.github.zamponimarco.elytrabooster.boosters.factory.BoosterFactory;
 import com.github.zamponimarco.elytrabooster.boosters.factory.SpawnerFactory;
 import com.github.zamponimarco.elytrabooster.boosters.spawners.AbstractSpawner;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 
+/**
+ * Handles data of the spawners
+ * 
+ * @author Marco
+ *
+ */
 public class SpawnerManager implements BoosterManager<AbstractSpawner> {
 
 	private final static String FILENAME = "spawners.yml";
@@ -79,13 +84,7 @@ public class SpawnerManager implements BoosterManager<AbstractSpawner> {
 		Objects.requireNonNull(id);
 		return spawners.get(id);
 	}
-
-	public void setBooster(String id, AbstractSpawner spawner) {
-		Objects.requireNonNull(id);
-		Objects.requireNonNull(spawner);
-		spawners.put(id, spawner);
-	}
-
+	
 	public void removeBooster(String id) {
 		spawners.remove(id);
 	}
@@ -93,9 +92,10 @@ public class SpawnerManager implements BoosterManager<AbstractSpawner> {
 	public AbstractSpawner reloadBooster(Booster booster) {
 		saveConfig();
 		booster.stopBoosterTask();
-		AbstractSpawner newSpawner = SpawnerFactory.buildBooster(plugin,
-				getDataYaml().getConfigurationSection(booster.getId()));
-		setBooster(booster.getId(), newSpawner);
+		String id = booster.getId();
+		removeBooster(id);
+		addBooster(id);
+		AbstractSpawner newSpawner = getBooster(id);
 		return newSpawner;
 	}
 
@@ -134,9 +134,5 @@ public class SpawnerManager implements BoosterManager<AbstractSpawner> {
 		}
 	}
 
-	@Override
-	public Class<? extends BoosterFactory> getFactory() {
-		return SpawnerFactory.class;
-	}
 
 }

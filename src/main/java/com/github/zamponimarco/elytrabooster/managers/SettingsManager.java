@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.EnumMap;
 import java.util.Map;
 
-import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.settings.Settings;
@@ -18,7 +18,7 @@ public class SettingsManager implements DataManager {
 	private ElytraBooster plugin;
 
 	private File dataFile;
-	private FileConfiguration dataYaml;
+	private YamlConfiguration dataYaml;
 	private Map<Settings, String> settings = new EnumMap<Settings, String>(Settings.class);
 
 	public SettingsManager(ElytraBooster plugin) {
@@ -41,7 +41,7 @@ public class SettingsManager implements DataManager {
 
 	@Override
 	public void loadDataYaml() {
-		dataYaml = plugin.getConfig();
+		dataYaml = (YamlConfiguration) plugin.getConfig();
 	}
 
 	@Override
@@ -68,20 +68,8 @@ public class SettingsManager implements DataManager {
 		}
 	}
 
-	public File getDataFile() {
-		return dataFile;
-	}
-
-	public void setDataFile(File dataFile) {
-		this.dataFile = dataFile;
-	}
-
-	public FileConfiguration getDataYaml() {
+	public YamlConfiguration getDataYaml() {
 		return dataYaml;
-	}
-
-	public void setDataYaml(FileConfiguration dataYaml) {
-		this.dataYaml = dataYaml;
 	}
 
 	public Map<Settings, String> getSettings() {

@@ -6,6 +6,7 @@ import java.util.List;
 import org.bukkit.Location;
 
 import com.github.zamponimarco.elytrabooster.boosters.Booster;
+import com.github.zamponimarco.elytrabooster.boosts.Boost;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.entityholders.EntityHolder;
 import com.github.zamponimarco.elytrabooster.managers.boosters.BoosterManager;
@@ -81,6 +82,10 @@ public abstract class AbstractSpawner implements Booster{
 
 	public int getCooldown() {
 		return cooldown;
+	}
+	
+	public Boost getBoost() {
+		return holder.getBoost();
 	}
 
 }

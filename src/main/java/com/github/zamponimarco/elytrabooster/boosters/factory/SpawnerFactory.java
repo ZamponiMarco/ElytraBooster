@@ -1,5 +1,8 @@
 package com.github.zamponimarco.elytrabooster.boosters.factory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -43,8 +46,11 @@ public class SpawnerFactory implements BoosterFactory {
 
 		String trailString = spawnerConfiguration.getString("trail", "simple");
 		BoostTrail trail = BoostTrailFactory.buildBoostTrail(trailString);
+		
+		List<String> boostActions = new ArrayList<String>();
+		boostActions = spawnerConfiguration.getStringList("boostActions");
 
-		Boost boost = new SimpleBoost(boostDuration, initialVelocity, finalVelocity, trail);
+		Boost boost = new SimpleBoost(boostDuration, initialVelocity, finalVelocity, trail, boostActions);
 
 		String entityString = spawnerConfiguration.getString("entity", "firework");
 		Class<? extends Entity> entityClass = FireworkEntity.class;
@@ -54,7 +60,7 @@ public class SpawnerFactory implements BoosterFactory {
 		} catch (Exception e) {
 		}
 
-		EntityHolder holder = new EntityHolder(plugin, entityClass, maxEntities, boost);
+		EntityHolder holder = new EntityHolder(plugin, entityClass, maxEntities, boost, id);
 
 		int cooldown = spawnerConfiguration.getInt("cooldown", 60);
 

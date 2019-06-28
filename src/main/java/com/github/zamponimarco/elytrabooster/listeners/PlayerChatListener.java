@@ -27,14 +27,13 @@ public class PlayerChatListener implements Listener {
 		Map<HumanEntity, Map<Booster, String>> settingsMap = StringSettingInventoryHolder.getSettingsMap();
 		Player p = e.getPlayer();
 		if (settingsMap != null && settingsMap.get(p) != null) {
-			boolean isThereBooster = !settingsMap.get(p).keySet().contains(null);
-			if (isThereBooster) {
+			if (!settingsMap.get(p).keySet().contains(null)) {
 				runModifySyncTask(p, e.getMessage(), settingsMap);
-				e.setCancelled(true);
 			} else {
 				runCreateSyncTask(p, e.getMessage(), settingsMap);
-				e.setCancelled(true);
 			}
+			settingsMap.remove(p);
+			e.setCancelled(true);
 		}
 	}
 
@@ -62,7 +61,6 @@ public class PlayerChatListener implements Listener {
 			} else {
 				p.sendMessage(MessagesUtil.color("&aBooster creation &6&lcancelled"));
 			}
-			settingsMap.remove(p);
 		});
 	}
 
@@ -79,7 +77,6 @@ public class PlayerChatListener implements Listener {
 			} else {
 				p.sendMessage(MessagesUtil.color("&aThe value &6&lhasn't&a been modified."));
 			}
-			settingsMap.remove(p);
 		});
 	}
 

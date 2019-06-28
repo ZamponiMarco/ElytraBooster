@@ -3,7 +3,6 @@ package com.github.zamponimarco.elytrabooster.commands.portal;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.github.zamponimarco.elytrabooster.boosters.factory.PortalFactory;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.managers.boosters.PortalManager;
 import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
@@ -26,8 +25,8 @@ public class PortalCreateCommand extends PortalCommand {
 		String newPortalId = arguments[0];
 
 		if (!portalManager.getBoostersMap().containsKey(newPortalId)) {
-			portalManager.setBooster(newPortalId, PortalFactory.buildBooster(plugin,
-					portalManager.createDefaultBoosterConfiguration(player, newPortalId)));
+			portalManager.createDefaultBoosterConfiguration(player, newPortalId);
+			portalManager.addBooster(newPortalId);
 			player.sendMessage(MessagesUtil.color("&aPortal created, &6ID: &a" + newPortalId));
 		} else {
 			invalidPortal();

@@ -19,7 +19,7 @@ public class EntityHolder {
 	private int maxEntities;
 	private Boost boost;
 
-	public EntityHolder(ElytraBooster plugin, Class<? extends Entity> entityClass, int maxEntities, Boost boost) {
+	public EntityHolder(ElytraBooster plugin, Class<? extends Entity> entityClass, int maxEntities, Boost boost, String spawner) {
 		this.plugin = plugin;
 		this.entityClass = entityClass;
 		this.maxEntities = maxEntities;

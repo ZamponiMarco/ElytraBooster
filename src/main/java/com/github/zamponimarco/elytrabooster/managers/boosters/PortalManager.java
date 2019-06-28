@@ -11,7 +11,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import com.github.zamponimarco.elytrabooster.boosters.Booster;
-import com.github.zamponimarco.elytrabooster.boosters.factory.BoosterFactory;
 import com.github.zamponimarco.elytrabooster.boosters.factory.PortalFactory;
 import com.github.zamponimarco.elytrabooster.boosters.portals.AbstractPortal;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
@@ -122,12 +121,6 @@ public class PortalManager implements BoosterManager<AbstractPortal> {
 		return portals.get(id);
 	}
 
-	public void setBooster(String id, AbstractPortal portal) {
-		Objects.requireNonNull(id);
-		Objects.requireNonNull(portal);
-		portals.put(id, portal);
-	}
-
 	public void removeBooster(String id) {
 		portals.remove(id);
 	}
@@ -135,9 +128,10 @@ public class PortalManager implements BoosterManager<AbstractPortal> {
 	public AbstractPortal reloadBooster(Booster booster) {
 		saveConfig();
 		booster.stopBoosterTask();
-		AbstractPortal newPortal = PortalFactory.buildBooster(plugin,
-				getDataYaml().getConfigurationSection(booster.getId()));
-		setBooster(booster.getId(), newPortal);
+		String id = booster.getId();
+		removeBooster(id);
+		addBooster(id);
+		AbstractPortal newPortal = getBooster(id);
 		return newPortal;
 	}
 
@@ -151,11 +145,6 @@ public class PortalManager implements BoosterManager<AbstractPortal> {
 
 	public YamlConfiguration getDataYaml() {
 		return dataYaml;
-	}
-
-	@Override
-	public Class<? extends BoosterFactory> getFactory() {
-		return PortalFactory.class;
 	}
 
 }

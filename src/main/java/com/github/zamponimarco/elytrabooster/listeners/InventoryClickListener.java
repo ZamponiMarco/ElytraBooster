@@ -17,8 +17,7 @@ public class InventoryClickListener implements Listener {
 		}
 
 		if (e.getClickedInventory().getHolder() instanceof ElytraBoosterInventoryHolder) {
-			ElytraBoosterInventoryHolder holder = (ElytraBoosterInventoryHolder) e.getClickedInventory().getHolder();
-			holder.handleClickEvent(e);
+			((ElytraBoosterInventoryHolder) e.getClickedInventory().getHolder()).handleClickEvent(e);
 		}
 	}
 

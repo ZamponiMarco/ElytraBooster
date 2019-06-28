@@ -10,7 +10,6 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-import com.github.zamponimarco.elytrabooster.boosters.factory.PortalFactory;
 import com.github.zamponimarco.elytrabooster.boosters.portals.AbstractPortal;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.managers.boosters.PortalManager;
@@ -66,8 +65,7 @@ public class PortalMoveCommand extends PortalCommand {
 
 		portal.stopBoosterTask();
 		portalManager.saveConfig();
-		portalManager.setBooster(id, PortalFactory.buildBooster(plugin,
-				portalManager.getDataYaml().getConfigurationSection(id)));
+		portalManager.addBooster(id);
 	}
 
 	@Override
