@@ -30,6 +30,11 @@ public class FireworkPadVisual extends PadVisual {
 				r.nextDouble() * 0.1 - 0.05, 0.12, r.nextDouble() * 0.1 - 0.05));
 		center.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, center.clone().add(new Vector(0, 2.1, 0)), 1, 0.1,
 				0, 0.1, 0.01);
+		if (item.isDead()) {
+			stopVisual();
+			initializeVisual();
+		} else {				
+		}
 	}
 
 	@Override
@@ -66,6 +71,11 @@ public class FireworkPadVisual extends PadVisual {
 	@Override
 	public void stopVisual() {
 		item.remove();
+	}
+
+	@Override
+	public String getName() {
+		return "firework";
 	}
 
 }

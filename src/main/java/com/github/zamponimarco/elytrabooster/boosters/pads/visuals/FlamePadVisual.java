@@ -29,6 +29,10 @@ public class FlamePadVisual extends PadVisual {
 		circlePoints.forEach(point -> point.getWorld().spawnParticle(Particle.FLAME, point, 0,
 				r.nextDouble() * 0.1 - 0.05, 0.08, r.nextDouble() * 0.1 - 0.05));
 		center.getWorld().spawnParticle(Particle.FLAME, center.clone().add(new Vector(0, 2.2, 0)), 1, 0.1, 0.1, 0.1, 0.01);
+		if (item.isDead()) {
+			stopVisual();
+			initializeVisual();
+		} 
 	}
 
 	@Override
@@ -65,6 +69,11 @@ public class FlamePadVisual extends PadVisual {
 	@Override
 	public void stopVisual() {
 		item.remove();
+	}
+
+	@Override
+	public String getName() {
+		return "flame";
 	}
 
 }

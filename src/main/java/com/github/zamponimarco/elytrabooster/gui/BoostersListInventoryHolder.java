@@ -30,6 +30,7 @@ public class BoostersListInventoryHolder extends ElytraBoosterInventoryHolder {
 	private static final String ACTIVE_PORTAL_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTIxOTI4ZWE2N2QzYThiOTdkMjEyNzU4ZjE1Y2NjYWMxMDI0Mjk1YjE4NWIzMTkyNjQ4NDRmNGM1ZTFlNjFlIn19fQ=====";
 	private static final String NOT_ACTIVE_PORTAL_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjVlZjY4ZGNiZDU4MjM0YmE3YWVlMmFkOTFjYTZmYTdjZTIzZjlhMzIzNDViNDhkNmU1ZjViODZhNjhiNWIifX19===";
 	private static final String SPAWNER_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjQ3ZTJlNWQ1NWI2ZDA0OTQzNTE5YmVkMjU1N2M2MzI5ZTMzYjYwYjkwOWRlZTg5MjNjZDg4YjExNTIxMCJ9fX0======";
+	private static final String PAD_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTA1YTJjYWI4YjY4ZWE1N2UzYWY5OTJhMzZlNDdjOGZmOWFhODdjYzg3NzYyODE5NjZmOGMzY2YzMWEzOCJ9fX0=======";
 
 	private String title;
 	private String boosterString;
@@ -56,7 +57,7 @@ public class BoostersListInventoryHolder extends ElytraBoosterInventoryHolder {
 		this.inventory = Bukkit.createInventory(this, 54, title);
 		toList.forEach(booster -> registerClickConsumer(toList.indexOf(booster), getBoosterItem(booster),
 				getBoosterConsumer(toList.indexOf(booster))));
-		registerClickConsumer(51, getCreateItem(), getCreateConsumer("portal"));
+		registerClickConsumer(51, getCreateItem(), getCreateConsumer(boosterString));
 		if (page != maxPage) {
 			registerClickConsumer(53, HeadsUtil.skullFromValue(ARROW_LEFT_HEAD), e -> e.getWhoClicked().openInventory(
 					new BoostersListInventoryHolder(plugin, title, boosterString, boosters, page + 1).getInventory()));
@@ -84,7 +85,7 @@ public class BoostersListInventoryHolder extends ElytraBoosterInventoryHolder {
 		} else if (booster instanceof AbstractSpawner) {
 			return HeadsUtil.skullFromValue(SPAWNER_HEAD);
 		} else if (booster instanceof AbstractPad) {
-			return HeadsUtil.skullFromValue(SPAWNER_HEAD);
+			return HeadsUtil.skullFromValue(PAD_HEAD);
 		}
 		return null;
 	}

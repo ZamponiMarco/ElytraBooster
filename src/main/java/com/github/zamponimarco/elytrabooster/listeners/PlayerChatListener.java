@@ -32,7 +32,6 @@ public class PlayerChatListener implements Listener {
 			} else {
 				runCreateSyncTask(p, e.getMessage(), settingsMap);
 			}
-			settingsMap.remove(p);
 			e.setCancelled(true);
 		}
 	}
@@ -53,6 +52,7 @@ public class PlayerChatListener implements Listener {
 			} else {
 				p.sendMessage(MessagesUtil.color("&aBooster creation &6&lcancelled"));
 			}
+			settingsMap.remove(p);
 		});
 	}
 
@@ -69,6 +69,7 @@ public class PlayerChatListener implements Listener {
 			} else {
 				p.sendMessage(MessagesUtil.color("&aThe value &6&lhasn't&a been modified."));
 			}
+			settingsMap.remove(p);
 		});
 	}
 

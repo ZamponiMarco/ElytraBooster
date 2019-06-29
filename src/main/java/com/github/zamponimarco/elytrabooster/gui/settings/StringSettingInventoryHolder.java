@@ -19,14 +19,13 @@ public class StringSettingInventoryHolder extends SettingInventoryHolder impleme
 
 	private static final String MODIFY_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWE3NWM4ZTUxYzNkMTA1YmFiNGM3ZGUzM2E3NzA5MzczNjRiNWEwMWMxNWI3ZGI4MmNjM2UxZmU2ZWI5MzM5NiJ9fX0==";
 
-	private static Map<HumanEntity, Map<Booster, String>> settingsMap;
+	private static Map<HumanEntity, Map<Booster, String>> settingsMap = new HashMap<>();
 	private boolean isBoosterCreation;
 
 	public StringSettingInventoryHolder(ElytraBooster plugin, String key, Booster booster, HumanEntity player,
 			Object value) {
 		super(plugin, key, booster, player, value);
 		isBoosterCreation = booster == null;
-		settingsMap = new HashMap<>();
 		initializeInventory();
 	}
 

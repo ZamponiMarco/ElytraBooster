@@ -18,5 +18,7 @@ public abstract class PadVisual {
 	public abstract void initializeVisual();
 	
 	public abstract void stopVisual();
+
+	public abstract String getName();
 	
 }

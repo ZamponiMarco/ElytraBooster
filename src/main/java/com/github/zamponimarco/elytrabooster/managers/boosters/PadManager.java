@@ -79,8 +79,22 @@ public class PadManager implements BoosterManager<AbstractPad> {
 
 	@Override
 	public void setParam(String id, String param, String value) {
-		// TODO Auto-generated method stub
-
+		ConfigurationSection portal = getDataYaml().getConfigurationSection(id);
+		switch (param) {
+		case "verticalVelocity":
+		case "horizontalVelocity":
+			portal.set(param, Double.valueOf(value));
+			break;
+		case "cooldown":
+			portal.set(param, Integer.valueOf(value));
+			break;
+		case "trail":
+		case "visual":
+			portal.set(param, value);
+			break;
+		default:
+			throw new IllegalArgumentException();
+		}
 	}
 
 	@Override
