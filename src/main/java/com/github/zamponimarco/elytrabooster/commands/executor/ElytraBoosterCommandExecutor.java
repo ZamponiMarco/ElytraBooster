@@ -12,16 +12,15 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 
+import com.github.zamponimarco.elytrabooster.commands.factory.BoosterCommandFactory;
 import com.github.zamponimarco.elytrabooster.commands.factory.CommandFactory;
 import com.github.zamponimarco.elytrabooster.commands.factory.ElytraBoosterCommandFactory;
-import com.github.zamponimarco.elytrabooster.commands.factory.PortalCommandFactory;
-import com.github.zamponimarco.elytrabooster.commands.factory.SpawnerCommandFactory;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.google.common.collect.Lists;
 
 public class ElytraBoosterCommandExecutor implements CommandExecutor, TabCompleter {
 
-	private static final List<String> SUBTYPES = Lists.newArrayList("portal", "spawner", "help", "reload");
+	private static final List<String> SUBTYPES = Lists.newArrayList("portal", "spawner", "help", "reload", "pad");
 	private static final List<String> PORTAL_SUBCOMMANDS = Lists.newArrayList("create", "delete", "disable", "enable",
 			"help", "move", "near", "list", "set");
 	private static final List<String> SPAWNER_SUBCOMMANDS = Lists.newArrayList("create", "delete", "help", "list",
@@ -41,18 +40,27 @@ public class ElytraBoosterCommandExecutor implements CommandExecutor, TabComplet
 			String subType = args.length >= 1 ? args[0] : "";
 			String subCommand = "";
 			String[] arguments = new String[0];
+			String extra = "";
 
 			CommandFactory commandFactory = null;
 			switch (subType) {
 			case "portal":
-				commandFactory = new PortalCommandFactory();
+				commandFactory = new BoosterCommandFactory();
 				subCommand = args.length >= 2 ? args[1] : "";
 				arguments = args.length >= 3 ? Arrays.copyOfRange(args, 2, args.length) : new String[0];
+				extra = subType;
 				break;
 			case "spawner":
-				commandFactory = new SpawnerCommandFactory();
+				commandFactory = new BoosterCommandFactory();
 				subCommand = args.length >= 2 ? args[1] : "";
 				arguments = args.length >= 3 ? Arrays.copyOfRange(args, 2, args.length) : new String[0];
+				extra = subType;
+				break;
+			case "pad":
+				commandFactory = new BoosterCommandFactory();
+				subCommand = args.length >= 2 ? args[1] : "";
+				arguments = args.length >= 3 ? Arrays.copyOfRange(args, 2, args.length) : new String[0];
+				extra = subType;
 				break;
 			case "reload":
 				commandFactory = new ElytraBoosterCommandFactory();
@@ -63,7 +71,7 @@ public class ElytraBoosterCommandExecutor implements CommandExecutor, TabComplet
 				subCommand = "help";
 			}
 
-			commandFactory.buildCommand(plugin, sender, subCommand, arguments, isSenderPlayer).checkExecution();
+			commandFactory.buildCommand(plugin, sender, subCommand, arguments, isSenderPlayer, extra).checkExecution();
 		}
 		return false;
 	}

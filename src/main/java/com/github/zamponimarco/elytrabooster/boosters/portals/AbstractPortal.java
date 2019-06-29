@@ -9,10 +9,10 @@ import org.bukkit.Location;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.github.zamponimarco.elytrabooster.boosters.Booster;
-import com.github.zamponimarco.elytrabooster.boosts.Boost;
+import com.github.zamponimarco.elytrabooster.boosts.SimpleBoost;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.events.FinishedCooldownEvent;
-import com.github.zamponimarco.elytrabooster.events.PlayerBoostEvent;
+import com.github.zamponimarco.elytrabooster.events.PlayerSimpleBoostEvent;
 import com.github.zamponimarco.elytrabooster.managers.boosters.BoosterManager;
 import com.github.zamponimarco.elytrabooster.outlines.BlockPortalOutline;
 import com.github.zamponimarco.elytrabooster.outlines.PortalOutline;
@@ -37,7 +37,7 @@ public abstract class AbstractPortal implements Booster {
 	protected String id;
 	protected Location center;
 	protected char axis;
-	protected Boost boost;
+	protected SimpleBoost boost;
 	protected PortalOutline outline;
 	protected List<UnionPortal> portalsUnion;
 	protected int cooldown;
@@ -68,7 +68,7 @@ public abstract class AbstractPortal implements Booster {
 	 * @param sorter
 	 * @param measures
 	 */
-	public AbstractPortal(ElytraBooster plugin, String id, Location center, char axis, Boost boost,
+	public AbstractPortal(ElytraBooster plugin, String id, Location center, char axis, SimpleBoost boost,
 			PortalOutline outline, List<UnionPortal> portalsUnion, int cooldown, PointSorter sorter, String measures) {
 		super();
 		this.plugin = plugin;
@@ -123,7 +123,7 @@ public abstract class AbstractPortal implements Booster {
 	 * Runs the timer task that checks for users inside the portal and draws the
 	 * outline
 	 */
-	public void runPortalTask() {
+	public void runBoosterTask() {
 		if (!isActive()) {
 			outlineTaskNumber = plugin.getServer().getScheduler()
 					.runTaskTimer(plugin, () -> drawOutline(), 1, outlineInterval).getTaskId();
@@ -152,7 +152,7 @@ public abstract class AbstractPortal implements Booster {
 		plugin.getStatusMap().keySet().forEach(player -> {
 			if (!onCooldown() && !plugin.getStatusMap().get(player) && player.hasPermission("eb.boosters.boost")
 					&& isInUnionPortalArea(player.getLocation(), 0)) {
-				Bukkit.getPluginManager().callEvent(new PlayerBoostEvent(plugin, player, boost));
+				Bukkit.getPluginManager().callEvent(new PlayerSimpleBoostEvent(plugin, player, (SimpleBoost) boost));
 				cooldown();
 			}
 		});
@@ -319,7 +319,7 @@ public abstract class AbstractPortal implements Booster {
 		return sorter;
 	}
 
-	public Boost getBoost() {
+	public SimpleBoost getBoost() {
 		return boost;
 	}
 

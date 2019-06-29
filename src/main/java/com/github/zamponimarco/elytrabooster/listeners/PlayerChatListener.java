@@ -40,15 +40,7 @@ public class PlayerChatListener implements Listener {
 	private void runCreateSyncTask(Player p, String value, Map<HumanEntity, Map<Booster, String>> settingsMap) {
 		plugin.getServer().getScheduler().runTask(plugin, () -> {
 			String key = settingsMap.get(p).get(null);
-			BoosterManager<?> boosterManager = null;
-			switch (key) {
-			case "portal":
-				boosterManager = plugin.getPortalManager();
-				break;
-			case "spawner":
-				boosterManager = plugin.getSpawnerManager();
-				break;
-			}
+			BoosterManager<?> boosterManager = BoosterManager.getBoosterManager(key);
 
 			if (!value.equalsIgnoreCase("exit")) {
 				if (!boosterManager.getBoostersMap().containsKey(value)) {

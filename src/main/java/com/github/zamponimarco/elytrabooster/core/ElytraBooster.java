@@ -13,16 +13,20 @@ import com.github.zamponimarco.elytrabooster.listeners.InventoryClickListener;
 import com.github.zamponimarco.elytrabooster.listeners.PlayerChatListener;
 import com.github.zamponimarco.elytrabooster.listeners.PlayerGlideListener;
 import com.github.zamponimarco.elytrabooster.managers.SettingsManager;
+import com.github.zamponimarco.elytrabooster.managers.boosters.PadManager;
 import com.github.zamponimarco.elytrabooster.managers.boosters.PortalManager;
 import com.github.zamponimarco.elytrabooster.managers.boosters.SpawnerManager;
 import com.github.zamponimarco.elytrabooster.settings.Settings;
 
 public class ElytraBooster extends JavaPlugin {
 
+	private static ElytraBooster instance;
+	
 	private Map<Player, Boolean> statusMap;
 	private SettingsManager settingsManager;
 	private PortalManager portalManager;
 	private SpawnerManager spawnerManager;
+	private PadManager padManager;
 
 	public void onEnable() {
 		setUpFolder();
@@ -42,12 +46,15 @@ public class ElytraBooster extends JavaPlugin {
 	}
 
 	private void startupTasks() {
+		instance = this;
+		
 		settingsManager = new SettingsManager(this);
 		if (Boolean.valueOf(settingsManager.getSetting(Settings.METRICS))) {
 			new Metrics(this);
 		}
 		portalManager = new PortalManager(this);
 		spawnerManager = new SpawnerManager(this);
+		padManager = new PadManager(this);
 		statusMap = new HashMap<Player, Boolean>();
 		CommandExecutor executor = new ElytraBoosterCommandExecutor(this);
 		getCommand("eb").setExecutor(executor);
@@ -71,6 +78,14 @@ public class ElytraBooster extends JavaPlugin {
 
 	public SpawnerManager getSpawnerManager() {
 		return spawnerManager;
+	}
+	
+	public PadManager getPadManager() {
+		return padManager;
+	}
+
+	public static ElytraBooster getInstance() {
+		return instance;
 	}
 
 }

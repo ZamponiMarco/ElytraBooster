@@ -8,6 +8,6 @@ import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 public interface CommandFactory {
 
 	public AbstractCommand buildCommand(ElytraBooster plugin, CommandSender sender, String subCommand,
-			String[] arguments, boolean isSenderPlayer);
+			String[] arguments, boolean isSenderPlayer, String extra);
 
 }

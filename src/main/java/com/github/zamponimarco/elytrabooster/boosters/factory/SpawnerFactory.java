@@ -10,7 +10,6 @@ import org.bukkit.configuration.ConfigurationSection;
 
 import com.github.zamponimarco.elytrabooster.boosters.spawners.AbstractSpawner;
 import com.github.zamponimarco.elytrabooster.boosters.spawners.SphericSpawner;
-import com.github.zamponimarco.elytrabooster.boosts.Boost;
 import com.github.zamponimarco.elytrabooster.boosts.SimpleBoost;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.entities.Entity;
@@ -50,7 +49,7 @@ public class SpawnerFactory implements BoosterFactory {
 		List<String> boostActions = new ArrayList<String>();
 		boostActions = spawnerConfiguration.getStringList("boostActions");
 
-		Boost boost = new SimpleBoost(boostDuration, initialVelocity, finalVelocity, trail, boostActions);
+		SimpleBoost boost = new SimpleBoost(trail, boostActions, boostDuration, initialVelocity, finalVelocity);
 
 		String entityString = spawnerConfiguration.getString("entity", "firework");
 		Class<? extends Entity> entityClass = FireworkEntity.class;

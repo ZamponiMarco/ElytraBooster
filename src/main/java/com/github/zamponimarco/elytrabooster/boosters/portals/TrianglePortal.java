@@ -6,7 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 import com.github.zamponimarco.elytrabooster.boosters.portals.utils.PortalUtils;
-import com.github.zamponimarco.elytrabooster.boosts.Boost;
+import com.github.zamponimarco.elytrabooster.boosts.SimpleBoost;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.outlines.PortalOutline;
 import com.github.zamponimarco.elytrabooster.outlines.pointsorters.PointSorter;
@@ -16,13 +16,13 @@ public class TrianglePortal extends AbstractPortal {
 	private Location point2;
 	private Location point3;
 
-	public TrianglePortal(ElytraBooster plugin, String id, Location center, char axis, Boost boost, PortalOutline outline,
+	public TrianglePortal(ElytraBooster plugin, String id, Location center, char axis, SimpleBoost boost, PortalOutline outline,
 			List<UnionPortal> portalsUnion, int cooldown, PointSorter sorter, String measures) {
 		super(plugin, id, center, axis, boost, outline, portalsUnion, cooldown, sorter, measures);
 		try {
 			initMeasures();
 			points = getUnionPoints();
-			super.runPortalTask();
+			super.runBoosterTask();
 		} catch (Exception e) {
 			Bukkit.getLogger().warning(warnMessage());
 		}

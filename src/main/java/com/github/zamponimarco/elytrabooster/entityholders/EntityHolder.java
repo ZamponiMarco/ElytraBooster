@@ -6,7 +6,7 @@ import java.util.Random;
 
 import org.bukkit.Location;
 
-import com.github.zamponimarco.elytrabooster.boosts.Boost;
+import com.github.zamponimarco.elytrabooster.boosts.SimpleBoost;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.entities.Entity;
 import com.github.zamponimarco.elytrabooster.entities.factory.EntityFactory;
@@ -17,9 +17,9 @@ public class EntityHolder {
 	private Class<? extends Entity> entityClass;
 	private List<Entity> entities;
 	private int maxEntities;
-	private Boost boost;
+	private SimpleBoost boost;
 
-	public EntityHolder(ElytraBooster plugin, Class<? extends Entity> entityClass, int maxEntities, Boost boost, String spawner) {
+	public EntityHolder(ElytraBooster plugin, Class<? extends Entity> entityClass, int maxEntities, SimpleBoost boost, String spawner) {
 		this.plugin = plugin;
 		this.entityClass = entityClass;
 		this.maxEntities = maxEntities;
@@ -66,7 +66,7 @@ public class EntityHolder {
 		entities.remove(entity);
 	}
 
-	public Boost getBoost() {
+	public SimpleBoost getBoost() {
 		return boost;
 	}
 

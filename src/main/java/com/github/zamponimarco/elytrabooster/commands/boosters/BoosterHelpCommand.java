@@ -1,4 +1,4 @@
-package com.github.zamponimarco.elytrabooster.commands.portal;
+package com.github.zamponimarco.elytrabooster.commands.boosters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,15 +9,15 @@ import org.bukkit.command.CommandSender;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
 
-public class PortalHelpCommand extends PortalCommand {
+public class BoosterHelpCommand extends BoosterCommand {
 
-	public PortalHelpCommand(ElytraBooster plugin, CommandSender sender, String subCommand, String[] arguments,
-			boolean isSenderPlayer) {
-		super(plugin, sender, subCommand, arguments, isSenderPlayer);
+	public BoosterHelpCommand(ElytraBooster plugin, CommandSender sender, String subCommand, String[] arguments,
+			boolean isSenderPlayer, String boosterString) {
+		super(plugin, sender, subCommand, arguments, isSenderPlayer, boosterString);
 	}
 
 	private List<String> pages;
-
+	
 	@Override
 	protected void execute() {
 		pages = new ArrayList<String>();
@@ -32,14 +32,13 @@ public class PortalHelpCommand extends PortalCommand {
 		}
 
 		sender.sendMessage(pages.get(pageToPrint));
-
 	}
 
 	@Override
 	protected boolean isOnlyPlayer() {
 		return false;
 	}
-
+	
 	private void setUpPages() {
 		StringBuilder page = new StringBuilder();
 		page.append(MessagesUtil.header("ElytraBooster Help"));

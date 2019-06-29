@@ -134,5 +134,4 @@ public class SpawnerManager implements BoosterManager<AbstractSpawner> {
 		}
 	}
 
-
 }

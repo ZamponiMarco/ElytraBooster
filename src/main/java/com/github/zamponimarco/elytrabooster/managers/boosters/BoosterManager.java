@@ -6,10 +6,23 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
 import com.github.zamponimarco.elytrabooster.boosters.Booster;
+import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.managers.DataManager;
 
 public interface BoosterManager<T extends Booster> extends DataManager {
 
+	public static BoosterManager<?> getBoosterManager(String boosterString){
+		switch(boosterString) {
+		case "portal":
+			return ElytraBooster.getInstance().getPortalManager();
+		case "spawner":
+			return ElytraBooster.getInstance().getSpawnerManager();
+		case "pad":
+			return ElytraBooster.getInstance().getPadManager();
+		}
+		return null;
+	}
+	
 	/**
 	 * Creates a default yaml configuration section for a certain booster
 	 * 

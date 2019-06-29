@@ -4,9 +4,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 import com.github.zamponimarco.elytrabooster.boosts.Boost;
+import com.github.zamponimarco.elytrabooster.boosts.SimpleBoost;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.entityholders.EntityHolder;
-import com.github.zamponimarco.elytrabooster.events.PlayerBoostEvent;
+import com.github.zamponimarco.elytrabooster.events.PlayerSimpleBoostEvent;
 import com.github.zamponimarco.elytrabooster.settings.Settings;
 
 public abstract class Entity {
@@ -37,7 +38,7 @@ public abstract class Entity {
 		plugin.getStatusMap().keySet().forEach(player -> {
 			if (!plugin.getStatusMap().get(player) && player.hasPermission("eb.boosters.boost")
 					&& player.getLocation().distance(location) <= 1.0) {
-				Bukkit.getPluginManager().callEvent(new PlayerBoostEvent(plugin, player, boost));
+				Bukkit.getPluginManager().callEvent(new PlayerSimpleBoostEvent(plugin, player, (SimpleBoost) boost));
 				onActivation();
 				holderDespawn();
 			}

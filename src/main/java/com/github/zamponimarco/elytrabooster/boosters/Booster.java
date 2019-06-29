@@ -1,6 +1,7 @@
 package com.github.zamponimarco.elytrabooster.boosters;
 
-import com.github.zamponimarco.elytrabooster.boosts.Boost;
+import org.bukkit.Location;
+
 import com.github.zamponimarco.elytrabooster.managers.boosters.BoosterManager;
 
 public interface Booster {
@@ -9,8 +10,10 @@ public interface Booster {
 	
 	public String getId();
 	
-	public Boost getBoost();
-	
+	public Location getCenter();
+		
 	public void stopBoosterTask();
+
+	public void runBoosterTask();
 	
 }

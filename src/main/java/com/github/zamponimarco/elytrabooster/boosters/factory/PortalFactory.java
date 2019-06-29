@@ -13,7 +13,6 @@ import com.github.zamponimarco.elytrabooster.boosters.portals.CirclePortal;
 import com.github.zamponimarco.elytrabooster.boosters.portals.RectanglePortal;
 import com.github.zamponimarco.elytrabooster.boosters.portals.TrianglePortal;
 import com.github.zamponimarco.elytrabooster.boosters.portals.UnionPortal;
-import com.github.zamponimarco.elytrabooster.boosts.Boost;
 import com.github.zamponimarco.elytrabooster.boosts.SimpleBoost;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.outlines.PortalOutline;
@@ -77,7 +76,7 @@ public class PortalFactory implements BoosterFactory {
 		boostActions = portalConfiguration.getStringList("boostActions");
 
 		// Boost
-		Boost boost = new SimpleBoost(boostDuration, initialVelocity, finalVelocity, trail, boostActions);
+		SimpleBoost boost = new SimpleBoost(trail, boostActions, boostDuration, initialVelocity, finalVelocity);
 
 		// Portal Outline type
 		String outlineType = portalConfiguration.getString("outlineType", "STONE");
@@ -150,7 +149,7 @@ public class PortalFactory implements BoosterFactory {
 		return buildPortal(plugin, id, center, axis, boost, outline, portalsUnion, shape, cooldown, sorter, measures);
 	}
 
-	private static AbstractPortal buildPortal(ElytraBooster plugin, String id, Location center, char axis, Boost boost,
+	private static AbstractPortal buildPortal(ElytraBooster plugin, String id, Location center, char axis, SimpleBoost boost,
 			PortalOutline outline, List<UnionPortal> portalsUnion, String shape, int cooldown, PointSorter sorter,
 			String measures) {
 		switch (shape) {
@@ -170,7 +169,7 @@ public class PortalFactory implements BoosterFactory {
 	}
 
 	private static UnionPortal buildUnionPortal(ElytraBooster plugin, String id, Location center, char axis,
-			Boost boost, PortalOutline outline, List<UnionPortal> portalsUnion, String shape, int cooldown,
+			SimpleBoost boost, PortalOutline outline, List<UnionPortal> portalsUnion, String shape, int cooldown,
 			PointSorter sorter, String measures, boolean intersecate) {
 		return new UnionPortal(plugin, id, center, axis, boost, outline, portalsUnion, shape, cooldown, measures,
 				sorter, intersecate);

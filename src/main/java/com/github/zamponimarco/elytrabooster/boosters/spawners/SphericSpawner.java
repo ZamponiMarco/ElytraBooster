@@ -10,7 +10,7 @@ public class SphericSpawner extends AbstractSpawner {
 	public SphericSpawner(ElytraBooster plugin, String id, Location center, double minRadius, double maxRadius,
 			int cooldown, EntityHolder holder) {
 		super(plugin, id, center, minRadius, maxRadius, cooldown, holder);
-		runSpawnerTask();
+		runBoosterTask();
 	}
 
 }

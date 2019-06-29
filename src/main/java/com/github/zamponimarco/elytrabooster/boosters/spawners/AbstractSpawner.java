@@ -1,12 +1,9 @@
 package com.github.zamponimarco.elytrabooster.boosters.spawners;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.bukkit.Location;
 
 import com.github.zamponimarco.elytrabooster.boosters.Booster;
-import com.github.zamponimarco.elytrabooster.boosts.Boost;
+import com.github.zamponimarco.elytrabooster.boosts.SimpleBoost;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.entityholders.EntityHolder;
 import com.github.zamponimarco.elytrabooster.managers.boosters.BoosterManager;
@@ -23,8 +20,6 @@ public abstract class AbstractSpawner implements Booster{
 
 	protected int spawnTaskNumber;
 
-	protected List<Location> entities;
-
 	public AbstractSpawner(ElytraBooster plugin, String id, Location center, double minRadius, double maxRadius,
 			int cooldown, EntityHolder holder) {
 		this.plugin = plugin;
@@ -34,15 +29,13 @@ public abstract class AbstractSpawner implements Booster{
 		this.maxRadius = maxRadius;
 		this.cooldown = cooldown;
 		this.holder = holder;
-
-		this.entities = new ArrayList<Location>();
 	}
 	
 	public BoosterManager<?> getDataManager() {
 		return plugin.getSpawnerManager();
 	}
 
-	public void runSpawnerTask() {
+	public void runBoosterTask() {
 		this.spawnTaskNumber = plugin.getServer().getScheduler().runTaskTimer(plugin, () -> spawnEntity(), 0, cooldown)
 				.getTaskId();
 	}
@@ -84,7 +77,7 @@ public abstract class AbstractSpawner implements Booster{
 		return cooldown;
 	}
 	
-	public Boost getBoost() {
+	public SimpleBoost getBoost() {
 		return holder.getBoost();
 	}
 

@@ -8,20 +8,20 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.github.zamponimarco.elytrabooster.actions.factory.ActionFactory;
-import com.github.zamponimarco.elytrabooster.boosts.Boost;
+import com.github.zamponimarco.elytrabooster.boosts.SimpleBoost;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
 
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 
-public class PlayerBoostEvent extends Event implements Cancellable {
+public class PlayerSimpleBoostEvent extends Event implements Cancellable {
 
 	private static final HandlerList HANDLERS_LIST = new HandlerList();
 	private boolean cancelled;
 	private Player player;
 
-	public PlayerBoostEvent(ElytraBooster plugin, Player player, Boost boost) {
+	public PlayerSimpleBoostEvent(ElytraBooster plugin, Player player, SimpleBoost boost) {
 
 		this.player = player;
 
@@ -31,7 +31,7 @@ public class PlayerBoostEvent extends Event implements Cancellable {
 		getBoostProcess(plugin, boost).runTaskTimer(plugin, 0, 1);
 	}
 
-	private BukkitRunnable getBoostProcess(ElytraBooster plugin, Boost boost) {
+	private BukkitRunnable getBoostProcess(ElytraBooster plugin, SimpleBoost boost) {
 		return new BukkitRunnable() {
 
 			double tempVelocity = boost.getInitialVelocity();
@@ -68,7 +68,7 @@ public class PlayerBoostEvent extends Event implements Cancellable {
 	 * @param portal
 	 * @param counter
 	 */
-	private void sendProgressMessage(Player player, Boost boost, int counter) {
+	private void sendProgressMessage(Player player, SimpleBoost boost, int counter) {
 		int progress = (int) Math.floor((counter / (double) boost.getBoostDuration()) * 30);
 
 		StringBuilder sb = new StringBuilder("");

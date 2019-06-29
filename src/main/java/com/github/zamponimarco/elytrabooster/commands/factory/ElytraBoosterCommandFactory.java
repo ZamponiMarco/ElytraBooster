@@ -11,7 +11,7 @@ public class ElytraBoosterCommandFactory implements CommandFactory {
 
 	@Override
 	public AbstractCommand buildCommand(ElytraBooster plugin, CommandSender sender, String subCommand,
-			String[] arguments, boolean isSenderPlayer) {
+			String[] arguments, boolean isSenderPlayer, String extra) {
 		switch (subCommand) {
 		case "reload":
 			return new ElytraBoosterReloadCommand(plugin, sender, subCommand, arguments, isSenderPlayer);

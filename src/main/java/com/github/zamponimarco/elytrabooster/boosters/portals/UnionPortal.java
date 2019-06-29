@@ -7,7 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 import com.github.zamponimarco.elytrabooster.boosters.portals.utils.PortalUtils;
-import com.github.zamponimarco.elytrabooster.boosts.Boost;
+import com.github.zamponimarco.elytrabooster.boosts.SimpleBoost;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.outlines.BlockPortalOutline;
 import com.github.zamponimarco.elytrabooster.outlines.PortalOutline;
@@ -21,7 +21,7 @@ public class UnionPortal extends AbstractPortal {
 	private Object measures2;
 	private boolean intersecate;
 
-	public UnionPortal(ElytraBooster plugin, String id, Location center, char axis, Boost boost, PortalOutline outline,
+	public UnionPortal(ElytraBooster plugin, String id, Location center, char axis, SimpleBoost boost, PortalOutline outline,
 			List<UnionPortal> portalsUnion, String shape, int cooldown, String measures, PointSorter sorter,
 			boolean intersecate) {
 		super(plugin, id, center, axis, boost, outline, portalsUnion, cooldown, sorter, measures);
