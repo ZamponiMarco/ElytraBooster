@@ -84,7 +84,7 @@ public class BoostersListInventoryHolder extends ElytraBoosterInventoryHolder {
 		} else if (booster instanceof AbstractSpawner) {
 			return HeadsUtil.skullFromValue(SPAWNER_HEAD);
 		} else if (booster instanceof AbstractPad) {
-			return HeadsUtil.skullFromValue(null);
+			return HeadsUtil.skullFromValue(SPAWNER_HEAD);
 		}
 		return null;
 	}

@@ -18,6 +18,7 @@ public class ElytraBoosterReloadCommand extends AbstractCommand {
 		
 		plugin.getSpawnerManager().getBoostersMap().values().forEach(spawner -> spawner.stopBoosterTask());
 		plugin.getPortalManager().getBoostersMap().values().forEach(portal -> portal.stopBoosterTask());
+		plugin.getPadManager().getBoostersMap().values().forEach(pad -> pad.stopBoosterTask());
 		plugin.getServer().getScheduler().cancelTasks(plugin);
 		plugin.getSettingsManager().reloadData();
 		plugin.getPortalManager().reloadData();

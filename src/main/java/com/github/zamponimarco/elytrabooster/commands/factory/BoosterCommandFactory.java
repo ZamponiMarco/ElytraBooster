@@ -4,6 +4,7 @@ import org.apache.commons.lang.WordUtils;
 import org.bukkit.command.CommandSender;
 
 import com.github.zamponimarco.elytrabooster.commands.boosters.BoosterCommand;
+import com.github.zamponimarco.elytrabooster.commands.boosters.BoosterHelpCommand;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 
 public class BoosterCommandFactory implements CommandFactory {
@@ -19,8 +20,8 @@ public class BoosterCommandFactory implements CommandFactory {
 							boolean.class, String.class)
 					.newInstance(plugin, sender, subCommand, arguments, isSenderPlayer, extra);
 		} catch (Exception e) {
+			return new BoosterHelpCommand(plugin, sender, subCommand, arguments, isSenderPlayer, extra);
 		}
-		return null;
 	}
 
 }

@@ -12,6 +12,7 @@ import com.github.zamponimarco.elytrabooster.commands.executor.ElytraBoosterComm
 import com.github.zamponimarco.elytrabooster.listeners.InventoryClickListener;
 import com.github.zamponimarco.elytrabooster.listeners.PlayerChatListener;
 import com.github.zamponimarco.elytrabooster.listeners.PlayerGlideListener;
+import com.github.zamponimarco.elytrabooster.listeners.PlayerSwapHandItemsListener;
 import com.github.zamponimarco.elytrabooster.managers.SettingsManager;
 import com.github.zamponimarco.elytrabooster.managers.boosters.PadManager;
 import com.github.zamponimarco.elytrabooster.managers.boosters.PortalManager;
@@ -37,6 +38,7 @@ public class ElytraBooster extends JavaPlugin {
 	public void onDisable() {
 		getServer().getScheduler().cancelTasks(this);
 		spawnerManager.getBoostersMap().values().forEach(spawner -> spawner.stopBoosterTask());
+		padManager.getBoostersMap().values().forEach(pad -> pad.stopBoosterTask());
 	}
 
 	private void setUpFolder() {
@@ -62,6 +64,7 @@ public class ElytraBooster extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new PlayerGlideListener(this), this);
 		getServer().getPluginManager().registerEvents(new InventoryClickListener(), this);
 		getServer().getPluginManager().registerEvents(new PlayerChatListener(this), this);
+		getServer().getPluginManager().registerEvents(new PlayerSwapHandItemsListener(this), this);
 	}
 
 	public PortalManager getPortalManager() {
