@@ -21,11 +21,13 @@ public class PlayerSwapHandItemsListener implements Listener {
 	@EventHandler
 	public void onPlayerSwapHandItems(PlayerSwapHandItemsEvent e) {
 		PadManager padManager = plugin.getPadManager();
-		if (!e.getPlayer().isGliding() && e.getPlayer().getEquipment().getChestplate().getType().equals(Material.ELYTRA)
+		if (!e.getPlayer().isGliding() && e.getPlayer().getEquipment().getChestplate() != null
+				&& e.getPlayer().getEquipment().getChestplate().getType().equals(Material.ELYTRA)
 				&& padManager.getBoostersMap().values().stream()
 						.anyMatch(pad -> pad.getCenter().distance(e.getPlayer().getLocation()) <= 1)) {
 			padManager.getBoostersMap().values().stream().forEach(pad -> {
 				if (pad.getCenter().distance(e.getPlayer().getLocation()) <= 1) {
+					pad.cooldown();
 					pad.getVisual().onBoost();
 					Bukkit.getPluginManager()
 							.callEvent(new PlayerVerticalBoostEvent(plugin, e.getPlayer(), pad.getBoost()));

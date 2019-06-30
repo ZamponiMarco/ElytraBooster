@@ -21,10 +21,8 @@ import com.google.common.collect.Lists;
 public class ElytraBoosterCommandExecutor implements CommandExecutor, TabCompleter {
 
 	private static final List<String> SUBTYPES = Lists.newArrayList("portal", "spawner", "help", "reload", "pad");
-	private static final List<String> PORTAL_SUBCOMMANDS = Lists.newArrayList("create", "delete", "disable", "enable",
+	private static final List<String> BOOSTER_SUBCOMMANDS = Lists.newArrayList("create", "delete", "disable", "enable",
 			"help", "move", "near", "list", "set");
-	private static final List<String> SPAWNER_SUBCOMMANDS = Lists.newArrayList("create", "delete", "help", "list",
-			"move", "near", "set");
 
 	private ElytraBooster plugin;
 
@@ -82,14 +80,7 @@ public class ElytraBoosterCommandExecutor implements CommandExecutor, TabComplet
 		if (args.length == 1) {
 			StringUtil.copyPartialMatches(args[0], SUBTYPES, completions);
 		} else if (args.length == 2) {
-			switch (args[0]) {
-			case "portal":
-				StringUtil.copyPartialMatches(args[1], PORTAL_SUBCOMMANDS, completions);
-				break;
-			case "spawner":
-				StringUtil.copyPartialMatches(args[1], SPAWNER_SUBCOMMANDS, completions);
-				break;
-			}
+			StringUtil.copyPartialMatches(args[1], BOOSTER_SUBCOMMANDS, completions);
 		}
 		Collections.sort(completions);
 		return completions;

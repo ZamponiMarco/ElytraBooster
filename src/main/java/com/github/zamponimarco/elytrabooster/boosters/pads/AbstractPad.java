@@ -1,6 +1,7 @@
 package com.github.zamponimarco.elytrabooster.boosters.pads;
 
 import org.bukkit.Location;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import com.github.zamponimarco.elytrabooster.boosters.Booster;
 import com.github.zamponimarco.elytrabooster.boosters.pads.visuals.PadVisual;
@@ -11,19 +12,25 @@ import com.github.zamponimarco.elytrabooster.managers.boosters.BoosterManager;
 public abstract class AbstractPad implements Booster {
 
 	protected ElytraBooster plugin;
+	protected AbstractPad pad;
 	protected String id;
 	protected Location center;
 	protected VerticalBoost boost;
 	protected PadVisual visual;
+	protected int cooldown;
 
+	protected int currCooldown;
 	protected int visualTaskId;
 
-	public AbstractPad(ElytraBooster plugin, String id, Location center, VerticalBoost boost, PadVisual visual) {
+	public AbstractPad(ElytraBooster plugin, String id, Location center, VerticalBoost boost, PadVisual visual,
+			int cooldown) {
 		this.plugin = plugin;
 		this.id = id;
 		this.center = center;
 		this.boost = boost;
 		this.visual = visual;
+		this.cooldown = cooldown;
+		this.pad = this;
 	}
 
 	public void runBoosterTask() {
@@ -39,6 +46,29 @@ public abstract class AbstractPad implements Booster {
 
 	public BoosterManager<?> getDataManager() {
 		return plugin.getPadManager();
+	}
+
+	public void cooldown() {
+		BukkitRunnable cooldownProcess = new BukkitRunnable() {
+			@Override
+			public void run() {
+				if (currCooldown > 0) {
+					currCooldown--;
+				} else {
+					pad.runBoosterTask();
+					this.cancel();
+				}
+			}
+		};
+		if (cooldown > 0) {
+			this.stopBoosterTask();
+			currCooldown = cooldown;
+			cooldownProcess.runTaskTimer(plugin, 0, 1);
+		}
+	}
+
+	public boolean onCooldown() {
+		return currCooldown > 0;
 	}
 
 	@Override
@@ -57,6 +87,10 @@ public abstract class AbstractPad implements Booster {
 	@Override
 	public Location getCenter() {
 		return center;
+	}
+	
+	public int getCooldown() {
+		return cooldown;
 	}
 
 }

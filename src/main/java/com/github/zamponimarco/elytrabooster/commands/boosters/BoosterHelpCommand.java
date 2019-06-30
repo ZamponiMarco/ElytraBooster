@@ -17,7 +17,7 @@ public class BoosterHelpCommand extends BoosterCommand {
 	}
 
 	private List<String> pages;
-	
+
 	@Override
 	protected void execute() {
 		pages = new ArrayList<String>();
@@ -25,7 +25,8 @@ public class BoosterHelpCommand extends BoosterCommand {
 		int numberOfPages = 1;
 
 		int pageToPrint;
-		if (arguments.length >= 1 && StringUtils.isNumeric(arguments[0]) && Integer.valueOf(arguments[0]) > numberOfPages) {
+		if (arguments.length >= 1 && StringUtils.isNumeric(arguments[0])
+				&& Integer.valueOf(arguments[0]) > numberOfPages) {
 			pageToPrint = Integer.valueOf(arguments[0]) - 1;
 		} else {
 			pageToPrint = 0;
@@ -38,18 +39,19 @@ public class BoosterHelpCommand extends BoosterCommand {
 	protected boolean isOnlyPlayer() {
 		return false;
 	}
-	
+
 	private void setUpPages() {
 		StringBuilder page = new StringBuilder();
 		page.append(MessagesUtil.header("ElytraBooster Help"));
-		page.append(MessagesUtil.color(String.format("&2/eb portal help &c[page] &7Print the portals help message.\n"
-				+ "&2/eb portal list &7List portals.\n"
-				+ "&2/eb portal create &c[id] &7Create a new portal.\n" + "&2/eb portal delete &c[id] &7Deletes the given portal.\n"
-				+ "&2/eb portal move &c[id] <x> <y> <z> &7Move the portal to your location or to the given coords, if present.\n"
-				+ "&2/eb portal set &c[id] [param:value,...] &7Sets the params to the values given in input.\n"
-				+ "&2/eb portal near &c[radius] &7List all the portals within [radius] blocks.\n"
-				+ "&2/eb portal disable &c[id] &7Disable the portal named [id]\n"
-				+ "&2/eb portal enable &c[id] &7Enable the portal named [id]\n")));
+		page.append(MessagesUtil.color(String.format("&2/eb booster help &c[page] &7Print the boosters help message.\n"
+				+ "&2/eb booster list &7List boosters.\n" + "&2/eb booster create &c[id] &7Create a new booster.\n"
+				+ "&2/eb booster delete &c[id] &7Deletes the given booster.\n"
+				+ "&2/eb booster move &c[id] <x> <y> <z> &7Move the booster to your location or to the given coords, if present.\n"
+				+ "&2/eb booster set &c[id] [param:value,...] &7Sets the params to the values given in input.\n"
+				+ "&2/eb booster near &c[radius] &7List all the boosters within [radius] blocks.\n"
+				+ "&2/eb booster disable &c[id] &7Disable the booster named [id]\n"
+				+ "&2/eb booster enable &c[id] &7Enable the booster named [id]\n"))
+				.replaceAll("booster", boosterString));
 		page.append(MessagesUtil.footer(1, 1));
 		pages.add(page.toString());
 	}

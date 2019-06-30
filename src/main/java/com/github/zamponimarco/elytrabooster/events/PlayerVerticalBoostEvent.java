@@ -8,6 +8,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import com.github.zamponimarco.elytrabooster.actions.factory.ActionFactory;
 import com.github.zamponimarco.elytrabooster.boosts.VerticalBoost;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 
@@ -24,6 +25,7 @@ public class PlayerVerticalBoostEvent extends Event implements Cancellable {
 		player.setVelocity(player.getLocation().getDirection().setY(0).multiply(boost.getHorizontalVelocity())
 				.add(new Vector(0, boost.getVerticalVelocity(), 0)));
 		player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 20, 1);
+		boost.getBoostActions().forEach(action -> ActionFactory.buildAction(plugin, action, player));
 		getOpenElytraProcess(plugin, player, boost).runTaskTimer(plugin, 0, 1);
 	}
 
@@ -35,6 +37,7 @@ public class PlayerVerticalBoostEvent extends Event implements Cancellable {
 				boost.getTrail().spawnTrail(player);
 				if (player.getVelocity().normalize().getY() < 0) {
 					player.setGliding(true);
+					plugin.getStatusMap().put(player, false);
 					this.cancel();
 				} else if (player.getFallDistance() > 1 && player.isOnGround()) {
 					this.cancel();

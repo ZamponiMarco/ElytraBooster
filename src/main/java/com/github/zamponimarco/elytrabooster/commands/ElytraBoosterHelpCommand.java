@@ -46,7 +46,8 @@ public class ElytraBoosterHelpCommand extends AbstractCommand {
 		page.append(MessagesUtil.color(String.format("&2/eb help &c[page] &7Print the help message.\n"
 				+ "&2/eb reload &7Reload ElytraBooster config files.\n"
 				+ "&2/eb portal help &7Print the portals help message.\n"
-				+ "&2/eb spawner help &7Print the spawners help message.\n")));
+				+ "&2/eb spawner help &7Print the spawners help message.\n"
+				+ "&2/eb pad help &7Print the pads help message.\n")));
 		page.append(MessagesUtil.footer(1, 1));
 		pages.add(page.toString());
 	}

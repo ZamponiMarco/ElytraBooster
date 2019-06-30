@@ -8,8 +8,8 @@ import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 
 public class SimplePad extends AbstractPad {
 
-	public SimplePad(ElytraBooster plugin, String id, Location center, VerticalBoost boost, PadVisual visual) {
-		super(plugin, id, center, boost, visual);
+	public SimplePad(ElytraBooster plugin, String id, Location center, VerticalBoost boost, PadVisual visual, int cooldown) {
+		super(plugin, id, center, boost, visual, cooldown);
 		runBoosterTask();
 	}
 

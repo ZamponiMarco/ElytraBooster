@@ -24,7 +24,7 @@ import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
 
 public class BoostersListInventoryHolder extends ElytraBoosterInventoryHolder {
 
-	private static final int PORTALS_NUMBER = 50;
+	private static final int BOOSTERS_NUMBER = 50;
 	private static final String ARROW_LEFT_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzY5N2MyNDg5MmNmYzAzYzcyOGZmYWVhYmYzNGJkZmI5MmQ0NTExNDdiMjZkMjAzZGNhZmE5M2U0MWZmOSJ9fX0=";
 	private static final String ARROW_RIGHT_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODZlMTQ1ZTcxMjk1YmNjMDQ4OGU5YmI3ZTZkNjg5NWI3Zjk2OWEzYjViYjdlYjM0YTUyZTkzMmJjODRkZjViIn19fQ===";
 	private static final String ACTIVE_PORTAL_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTIxOTI4ZWE2N2QzYThiOTdkMjEyNzU4ZjE1Y2NjYWMxMDI0Mjk1YjE4NWIzMTkyNjQ4NDRmNGM1ZTFlNjFlIn19fQ=====";
@@ -44,15 +44,15 @@ public class BoostersListInventoryHolder extends ElytraBoosterInventoryHolder {
 		this.title = title;
 		this.boosterString = boosterString;
 		this.boosters = boosters;
-		this.toList = boosters.stream().filter(portal -> boosters.indexOf(portal) >= (page - 1) * PORTALS_NUMBER
-				&& boosters.indexOf(portal) <= page * PORTALS_NUMBER - 1).collect(Collectors.toList());
+		this.toList = boosters.stream().filter(portal -> boosters.indexOf(portal) >= (page - 1) * BOOSTERS_NUMBER
+				&& boosters.indexOf(portal) <= page * BOOSTERS_NUMBER - 1).collect(Collectors.toList());
 		this.page = page;
 		initializeInventory();
 	}
 
 	@Override
 	protected void initializeInventory() {
-		int maxPage = (int) Math.ceil((boosters.size() > 0 ? boosters.size() : 1) / (double) PORTALS_NUMBER);
+		int maxPage = (int) Math.ceil((boosters.size() > 0 ? boosters.size() : 1) / (double) BOOSTERS_NUMBER);
 
 		this.inventory = Bukkit.createInventory(this, 54, title);
 		toList.forEach(booster -> registerClickConsumer(toList.indexOf(booster), getBoosterItem(booster),

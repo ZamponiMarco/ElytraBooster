@@ -40,7 +40,9 @@ public class PadFactory implements BoosterFactory {
 
 		String visualString = padConfiguration.getString("visual", "flame");
 		PadVisual visual = PadVisualFactory.buildPadVisual(visualString, center);
+		
+		int cooldown = padConfiguration.getInt("cooldown", 0);
 
-		return new SimplePad(plugin, id, center, boost, visual);
+		return new SimplePad(plugin, id, center, boost, visual, cooldown);
 	}
 }
