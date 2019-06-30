@@ -49,14 +49,15 @@ public class ElytraBooster extends JavaPlugin {
 
 	private void startupTasks() {
 		instance = this;
+	    new UpdateChecker(this).checkForUpdate();
 		
 		settingsManager = new SettingsManager(this);
-		if (Boolean.valueOf(settingsManager.getSetting(Settings.METRICS))) {
-			new Metrics(this);
-		}
 		portalManager = new PortalManager(this);
 		spawnerManager = new SpawnerManager(this);
 		padManager = new PadManager(this);
+		if (Boolean.valueOf(settingsManager.getSetting(Settings.METRICS))) {
+			new Metrics(this);
+		}
 		statusMap = new HashMap<Player, Boolean>();
 		CommandExecutor executor = new ElytraBoosterCommandExecutor(this);
 		getCommand("eb").setExecutor(executor);
