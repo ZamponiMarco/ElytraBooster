@@ -52,4 +52,8 @@ public class MushroomEntity extends Entity {
 			}
 		}, 0, 5).getTaskId();
 	}
+
+	@Override
+	public void onActivation() {
+	}
 }

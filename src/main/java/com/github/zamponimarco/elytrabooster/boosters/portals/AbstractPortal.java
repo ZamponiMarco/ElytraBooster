@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.github.zamponimarco.elytrabooster.boosters.Booster;
@@ -44,11 +45,11 @@ public abstract class AbstractPortal implements Booster {
 	protected PointSorter sorter;
 	protected String measures;
 
-	protected int outlineTaskNumber;
-	protected int checkTaskNumber;
 	protected List<Location> points;
-	protected int currCooldown;
 
+	private int outlineTaskNumber;
+	private int checkTaskNumber;
+	private int currCooldown;
 	private int outlineInterval;
 	private int checkInterval;
 
@@ -92,8 +93,6 @@ public abstract class AbstractPortal implements Booster {
 
 	/**
 	 * Initialize measures
-	 * 
-	 * @throws Exception
 	 */
 	protected abstract void initMeasures();
 
@@ -149,13 +148,16 @@ public abstract class AbstractPortal implements Booster {
 	 * Task that checks if the players are passing throught the portal
 	 */
 	protected void checkPlayersPassing() {
-		plugin.getStatusMap().keySet().forEach(player -> {
-			if (!onCooldown() && !plugin.getStatusMap().get(player) && player.hasPermission("eb.boosters.boost")
-					&& isInUnionPortalArea(player.getLocation(), 0)) {
-				Bukkit.getPluginManager().callEvent(new PlayerSimpleBoostEvent(plugin, player, (SimpleBoost) boost));
-				cooldown();
-			}
-		});
+		if (!onCooldown()) {
+			plugin.getStatusMap().keySet().stream().filter(player -> !plugin.getStatusMap().get(player)
+					&& player.hasPermission("eb.boosters.boost") && isInUnionPortalArea(player.getLocation(), 0))
+					.forEach(this::boostPlayer);
+		}
+	}
+
+	private void boostPlayer(Player player) {
+		Bukkit.getPluginManager().callEvent(new PlayerSimpleBoostEvent(plugin, player, (SimpleBoost) boost));
+		cooldown();
 	}
 
 	/**

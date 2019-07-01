@@ -52,4 +52,8 @@ public class FireworkEntity extends Entity {
 		}, 0, 4).getTaskId();
 	}
 
+	@Override
+	public void onActivation() {
+	}
+
 }

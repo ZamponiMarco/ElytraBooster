@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 
 import com.github.zamponimarco.elytrabooster.boosts.SimpleBoost;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
@@ -19,7 +20,8 @@ public class EntityHolder {
 	private int maxEntities;
 	private SimpleBoost boost;
 
-	public EntityHolder(ElytraBooster plugin, Class<? extends Entity> entityClass, int maxEntities, SimpleBoost boost, String spawner) {
+	public EntityHolder(ElytraBooster plugin, Class<? extends Entity> entityClass, int maxEntities, SimpleBoost boost,
+			String spawner) {
 		this.plugin = plugin;
 		this.entityClass = entityClass;
 		this.maxEntities = maxEntities;
@@ -31,14 +33,20 @@ public class EntityHolder {
 		if (entities.size() < maxEntities) {
 			Random r = new Random();
 			double multiply = maxRadius - minRadius;
-			double randomX = r.nextDouble() * 2 - 1;
-			double x = center.getX() + randomX * multiply + (Math.signum(randomX) > 0 ? minRadius : -minRadius);
-			double randomY = r.nextDouble() * 2 - 1;
-			double y = center.getY() + randomY * multiply + (Math.signum(randomX) > 0 ? minRadius : -minRadius);
-			double randomZ = r.nextDouble() * 2 - 1;
-			double z = center.getZ() + randomZ * multiply + (Math.signum(randomX) > 0 ? minRadius : -minRadius);
-			entities.add(EntityFactory.buildEntity(entityClass, plugin, this, new Location(center.getWorld(), x, y, z),
-					boost));
+			double x;
+			double y;
+			double z;
+			Location loc;
+			do {
+				double randomX = r.nextDouble() * 2 - 1;
+				x = center.getX() + randomX * multiply + (Math.signum(randomX) > 0 ? minRadius : -minRadius);
+				double randomY = r.nextDouble() * 2 - 1;
+				y = center.getY() + randomY * multiply + (Math.signum(randomX) > 0 ? minRadius : -minRadius);
+				double randomZ = r.nextDouble() * 2 - 1;
+				z = center.getZ() + randomZ * multiply + (Math.signum(randomX) > 0 ? minRadius : -minRadius);
+				loc = new Location(center.getWorld(), x, y, z);
+			} while (loc.getBlock().getType() != Material.AIR);
+			entities.add(EntityFactory.buildEntity(entityClass, plugin, this, loc, boost));
 		}
 	}
 
