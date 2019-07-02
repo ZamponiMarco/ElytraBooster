@@ -49,7 +49,7 @@ public class PadManager implements BoosterManager<AbstractPad> {
 	@Override
 	public void loadData() {
 		pads = new HashMap<String, AbstractPad>();
-		dataYaml.getKeys(false).forEach(id -> addBooster(id));
+		dataYaml.getKeys(false).forEach(this::addBooster);
 	}
 
 	@Override

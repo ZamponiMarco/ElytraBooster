@@ -21,6 +21,9 @@ import com.google.common.collect.Lists;
 
 public abstract class ElytraBoosterInventoryHolder implements InventoryHolder {
 
+	private static final String CREATE_ITEM_TITLE = "&a&lCreate Booster";
+	private static final String DELETE_ITEM_TITLE = "&a&lDelete Booster";
+	
 	private static final String DELETE_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTljZGI5YWYzOGNmNDFkYWE1M2JjOGNkYTc2NjVjNTA5NjMyZDE0ZTY3OGYwZjE5ZjI2M2Y0NmU1NDFkOGEzMCJ9fX0=";
 	private static final String CREATE_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTcxZDg5NzljMTg3OGEwNTk4N2E3ZmFmMjFiNTZkMWI3NDRmOWQwNjhjNzRjZmZjZGUxZWExZWRhZDU4NTIifX19=";
 
@@ -82,7 +85,7 @@ public abstract class ElytraBoosterInventoryHolder implements InventoryHolder {
 	protected ItemStack getDeleteItem() {
 		ItemStack item = HeadsUtil.skullFromValue(DELETE_HEAD);
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName(MessagesUtil.color("&c&lRemove Booster"));
+		meta.setDisplayName(MessagesUtil.color(DELETE_ITEM_TITLE));
 		meta.setLore(Lists.newArrayList(MessagesUtil.color("&6&l- &e&lLeft click &6to delete booster")));
 		item.setItemMeta(meta);
 		return item;
@@ -98,7 +101,7 @@ public abstract class ElytraBoosterInventoryHolder implements InventoryHolder {
 	protected ItemStack getCreateItem() {
 		ItemStack item = HeadsUtil.skullFromValue(CREATE_HEAD);
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName(MessagesUtil.color("&a&lCreate Booster"));
+		meta.setDisplayName(MessagesUtil.color(CREATE_ITEM_TITLE));
 		meta.setLore(Lists.newArrayList(MessagesUtil.color("&6&l- &e&lLeft click &6to create booster")));
 		item.setItemMeta(meta);
 		return item;

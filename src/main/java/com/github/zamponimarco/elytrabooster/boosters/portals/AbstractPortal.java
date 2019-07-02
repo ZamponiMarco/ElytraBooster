@@ -21,15 +21,13 @@ import com.github.zamponimarco.elytrabooster.outlines.pointsorters.PointSorter;
 import com.github.zamponimarco.elytrabooster.settings.Settings;
 import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
 
-import net.md_5.bungee.api.ChatColor;
-
 /**
  * Handles portal boost process
  * 
- * @author Marco
- *
  */
 public abstract class AbstractPortal implements Booster {
+
+	private static final String WARN_MSG = "&4Error with the creation of the portal &6%s &4. Check portals configuration.";
 
 	// Instance variables area ---
 
@@ -255,18 +253,8 @@ public abstract class AbstractPortal implements Booster {
 		return unionPoints;
 	}
 
-	/**
-	 * Generates a string that represents the portal
-	 */
-	@Override
-	public String toString() {
-		return MessagesUtil.color(String.format("&6Id: &a%s &6enabled: &a%b\n&6x/y/z: &a%.2f&6/&a%.2f&6/&a%.2f\n", id,
-				isActive(), center.getX(), center.getY(), center.getZ()));
-	}
-
 	public String warnMessage() {
-		return ChatColor.RED + "Error with the creation of the portal " + ChatColor.GOLD + id + ChatColor.RED
-				+ ". Check portals configuration.";
+		return MessagesUtil.color(String.format(WARN_MSG, getId()));
 	}
 
 	public ElytraBooster getPlugin() {

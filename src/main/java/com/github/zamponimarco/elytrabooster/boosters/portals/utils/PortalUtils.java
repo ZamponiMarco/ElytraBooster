@@ -16,6 +16,8 @@ import org.bukkit.World;
  */
 public class PortalUtils {
 
+	private static final double AXIS_DISTANCE = 1.0;
+	
 	/**
 	 * Algorithm to find the points of a circle
 	 * 
@@ -72,11 +74,11 @@ public class PortalUtils {
 
 		switch (axis) {
 		case 'x':
-			return distanceX <= 1 && Math.hypot(distanceZ, distanceY) < radius - epsilon;
+			return distanceX <= AXIS_DISTANCE && Math.hypot(distanceZ, distanceY) < radius - epsilon;
 		case 'y':
-			return distanceY <= 1 && Math.hypot(distanceX, distanceZ) < radius - epsilon;
+			return distanceY <= AXIS_DISTANCE && Math.hypot(distanceX, distanceZ) < radius - epsilon;
 		case 'z':
-			return distanceZ <= 1 && Math.hypot(distanceY, distanceX) < radius - epsilon;
+			return distanceZ <= AXIS_DISTANCE && Math.hypot(distanceY, distanceX) < radius - epsilon;
 		}
 		return false;
 	}
@@ -103,10 +105,10 @@ public class PortalUtils {
 		double distanceY = Math.abs(distance.getY());
 		double distanceZ = Math.abs(distance.getZ());
 
-		boolean isInX = axis == 'x' ? distanceX <= 1 : distanceX < halfLength - epsilon;
-		boolean isInY = axis == 'y' ? distanceY <= 1 : distanceY < halfLength - epsilon;
+		boolean isInX = axis == 'x' ? distanceX <= AXIS_DISTANCE : distanceX < halfLength - epsilon;
+		boolean isInY = axis == 'y' ? distanceY <= AXIS_DISTANCE : distanceY < halfLength - epsilon;
 		isInY = axis == 'z' ? distanceY < halfHeight - epsilon : isInY;
-		boolean isInZ = axis == 'z' ? distanceZ <= 1 : distanceZ < halfHeight - epsilon;
+		boolean isInZ = axis == 'z' ? distanceZ <= AXIS_DISTANCE : distanceZ < halfHeight - epsilon;
 
 		return isInX && isInY && isInZ;
 	}
@@ -156,7 +158,7 @@ public class PortalUtils {
 		boolean d23 = dotProduct(location, point2, point3, axis, epsilon);
 		boolean d31 = dotProduct(location, point3, point1, axis, epsilon);
 		boolean isInArea = (d12 && d23 && d31) || (!d12 && !d23 && !d31);
-		return isInArea && axisDistance <= 1;
+		return isInArea && axisDistance <= AXIS_DISTANCE;
 	}
 
 	public static boolean dotProduct(Location p1, Location p2, Location p3, char axis, double epsilon) {

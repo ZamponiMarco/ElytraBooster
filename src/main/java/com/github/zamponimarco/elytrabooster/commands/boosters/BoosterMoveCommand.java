@@ -48,7 +48,7 @@ public class BoosterMoveCommand extends BoosterCommand {
 		section.set("y", y);
 		section.set("z", z);
 
-		if (booster instanceof AbstractPortal) {
+		if (booster instanceof AbstractPortal && !((AbstractPortal) booster).getPortalsUnion().isEmpty()) {
 			Location oldLocation = booster.getCenter();
 			Location newLocation = new Location(world, x, y, z);
 			Vector movement = newLocation.clone().subtract(oldLocation.clone()).toVector();
@@ -57,9 +57,7 @@ public class BoosterMoveCommand extends BoosterCommand {
 				unionPortal.setCenter(unionPortal.getCenter().clone().add(movement));
 				portalsUnion.add(unionPortal.toString());
 			});
-			if (!portalsUnion.isEmpty()) {
-				section.set("portalsUnion", portalsUnion);
-			}
+			section.set("portalsUnion", portalsUnion);
 		}
 		booster.stopBoosterTask();
 		boosterManager.saveConfig();

@@ -4,15 +4,15 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.WordUtils;
 import org.bukkit.entity.Player;
 
 import com.github.zamponimarco.elytrabooster.actions.AbstractAction;
-import com.github.zamponimarco.elytrabooster.actions.EffectAction;
-import com.github.zamponimarco.elytrabooster.actions.ParticleAction;
-import com.github.zamponimarco.elytrabooster.actions.SoundAction;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 
 public class ActionFactory {
+	
+	private static final String PACKAGE_NAME = "com.github.zamponimarco.elytrabooster.actions.";
 
 	public static AbstractAction buildAction(ElytraBooster plugin, String actionString, Player player) {
 		Map<String, String> parameters = new HashMap<String, String>();
@@ -24,16 +24,14 @@ public class ActionFactory {
 			String[] keyValue = string.split("=");
 			parameters.put(keyValue[0], keyValue[1]);
 		});
-
-		switch (actionType) {
-		case "effect":
-			return new EffectAction(plugin, parameters);
-		case "particle":
-			return new ParticleAction(plugin, parameters);
-		case "sound":
-			return new SoundAction(plugin, parameters);
+		
+		try {
+			return (AbstractAction) Class
+					.forName(PACKAGE_NAME + WordUtils.capitalize(actionType) + "Action")
+					.getConstructor(ElytraBooster.class, Map.class).newInstance(plugin, parameters);
+		} catch (Exception e) {
+			return null;
 		}
-		return null;
 	}
 
 	private static String parsePlaceholders(String parametersString, Player player) {

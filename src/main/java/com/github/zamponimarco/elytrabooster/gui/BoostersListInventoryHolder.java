@@ -6,12 +6,17 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.util.Vector;
 
 import com.github.zamponimarco.elytrabooster.boosters.Booster;
 import com.github.zamponimarco.elytrabooster.boosters.pads.AbstractPad;
@@ -19,6 +24,7 @@ import com.github.zamponimarco.elytrabooster.boosters.portals.AbstractPortal;
 import com.github.zamponimarco.elytrabooster.boosters.spawners.AbstractSpawner;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.gui.factory.SettingsInventoryHolderFactory;
+import com.github.zamponimarco.elytrabooster.managers.boosters.BoosterManager;
 import com.github.zamponimarco.elytrabooster.utils.HeadsUtil;
 import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
 
@@ -96,6 +102,7 @@ public class BoostersListInventoryHolder extends ElytraBoosterInventoryHolder {
 				booster.getCenter().getX(), booster.getCenter().getY(), booster.getCenter().getZ())));
 		lore.add(MessagesUtil.color("&6&l- &e&lLeft click &6to open settings"));
 		lore.add(MessagesUtil.color("&6&l- &e&lRight click &6to teleport"));
+		lore.add(MessagesUtil.color("&6&l- &e&lMiddle click &6to move the portal to you"));
 		return lore;
 	}
 
@@ -107,8 +114,39 @@ public class BoostersListInventoryHolder extends ElytraBoosterInventoryHolder {
 						SettingsInventoryHolderFactory.buildSettingsInventoryHolder(plugin, booster).getInventory());
 			} else if (e.getClick().equals(ClickType.RIGHT)) {
 				e.getWhoClicked().teleport(booster.getCenter(), TeleportCause.PLUGIN);
+			} else if (e.getClick().equals(ClickType.MIDDLE)) {
+				movePortal(e.getWhoClicked(), booster);
 			}
 		};
+	}
+
+	private void movePortal(HumanEntity player, Booster booster) {
+		BoosterManager<?> boosterManager = BoosterManager.getBoosterManager(boosterString);
+
+		ConfigurationSection section = (ConfigurationSection) boosterManager.getDataYaml().get(booster.getId());
+		World world = player.getLocation().getWorld();
+		double x = player.getLocation().getBlockX();
+		double y = player.getLocation().getBlockY();
+		double z = player.getLocation().getBlockZ();
+		section.set("world", world.getName());
+		section.set("x", x);
+		section.set("y", y);
+		section.set("z", z);
+
+		if (booster instanceof AbstractPortal && !((AbstractPortal) booster).getPortalsUnion().isEmpty()) {
+			Location oldLocation = booster.getCenter();
+			Location newLocation = new Location(world, x, y, z);
+			Vector movement = newLocation.clone().subtract(oldLocation.clone()).toVector();
+			List<String> portalsUnion = new ArrayList<String>();
+			((AbstractPortal) booster).getPortalsUnion().forEach(portal -> {
+				portal.setCenter(portal.getCenter().clone().add(movement));
+				portalsUnion.add(portal.toString());
+			});
+			section.set("portalsUnion", portalsUnion);
+		}
+		booster.stopBoosterTask();
+		boosterManager.saveConfig();
+		boosterManager.addBooster(booster.getId());
 	}
 
 }

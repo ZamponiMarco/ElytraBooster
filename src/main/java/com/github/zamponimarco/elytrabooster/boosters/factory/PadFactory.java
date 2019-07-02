@@ -32,7 +32,7 @@ public class PadFactory implements BoosterFactory {
 
 		List<String> boostActions = new ArrayList<String>();
 		boostActions = padConfiguration.getStringList("boostActions");
-
+		
 		String trailString = padConfiguration.getString("trail", "simple");
 		BoostTrail trail = BoostTrailFactory.buildBoostTrail(trailString);
 
