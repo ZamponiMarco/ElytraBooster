@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
 
 import com.github.zamponimarco.elytrabooster.boosters.Booster;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
@@ -43,6 +44,11 @@ public class BoosterNearCommand extends BoosterCommand {
 	@Override
 	protected boolean isOnlyPlayer() {
 		return true;
+	}
+	
+	@Override
+	protected Permission getPermission() {
+		return new Permission("eb.admin.near");
 	}
 
 }

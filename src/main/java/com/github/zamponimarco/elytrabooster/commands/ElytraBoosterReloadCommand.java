@@ -1,6 +1,7 @@
 package com.github.zamponimarco.elytrabooster.commands;
 
 import org.bukkit.command.CommandSender;
+import org.bukkit.permissions.Permission;
 
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
@@ -31,6 +32,11 @@ public class ElytraBoosterReloadCommand extends AbstractCommand {
 	@Override
 	protected boolean isOnlyPlayer() {
 		return false;
+	}
+	
+	@Override
+	protected Permission getPermission() {
+		return new Permission("eb.admin.reload");
 	}
 
 }

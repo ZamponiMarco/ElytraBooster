@@ -2,6 +2,7 @@ package com.github.zamponimarco.elytrabooster.commands.boosters;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
 
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.managers.boosters.BoosterManager;
@@ -36,6 +37,11 @@ public class BoosterCreateCommand extends BoosterCommand {
 	@Override
 	protected boolean isOnlyPlayer() {
 		return true;
+	}
+	
+	@Override
+	protected Permission getPermission() {
+		return new Permission("eb.admin.create");
 	}
 
 }

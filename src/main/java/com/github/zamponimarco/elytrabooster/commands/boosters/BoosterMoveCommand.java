@@ -8,6 +8,7 @@ import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
 import org.bukkit.util.Vector;
 
 import com.github.zamponimarco.elytrabooster.boosters.Booster;
@@ -67,6 +68,11 @@ public class BoosterMoveCommand extends BoosterCommand {
 	@Override
 	protected boolean isOnlyPlayer() {
 		return true;
+	}
+	
+	@Override
+	protected Permission getPermission() {
+		return new Permission("eb.admin.move");
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.CommandSender;
+import org.bukkit.permissions.Permission;
 
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
@@ -50,6 +51,11 @@ public class ElytraBoosterHelpCommand extends AbstractCommand {
 				+ "&2/eb pad help &7Print the pads help message.\n")));
 		page.append(MessagesUtil.footer(1, 1));
 		pages.add(page.toString());
+	}
+
+	@Override
+	protected Permission getPermission() {
+		return new Permission("eb.admin.help");
 	}
 
 }

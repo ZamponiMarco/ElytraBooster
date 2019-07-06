@@ -1,11 +1,16 @@
 package com.github.zamponimarco.elytrabooster.commands;
 
 import org.bukkit.command.CommandSender;
+import org.bukkit.permissions.Permission;
 
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
 
 public abstract class AbstractCommand {
+
+	protected static final String NO_PERMISSION = MessagesUtil.color("&cYou don't have the permission");
+	protected static final String WRONG_SENDER = MessagesUtil.color("&cThis command can be used only by a player");
+	protected static final String INCORRECT_USAGE = MessagesUtil.color("&cIncorrect command syntax, type /eb help");
 
 	protected ElytraBooster plugin;
 	protected CommandSender sender;
@@ -25,28 +30,33 @@ public abstract class AbstractCommand {
 	protected boolean canSenderTypeExecute() {
 		return !isOnlyPlayer() || isSenderPlayer;
 	}
-	
+
 	protected boolean hasPermission() {
-		 return sender.hasPermission("eb.admin." + subCommand.toLowerCase());
+		return sender.hasPermission(getPermission());
 	}
 
 	public void checkExecution() {
-		String errorMessage = "";
-		errorMessage = !hasPermission()?MessagesUtil.color("&cYou don't have the permission"):errorMessage;
-		errorMessage = !canSenderTypeExecute()?MessagesUtil.color("&cThis command can be used only by a player"):errorMessage;
-		if (canSenderTypeExecute() && hasPermission()) {
-			execute();
-		} else {
-			sender.sendMessage(errorMessage);
+		if (!canSenderTypeExecute()) {
+			sender.sendMessage(WRONG_SENDER);
+			return;
 		}
+
+		if (!hasPermission()) {
+			sender.sendMessage(NO_PERMISSION);
+			return;
+		}
+
+		execute();
+	}
+
+	protected void incorrectUsage() {
+		sender.sendMessage(INCORRECT_USAGE);
 	}
 
 	protected abstract void execute();
 
 	protected abstract boolean isOnlyPlayer();
-	
-	protected void incorrectUsage() {
-		sender.sendMessage(MessagesUtil.color("&cIncorrect command syntax, type /eb help"));
-	}
+
+	protected abstract Permission getPermission();
 
 }

@@ -1,6 +1,7 @@
 package com.github.zamponimarco.elytrabooster.commands.boosters;
 
 import org.bukkit.command.CommandSender;
+import org.bukkit.permissions.Permission;
 
 import com.github.zamponimarco.elytrabooster.boosters.Booster;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
@@ -36,6 +37,11 @@ public class BoosterDisableCommand extends BoosterCommand {
 	@Override
 	protected boolean isOnlyPlayer() {
 		return false;
+	}
+	
+	@Override
+	protected Permission getPermission() {
+		return new Permission("eb.admin.disable");
 	}
 
 }

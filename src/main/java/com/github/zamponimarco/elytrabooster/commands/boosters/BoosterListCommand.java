@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
 
 import com.github.zamponimarco.elytrabooster.boosters.Booster;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
@@ -34,6 +35,11 @@ public class BoosterListCommand extends BoosterCommand {
 	@Override
 	protected boolean isOnlyPlayer() {
 		return true;
+	}
+	
+	@Override
+	protected Permission getPermission() {
+		return new Permission("eb.admin.list");
 	}
 
 }

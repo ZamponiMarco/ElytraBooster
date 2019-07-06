@@ -8,42 +8,50 @@ commands:
     description: Base ElytraBooster command
 permissions:
   eb.admin.create:
-    description: Portal creation permission
+    description: Booster creation permission
     default: op
   eb.admin.delete:
-    description: Portal deletion permission
+    description: Booster deletion permission
+    default: op
+  eb.admin.disable:
+    description: Booster disabling permission
+    default: op
+  eb.admin.enable:
+    description: Booster enabling permission
     default: op
   eb.admin.help:
     description: Show help message permission
     default: op
   eb.admin.list:
-    description: List existing portals permission
+    description: List existing boosters permission
     default: op
   eb.admin.move:
-    description: Portal moving permission
+    description: Booster moving permission
     default: op
   eb.admin.near:
-    description: List near portals permissio
+    description: List near portals permission
     default: op
   eb.admin.reload: 
     description: Reload plugin data permission
     default: op
   eb.admin.set:
-    description: Set portal parameters
+    description: Set booster parameters
     default: op
   eb.boosters.boost:
     default: true
   eb.boosters.*:
-    description: Wildcard portal usage permission
+    description: Wildcard booster usage permission
     default: true
     children:
-      eb.portals.boost: true
+      eb.boosters.boost: true
   eb.admin.*:
-    description: Wildcard portal editing permission
+    description: Wildcard booster editing permission
     default: op
     children:
       eb.admin.create: true
       eb.admin.delete: true
+      eb.admin.disable: true
+      eb.admin.enable: true
       eb.admin.help: true
       eb.admin.list: true
       eb.admin.move: true
