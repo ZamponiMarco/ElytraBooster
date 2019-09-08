@@ -4,7 +4,7 @@ import org.bukkit.command.CommandSender;
 
 import com.github.zamponimarco.elytrabooster.commands.AbstractCommand;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
-import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
+import com.github.zamponimarco.elytrabooster.utils.MessageUtils;
 
 public abstract class BoosterCommand extends AbstractCommand {
 
@@ -17,7 +17,7 @@ public abstract class BoosterCommand extends AbstractCommand {
 	}
 	
 	protected void invalidBooster() {
-		sender.sendMessage((MessagesUtil.color("&cBooster passed in input is invalid")));
+		sender.sendMessage((MessageUtils.color("&cBooster passed in input is invalid")));
 	}
 
 }

@@ -4,18 +4,18 @@ import java.util.function.Consumer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.github.zamponimarco.elytrabooster.boosters.Booster;
-import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
-import com.github.zamponimarco.elytrabooster.gui.factory.SettingsInventoryHolderFactory;
 import com.github.zamponimarco.elytrabooster.managers.boosters.BoosterManager;
-import com.github.zamponimarco.elytrabooster.utils.HeadsUtil;
-import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
+import com.github.zamponimarco.elytrabooster.utils.HeadUtils;
+import com.github.zamponimarco.elytrabooster.utils.MessageUtils;
 
 public class DoubleSettingInventoryHolder extends SettingInventoryHolder {
 
@@ -29,36 +29,33 @@ public class DoubleSettingInventoryHolder extends SettingInventoryHolder {
 
 	private double result;
 
-	public DoubleSettingInventoryHolder(ElytraBooster plugin, String key, Booster booster, HumanEntity player,
-			Object value) {
-		super(plugin, key, booster, player, value);
+	public DoubleSettingInventoryHolder(BoosterManager<?> manager, ConfigurationSection section, String key, Object value,
+			HumanEntity player, InventoryHolder holder) {
+		super(manager, section, key, value, player, holder);
 		this.result = (double) value;
-		initializeInventory();
 	}
 
 	@Override
 	protected void initializeInventory() {
-		BoosterManager<?> boosterManager = booster.getDataManager();
-		this.inventory = Bukkit.createInventory(this, 27, MessagesUtil.color("&6&lModify &e&l" + key));
-		registerClickConsumer(11, getModifyItem(-0.01, HeadsUtil.skullFromValue(ARROW_LEFT_HEAD)),
+		this.inventory = Bukkit.createInventory(this, 27, MessageUtils.color("&6&lModify &e&l" + key));
+		registerClickConsumer(11, getModifyItem(-0.01, HeadUtils.skullFromValue(ARROW_LEFT_HEAD)),
 				getConsumer(-0.01));
-		registerClickConsumer(10, getModifyItem(-0.1, HeadsUtil.skullFromValue(ARROW2_LEFT_HEAD)),
+		registerClickConsumer(10, getModifyItem(-0.1, HeadUtils.skullFromValue(ARROW2_LEFT_HEAD)),
 				getConsumer(-0.1));
-		registerClickConsumer(9, getModifyItem(-1.0, HeadsUtil.skullFromValue(ARROW3_LEFT_HEAD)),
+		registerClickConsumer(9, getModifyItem(-1.0, HeadUtils.skullFromValue(ARROW3_LEFT_HEAD)),
 				getConsumer(-1));
-		registerClickConsumer(15, getModifyItem(+0.01, HeadsUtil.skullFromValue(ARROW_RIGHT_HEAD)),
+		registerClickConsumer(15, getModifyItem(+0.01, HeadUtils.skullFromValue(ARROW_RIGHT_HEAD)),
 				getConsumer(+0.01));
-		registerClickConsumer(16, getModifyItem(+0.1, HeadsUtil.skullFromValue(ARROW2_RIGHT_HEAD)),
+		registerClickConsumer(16, getModifyItem(+0.1, HeadUtils.skullFromValue(ARROW2_RIGHT_HEAD)),
 				getConsumer(+0.1));
-		registerClickConsumer(17, getModifyItem(+1.0, HeadsUtil.skullFromValue(ARROW3_RIGHT_HEAD)),
+		registerClickConsumer(17, getModifyItem(+1.0, HeadUtils.skullFromValue(ARROW3_RIGHT_HEAD)),
 				getConsumer(+1));
 		registerClickConsumer(13, getConfirmItem(), e -> {
-			boosterManager.setParam(booster.getId(), key, String.valueOf(result));
-			booster = boosterManager.reloadBooster(booster);
-			player.openInventory(
-					SettingsInventoryHolderFactory.buildSettingsInventoryHolder(plugin, booster).getInventory());
-			player.sendMessage(MessagesUtil.color(
-					"&aPortal modified, &6ID: &a" + booster.getId() + ", &6" + key + ": &a" + String.valueOf(result)));
+			Booster booster = manager.getBooster(section.getName());
+			manager.setParam(booster.getId(), key, String.valueOf(value));
+			manager.reloadBooster(booster);
+			player.sendMessage(MessageUtils.color("&aObject modified: &6" + key + ": &e" + String.valueOf(value)));
+			player.openInventory(holder.getInventory());
 		});
 		registerClickConsumer(26, getBackItem(), getBackConsumer());
 		fillInventoryWith(Material.GRAY_STAINED_GLASS_PANE);
@@ -80,15 +77,15 @@ public class DoubleSettingInventoryHolder extends SettingInventoryHolder {
 
 	private ItemStack getModifyItem(double addition, ItemStack item) {
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName(MessagesUtil.color("&6&lModify -> &e&l" + String.valueOf(addition)));
+		meta.setDisplayName(MessageUtils.color("&6&lModify -> &e&l" + String.valueOf(addition)));
 		item.setItemMeta(meta);
 		return item;
 	}
 
 	private ItemStack getConfirmItem() {
-		ItemStack item = HeadsUtil.skullFromValue(SUBMIT);
+		ItemStack item = HeadUtils.skullFromValue(SUBMIT);
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName(MessagesUtil.color("&6&lResult = &e&l" + String.valueOf(result)));
+		meta.setDisplayName(MessageUtils.color("&6&lResult = &e&l" + String.valueOf(result)));
 		item.setItemMeta(meta);
 		return item;
 	}

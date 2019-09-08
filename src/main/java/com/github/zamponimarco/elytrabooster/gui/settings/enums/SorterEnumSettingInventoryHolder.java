@@ -1,10 +1,11 @@
 package com.github.zamponimarco.elytrabooster.gui.settings.enums;
 
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.inventory.InventoryHolder;
 
-import com.github.zamponimarco.elytrabooster.boosters.Booster;
-import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
-import com.github.zamponimarco.elytrabooster.utils.HeadsUtil;
+import com.github.zamponimarco.elytrabooster.managers.boosters.BoosterManager;
+import com.github.zamponimarco.elytrabooster.utils.HeadUtils;
 
 public class SorterEnumSettingInventoryHolder extends EnumSettingInventoryHolder {
 
@@ -13,16 +14,16 @@ public class SorterEnumSettingInventoryHolder extends EnumSettingInventoryHolder
 	private static final String RANDOM_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWMxZWE4MjA0Y2FiOGYzMzI3ZmZjZWY0OTJkMTkzZGE2MzQ0YThmODY0NTUyNDQyZTE1NWZlNzNiYjZiYSJ9fX0===";
 
 	
-	public SorterEnumSettingInventoryHolder(ElytraBooster plugin, String key, Booster booster, HumanEntity player,
-			Object value) {
-		super(plugin, key, booster, player, value);
+	public SorterEnumSettingInventoryHolder(BoosterManager<?> manager, ConfigurationSection section, String key, Object value,
+			HumanEntity player, InventoryHolder holder) {
+		super(manager, section, key, value, player, holder);
 	}
 
 	@Override
 	public void setUpMap() {
-		headsMap.put("none", HeadsUtil.skullFromValue(NONE_HEAD));
-		headsMap.put("closing", HeadsUtil.skullFromValue(CLOSING_HEAD));
-		headsMap.put("random", HeadsUtil.skullFromValue(RANDOM_HEAD));
+		headsMap.put("none", HeadUtils.skullFromValue(NONE_HEAD));
+		headsMap.put("closing", HeadUtils.skullFromValue(CLOSING_HEAD));
+		headsMap.put("random", HeadUtils.skullFromValue(RANDOM_HEAD));
 	}
 
 }

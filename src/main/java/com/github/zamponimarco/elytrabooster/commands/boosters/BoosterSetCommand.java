@@ -8,7 +8,7 @@ import org.bukkit.permissions.Permission;
 import com.github.zamponimarco.elytrabooster.boosters.Booster;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.managers.boosters.BoosterManager;
-import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
+import com.github.zamponimarco.elytrabooster.utils.MessageUtils;
 
 public class BoosterSetCommand extends BoosterCommand {
 
@@ -36,7 +36,7 @@ public class BoosterSetCommand extends BoosterCommand {
 			Arrays.asList(arguments[1].split(",")).forEach(string -> {
 				String[] argument = string.split(":");
 				boosterManager.setParam(id, argument[0], argument[1]);
-				sender.sendMessage(MessagesUtil
+				sender.sendMessage(MessageUtils
 						.color("&aPortal modified, &6ID: &a" + id + ", &6" + argument[0] + ": &a" + argument[1]));
 			});
 		} catch (Exception e) {

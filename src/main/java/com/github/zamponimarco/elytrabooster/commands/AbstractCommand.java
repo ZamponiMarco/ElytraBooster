@@ -4,13 +4,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
 
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
-import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
+import com.github.zamponimarco.elytrabooster.utils.MessageUtils;
 
 public abstract class AbstractCommand {
 
-	protected static final String NO_PERMISSION = MessagesUtil.color("&cYou don't have the permission");
-	protected static final String WRONG_SENDER = MessagesUtil.color("&cThis command can be used only by a player");
-	protected static final String INCORRECT_USAGE = MessagesUtil.color("&cIncorrect command syntax, type /eb help");
+	protected static final String NO_PERMISSION = MessageUtils.color("&cYou don't have the permission");
+	protected static final String WRONG_SENDER = MessageUtils.color("&cThis command can be used only by a player");
+	protected static final String INCORRECT_USAGE = MessageUtils.color("&cIncorrect command syntax, type /eb help");
 
 	protected ElytraBooster plugin;
 	protected CommandSender sender;

@@ -6,7 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
-import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
+import com.github.zamponimarco.elytrabooster.utils.MessageUtils;
 
 public class MessageAction extends AbstractAction{
 
@@ -26,7 +26,7 @@ public class MessageAction extends AbstractAction{
 
 	@Override
 	public void executeAction() {
-		target.sendMessage(MessagesUtil.color(message));
+		target.sendMessage(MessageUtils.color(message));
 	}
 
 }

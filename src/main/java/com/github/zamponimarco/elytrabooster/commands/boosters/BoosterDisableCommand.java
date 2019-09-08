@@ -6,7 +6,7 @@ import org.bukkit.permissions.Permission;
 import com.github.zamponimarco.elytrabooster.boosters.Booster;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.managers.boosters.BoosterManager;
-import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
+import com.github.zamponimarco.elytrabooster.utils.MessageUtils;
 
 public class BoosterDisableCommand extends BoosterCommand {
 
@@ -31,7 +31,7 @@ public class BoosterDisableCommand extends BoosterCommand {
 			return;
 		}
 		booster.stopBoosterTask();
-		sender.sendMessage(MessagesUtil.color("&aPortal disabled, &6ID: &a" + id));
+		sender.sendMessage(MessageUtils.color("&aPortal disabled, &6ID: &a" + id));
 	}
 
 	@Override

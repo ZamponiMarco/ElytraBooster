@@ -10,7 +10,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.util.Vector;
 
-import com.github.zamponimarco.elytrabooster.utils.HeadsUtil;
+import com.github.zamponimarco.elytrabooster.utils.HeadUtils;
 
 public class FireworkPadVisual extends PadVisual {
 
@@ -65,7 +65,7 @@ public class FireworkPadVisual extends PadVisual {
 		item.setVelocity(new Vector());
 		item.setPickupDelay(32767);
 		item.setInvulnerable(true);
-		item.setItemStack(HeadsUtil.skullFromValue(FIREWORK_HEAD));
+		item.setItemStack(HeadUtils.skullFromValue(FIREWORK_HEAD));
 	}
 
 	@Override

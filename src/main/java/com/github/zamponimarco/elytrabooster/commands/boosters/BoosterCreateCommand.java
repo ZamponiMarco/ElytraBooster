@@ -6,7 +6,7 @@ import org.bukkit.permissions.Permission;
 
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.managers.boosters.BoosterManager;
-import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
+import com.github.zamponimarco.elytrabooster.utils.MessageUtils;
 
 public class BoosterCreateCommand extends BoosterCommand {
 
@@ -28,7 +28,7 @@ public class BoosterCreateCommand extends BoosterCommand {
 		if (!boosterManager.getBoostersMap().containsKey(newBoosterId)) {
 			boosterManager.createDefaultBoosterConfiguration(player, newBoosterId);
 			boosterManager.addBooster(newBoosterId);
-			player.sendMessage(MessagesUtil.color(String.format("&a%s created, &6ID: &a%s", boosterString, newBoosterId)));
+			player.sendMessage(MessageUtils.color(String.format("&a%s created, &6ID: &a%s", boosterString, newBoosterId)));
 		} else {
 			invalidBooster();
 		}

@@ -1,19 +1,17 @@
 package com.github.zamponimarco.elytrabooster.commands.boosters;
 
-import java.util.List;
-
+import org.apache.commons.lang.WordUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 
-import com.github.zamponimarco.elytrabooster.boosters.Booster;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.gui.BoostersListInventoryHolder;
-import com.github.zamponimarco.elytrabooster.managers.boosters.BoosterManager;
-import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
-import com.google.common.collect.Lists;
+import com.github.zamponimarco.elytrabooster.utils.MessageUtils;
 
 public class BoosterListCommand extends BoosterCommand {
+
+	private static final String MENU_TITLE = MessageUtils.color("&1%ss list (&3%s&1)");
 
 	public BoosterListCommand(ElytraBooster plugin, CommandSender sender, String subCommand, String[] arguments,
 			boolean isSenderPlayer, String boosterString) {
@@ -23,20 +21,18 @@ public class BoosterListCommand extends BoosterCommand {
 	@Override
 	protected void execute() {
 		Player player = (Player) sender;
-		List<Booster> boosters = Lists
-				.newArrayList(BoosterManager.getBoosterManager(boosterString).getBoostersMap().values());
-		boosters.sort((p1, p2) -> (int) (p1.getCenter().distance(player.getLocation())
-				- p2.getCenter().distance(player.getLocation())));
 
-		player.openInventory(new BoostersListInventoryHolder(plugin, MessagesUtil.color("&1&lBooster list"),
-				boosterString, boosters, 1).getInventory());
+		player.openInventory(
+				new BoostersListInventoryHolder(
+						String.format(MENU_TITLE, WordUtils.capitalize(boosterString), player.getWorld().getName()), boosterString, 1,
+				player.getLocation()).getInventory());
 	}
 
 	@Override
 	protected boolean isOnlyPlayer() {
 		return true;
 	}
-	
+
 	@Override
 	protected Permission getPermission() {
 		return new Permission("eb.admin.list");

@@ -7,7 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 @SuppressWarnings("deprecation")
-public class HeadsUtil {
+public class HeadUtils {
 
 	/**
 	 * Gets a skull from a texture value

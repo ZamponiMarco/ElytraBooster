@@ -6,19 +6,19 @@ import java.util.function.Consumer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.github.zamponimarco.elytrabooster.boosters.Booster;
-import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
-import com.github.zamponimarco.elytrabooster.gui.factory.SettingsInventoryHolderFactory;
 import com.github.zamponimarco.elytrabooster.gui.settings.SettingInventoryHolder;
 import com.github.zamponimarco.elytrabooster.gui.settings.StringSettingInventoryHolder;
 import com.github.zamponimarco.elytrabooster.managers.boosters.BoosterManager;
-import com.github.zamponimarco.elytrabooster.utils.HeadsUtil;
-import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
+import com.github.zamponimarco.elytrabooster.utils.HeadUtils;
+import com.github.zamponimarco.elytrabooster.utils.MessageUtils;
 
 public abstract class EnumSettingInventoryHolder extends SettingInventoryHolder {
 
@@ -26,24 +26,23 @@ public abstract class EnumSettingInventoryHolder extends SettingInventoryHolder 
 
 	Map<String, ItemStack> headsMap;
 
-	public EnumSettingInventoryHolder(ElytraBooster plugin, String key, Booster booster, HumanEntity player,
-			Object value) {
-		super(plugin, key, booster, player, value);
+	public EnumSettingInventoryHolder(BoosterManager<?> manager, ConfigurationSection section, String key, Object value,
+			HumanEntity player, InventoryHolder holder) {
+		super(manager, section, key, value, player, holder);
 		headsMap = new LinkedHashMap<String, ItemStack>();
 		setUpMap();
-		initializeInventory();
 	}
 
 	@Override
 	protected void initializeInventory() {
-		inventory = Bukkit.createInventory(this, 27, MessagesUtil.color("&6&lModify &e&l" + key));
+		inventory = Bukkit.createInventory(this, 27, MessageUtils.color("&6&lModify &e&l" + key));
 		int slot = 0;
 		for (String value : headsMap.keySet()) {
 			registerClickConsumer(slot, getEnumItem(value), getEnumConsumer(value));
 			slot++;
 		}
 		registerClickConsumer(25, getStringItem(), e -> e.getWhoClicked()
-				.openInventory(new StringSettingInventoryHolder(plugin, key, booster, player, "").getInventory()));
+				.openInventory(new StringSettingInventoryHolder(manager, section, key, value, player, holder).getInventory()));
 		registerClickConsumer(26, getBackItem(), getBackConsumer());
 		fillInventoryWith(Material.GRAY_STAINED_GLASS_PANE);
 	}
@@ -52,28 +51,26 @@ public abstract class EnumSettingInventoryHolder extends SettingInventoryHolder 
 
 	private Consumer<InventoryClickEvent> getEnumConsumer(String value) {
 		return e -> {
-			BoosterManager<?> boosterManager = booster.getDataManager();
-			boosterManager.setParam(booster.getId(), key, String.valueOf(value));
-			booster = boosterManager.reloadBooster(booster);
-			player.openInventory(
-					SettingsInventoryHolderFactory.buildSettingsInventoryHolder(plugin, booster).getInventory());
-			player.sendMessage(MessagesUtil.color(
-					"&aPortal modified, &6ID: &a" + booster.getId() + ", &6" + key + ": &a" + String.valueOf(value)));
+			Booster booster = manager.getBooster(section.getName());
+			manager.setParam(booster.getId(), key, String.valueOf(value));
+			manager.reloadBooster(booster);
+			player.sendMessage(MessageUtils.color("&aObject modified: &6" + key + ": &e" + value));
+			player.openInventory(holder.getInventory());
 		};
 	}
 
 	private ItemStack getEnumItem(String newValue) {
 		ItemStack item = headsMap.get(newValue);
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName(MessagesUtil.color("&6&lModify -> &e&l" + newValue));
+		meta.setDisplayName(MessageUtils.color("&6&lModify -> &e&l" + newValue));
 		item.setItemMeta(meta);
 		return item;
 	}
 
 	private ItemStack getStringItem() {
-		ItemStack item = HeadsUtil.skullFromValue(PENCIL_HEAD);
+		ItemStack item = HeadUtils.skullFromValue(PENCIL_HEAD);
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName(MessagesUtil.color("&6&lSet a custom value"));
+		meta.setDisplayName(MessageUtils.color("&6&lSet a custom value"));
 		item.setItemMeta(meta);
 		return item;
 	}

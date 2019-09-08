@@ -4,7 +4,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
 
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
-import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
+import com.github.zamponimarco.elytrabooster.utils.MessageUtils;
 
 public class ElytraBoosterReloadCommand extends AbstractCommand {
 
@@ -15,7 +15,7 @@ public class ElytraBoosterReloadCommand extends AbstractCommand {
 
 	@Override
 	protected void execute() {
-		sender.sendMessage(MessagesUtil.color("&cReloading &6ElytraBooster"));
+		sender.sendMessage(MessageUtils.color("&cReloading &6ElytraBooster"));
 		
 		plugin.getSpawnerManager().getBoostersMap().values().forEach(spawner -> spawner.stopBoosterTask());
 		plugin.getPortalManager().getBoostersMap().values().forEach(portal -> portal.stopBoosterTask());
@@ -26,7 +26,7 @@ public class ElytraBoosterReloadCommand extends AbstractCommand {
 		plugin.getSpawnerManager().reloadData();
 		plugin.getPadManager().reloadData();
 		
-		sender.sendMessage(MessagesUtil.color("&aReloaded &6ElytraBooster"));
+		sender.sendMessage(MessageUtils.color("&aReloaded &6ElytraBooster"));
 	}
 
 	@Override

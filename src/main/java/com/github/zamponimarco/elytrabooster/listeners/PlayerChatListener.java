@@ -1,18 +1,21 @@
 package com.github.zamponimarco.elytrabooster.listeners;
 
 import java.util.Map;
+import java.util.Map.Entry;
 
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.inventory.InventoryHolder;
 
 import com.github.zamponimarco.elytrabooster.boosters.Booster;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.gui.settings.StringSettingInventoryHolder;
 import com.github.zamponimarco.elytrabooster.managers.boosters.BoosterManager;
-import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
+import com.github.zamponimarco.elytrabooster.utils.MessageUtils;
 
 public class PlayerChatListener implements Listener {
 
@@ -24,10 +27,12 @@ public class PlayerChatListener implements Listener {
 
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent e) {
-		Map<HumanEntity, Map<Booster, String>> settingsMap = StringSettingInventoryHolder.getSettingsMap();
+		Map<HumanEntity, Entry<BoosterManager<?>, Entry<ConfigurationSection, Entry<String, InventoryHolder>>>> settingsMap = StringSettingInventoryHolder
+				.getSettingsMap();
 		Player p = e.getPlayer();
 		if (settingsMap != null && settingsMap.get(p) != null) {
-			if (!settingsMap.get(p).keySet().contains(null)) {
+			String key = settingsMap.get(p).getValue().getValue().getKey();
+			if (key != null) {
 				runModifySyncTask(p, e.getMessage(), settingsMap);
 			} else {
 				runCreateSyncTask(p, e.getMessage(), settingsMap);
@@ -36,39 +41,43 @@ public class PlayerChatListener implements Listener {
 		}
 	}
 
-	private void runCreateSyncTask(Player p, String value, Map<HumanEntity, Map<Booster, String>> settingsMap) {
+	private void runCreateSyncTask(Player p, String value,
+			Map<HumanEntity, Entry<BoosterManager<?>, Entry<ConfigurationSection, Entry<String, InventoryHolder>>>> settingsMap) {
 		plugin.getServer().getScheduler().runTask(plugin, () -> {
-			String key = settingsMap.get(p).get(null);
-			BoosterManager<?> boosterManager = BoosterManager.getBoosterManager(key);
+			BoosterManager<?> manager = settingsMap.get(p).getKey();
 
 			if (!value.equalsIgnoreCase("exit")) {
-				if (!boosterManager.getBoostersMap().containsKey(value)) {
-					boosterManager.createDefaultBoosterConfiguration(p, value);
-					boosterManager.addBooster(value);
-					p.sendMessage(MessagesUtil.color("&aBooster created, &6ID: &a" + value));
+				if (!manager.getBoostersMap().containsKey(value)) {
+					manager.createDefaultBoosterConfiguration(p, value);
+					manager.addBooster(value);
+					p.sendMessage(MessageUtils.color("&aBooster created, &6ID: &a" + value));
 				} else {
-					p.sendMessage((MessagesUtil.color("&cBooster passed in input is invalid")));
+					p.sendMessage((MessageUtils.color("&cBooster passed in input is invalid")));
 				}
 			} else {
-				p.sendMessage(MessagesUtil.color("&aBooster creation &6&lcancelled"));
+				p.sendMessage(MessageUtils.color("&aBooster creation &6&lcancelled"));
 			}
+			p.openInventory(settingsMap.get(p).getValue().getValue().getValue().getInventory());
 			settingsMap.remove(p);
 		});
 	}
 
-	private void runModifySyncTask(Player p, String value, Map<HumanEntity, Map<Booster, String>> settingsMap) {
+	private void runModifySyncTask(Player p, String value,
+			Map<HumanEntity, Entry<BoosterManager<?>, Entry<ConfigurationSection, Entry<String, InventoryHolder>>>> settingsMap) {
 		plugin.getServer().getScheduler().runTask(plugin, () -> {
 			if (!value.equalsIgnoreCase("exit")) {
-				Booster booster = settingsMap.get(p).keySet().stream().findFirst().get();
-				BoosterManager<?> boosterManager = booster.getDataManager();
-				String key = settingsMap.get(p).get(booster);
-				boosterManager.setParam(booster.getId(), key, value);
-				boosterManager.reloadBooster(booster);
-				p.sendMessage(MessagesUtil
-						.color("&aBooster modified, &6ID: &a" + booster.getId() + ", &6" + key + ": &a" + value));
+				BoosterManager<?> manager = settingsMap.get(p).getKey();
+				ConfigurationSection section = settingsMap.get(p).getValue().getKey();
+				Booster booster = manager.getBooster(section.getName());
+				String key = settingsMap.get(p).getValue().getValue().getKey();
+				manager.setParam(booster.getId(), key, value);
+				manager.reloadBooster(booster);
+				p.sendMessage(MessageUtils.color("&aBooster modified, &6" + key + ": &e" + value));
+				p.openInventory(settingsMap.get(p).getValue().getValue().getValue().getInventory());
 			} else {
-				p.sendMessage(MessagesUtil.color("&aThe value &6&lhasn't&a been modified."));
+				p.sendMessage(MessageUtils.color("&aThe value &6&lhasn't&a been modified."));
 			}
+			p.openInventory(settingsMap.get(p).getValue().getValue().getValue().getInventory());
 			settingsMap.remove(p);
 		});
 	}

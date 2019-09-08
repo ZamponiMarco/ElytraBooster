@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
 
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
-import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
+import com.github.zamponimarco.elytrabooster.utils.MessageUtils;
 
 public class BoosterHelpCommand extends BoosterCommand {
 
@@ -48,8 +48,8 @@ public class BoosterHelpCommand extends BoosterCommand {
 
 	private void setUpPages() {
 		StringBuilder page = new StringBuilder();
-		page.append(MessagesUtil.header("ElytraBooster Help"));
-		page.append(MessagesUtil.color(String.format("&2/eb booster help &c[page] &7Print the boosters help message.\n"
+		page.append(MessageUtils.header("ElytraBooster Help"));
+		page.append(MessageUtils.color(String.format("&2/eb booster help &c[page] &7Print the boosters help message.\n"
 				+ "&2/eb booster list &7List boosters.\n" + "&2/eb booster create &c[id] &7Create a new booster.\n"
 				+ "&2/eb booster delete &c[id] &7Deletes the given booster.\n"
 				+ "&2/eb booster move &c[id] <x> <y> <z> &7Move the booster to your location or to the given coords, if present.\n"
@@ -58,7 +58,7 @@ public class BoosterHelpCommand extends BoosterCommand {
 				+ "&2/eb booster disable &c[id] &7Disable the booster named [id]\n"
 				+ "&2/eb booster enable &c[id] &7Enable the booster named [id]\n"))
 				.replaceAll("booster", boosterString));
-		page.append(MessagesUtil.footer(1, 1));
+		page.append(MessageUtils.footer(1, 1));
 		pages.add(page.toString());
 	}
 

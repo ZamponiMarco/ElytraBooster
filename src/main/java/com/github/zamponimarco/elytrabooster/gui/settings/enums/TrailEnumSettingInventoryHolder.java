@@ -1,10 +1,11 @@
 package com.github.zamponimarco.elytrabooster.gui.settings.enums;
 
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.inventory.InventoryHolder;
 
-import com.github.zamponimarco.elytrabooster.boosters.Booster;
-import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
-import com.github.zamponimarco.elytrabooster.utils.HeadsUtil;
+import com.github.zamponimarco.elytrabooster.managers.boosters.BoosterManager;
+import com.github.zamponimarco.elytrabooster.utils.HeadUtils;
 
 public class TrailEnumSettingInventoryHolder extends EnumSettingInventoryHolder {
 
@@ -14,17 +15,17 @@ public class TrailEnumSettingInventoryHolder extends EnumSettingInventoryHolder 
 	private static final String NONE_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2VkMWFiYTczZjYzOWY0YmM0MmJkNDgxOTZjNzE1MTk3YmUyNzEyYzNiOTYyYzk3ZWJmOWU5ZWQ4ZWZhMDI1In19fQ===";
 
 	
-	public TrailEnumSettingInventoryHolder(ElytraBooster plugin, String key, Booster booster, HumanEntity player,
-			Object value) {
-		super(plugin, key, booster, player, value);
+	public TrailEnumSettingInventoryHolder(BoosterManager<?> manager, ConfigurationSection section, String key, Object value,
+			HumanEntity player, InventoryHolder holder) {
+		super(manager, section, key, value, player, holder);
 	}
 
 	@Override
 	public void setUpMap() {
-		headsMap.put("simple", HeadsUtil.skullFromValue(SIMPLE_HEAD));
-		headsMap.put("rainbow", HeadsUtil.skullFromValue(RAINBOW_HEAD));
-		headsMap.put("helix", HeadsUtil.skullFromValue(HELIX_HEAD));
-		headsMap.put("none", HeadsUtil.skullFromValue(NONE_HEAD));
+		headsMap.put("simple", HeadUtils.skullFromValue(SIMPLE_HEAD));
+		headsMap.put("rainbow", HeadUtils.skullFromValue(RAINBOW_HEAD));
+		headsMap.put("helix", HeadUtils.skullFromValue(HELIX_HEAD));
+		headsMap.put("none", HeadUtils.skullFromValue(NONE_HEAD));
 	}
 
 }

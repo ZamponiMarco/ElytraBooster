@@ -17,7 +17,7 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
+import com.github.zamponimarco.elytrabooster.utils.MessageUtils;
 
 import net.md_5.bungee.api.ChatColor;
 
@@ -57,7 +57,7 @@ public class UpdateChecker {
 								.readLine();
 					} catch (final IOException e) {
 						Bukkit.getServer().getConsoleSender()
-								.sendMessage(MessagesUtil.color(ERR_MSG));
+								.sendMessage(MessageUtils.color(ERR_MSG));
 						e.printStackTrace();
 						cancel();
 						return;

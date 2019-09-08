@@ -10,7 +10,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import com.github.zamponimarco.elytrabooster.actions.factory.ActionFactory;
 import com.github.zamponimarco.elytrabooster.boosts.SimpleBoost;
 import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
-import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
+import com.github.zamponimarco.elytrabooster.utils.MessageUtils;
 
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -73,13 +73,13 @@ public class PlayerSimpleBoostEvent extends Event implements Cancellable {
 
 		StringBuilder sb = new StringBuilder("");
 		sb.append("&a");
-		sb.append(MessagesUtil.repeat(30 - progress, "|"));
+		sb.append(MessageUtils.repeat(30 - progress, "|"));
 		sb.append("&c");
-		sb.append(MessagesUtil.repeat(progress, "|"));
+		sb.append(MessageUtils.repeat(progress, "|"));
 
 		player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
 				new ComponentBuilder(
-						MessagesUtil.color(MessagesUtil.color(String.format("&2Boost &6[%s&6]", sb.toString()))))
+						MessageUtils.color(MessageUtils.color(String.format("&2Boost &6[%s&6]", sb.toString()))))
 								.create());
 	}
 

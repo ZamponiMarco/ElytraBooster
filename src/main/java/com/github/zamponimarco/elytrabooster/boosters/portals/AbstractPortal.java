@@ -19,7 +19,7 @@ import com.github.zamponimarco.elytrabooster.outlines.BlockPortalOutline;
 import com.github.zamponimarco.elytrabooster.outlines.PortalOutline;
 import com.github.zamponimarco.elytrabooster.outlines.pointsorters.PointSorter;
 import com.github.zamponimarco.elytrabooster.settings.Settings;
-import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
+import com.github.zamponimarco.elytrabooster.utils.MessageUtils;
 
 /**
  * Handles portal boost process
@@ -147,8 +147,18 @@ public abstract class AbstractPortal implements Booster {
 	 */
 	protected void checkPlayersPassing() {
 		if (!onCooldown()) {
-			plugin.getStatusMap().keySet().stream().filter(player -> !plugin.getStatusMap().get(player)
-					&& player.hasPermission("eb.boosters.boost") && isInUnionPortalArea(player.getLocation(), 0))
+			
+			/*
+			 * Check in order if:
+			 *  - player is gliding and is being currently boosted
+			 *  - player has correct permission
+			 *  - player is in the same world of the portal
+			 *  - player is inside portal area
+			 */
+			plugin.getStatusMap().keySet().stream()
+					.filter(player -> !plugin.getStatusMap().get(player) && player.hasPermission("eb.boosters.boost")
+							&& player.getWorld().equals(getCenter().getWorld())
+							&& isInUnionPortalArea(player.getLocation(), 0))
 					.forEach(this::boostPlayer);
 		}
 	}
@@ -254,7 +264,7 @@ public abstract class AbstractPortal implements Booster {
 	}
 
 	public String warnMessage() {
-		return MessagesUtil.color(String.format(WARN_MSG, getId()));
+		return MessageUtils.color(String.format(WARN_MSG, getId()));
 	}
 
 	public ElytraBooster getPlugin() {

@@ -22,11 +22,11 @@ import com.github.zamponimarco.elytrabooster.boosters.Booster;
 import com.github.zamponimarco.elytrabooster.boosters.pads.AbstractPad;
 import com.github.zamponimarco.elytrabooster.boosters.portals.AbstractPortal;
 import com.github.zamponimarco.elytrabooster.boosters.spawners.AbstractSpawner;
-import com.github.zamponimarco.elytrabooster.core.ElytraBooster;
 import com.github.zamponimarco.elytrabooster.gui.factory.SettingsInventoryHolderFactory;
 import com.github.zamponimarco.elytrabooster.managers.boosters.BoosterManager;
-import com.github.zamponimarco.elytrabooster.utils.HeadsUtil;
-import com.github.zamponimarco.elytrabooster.utils.MessagesUtil;
+import com.github.zamponimarco.elytrabooster.utils.HeadUtils;
+import com.github.zamponimarco.elytrabooster.utils.MessageUtils;
+import com.google.common.collect.Lists;
 
 public class BoostersListInventoryHolder extends ElytraBoosterInventoryHolder {
 
@@ -40,37 +40,47 @@ public class BoostersListInventoryHolder extends ElytraBoosterInventoryHolder {
 
 	private String title;
 	private String boosterString;
-	private List<Booster> boosters;
-	private List<Booster> toList;
 	private int page;
+	private Location center;
+	private int range;
 
-	public BoostersListInventoryHolder(ElytraBooster plugin, String title, String boosterString, List<Booster> boosters,
-			int page) {
-		super(plugin);
+	public BoostersListInventoryHolder(String title, String boosterString, int page, Location center, int range) {
 		this.title = title;
 		this.boosterString = boosterString;
-		this.boosters = boosters;
-		this.toList = boosters.stream().filter(portal -> boosters.indexOf(portal) >= (page - 1) * BOOSTERS_NUMBER
-				&& boosters.indexOf(portal) <= page * BOOSTERS_NUMBER - 1).collect(Collectors.toList());
 		this.page = page;
-		initializeInventory();
+		this.center = center;
+		this.range = range;
+	}
+
+	public BoostersListInventoryHolder(String title, String boosterString, int page, Location center) {
+		this(title, boosterString, page, center, Integer.MAX_VALUE);
 	}
 
 	@Override
 	protected void initializeInventory() {
+		BoosterManager<?> manager = BoosterManager.getBoosterManager(boosterString);
+
+		List<Booster> boosters = Lists.newArrayList(manager.getBoostersMap().values());
+		List<Booster> toList = boosters.stream()
+				.filter(booster -> booster.getCenter().getWorld().equals(center.getWorld())
+						&& booster.getCenter().distance(center) <= range
+						&& boosters.indexOf(booster) >= (page - 1) * BOOSTERS_NUMBER
+						&& boosters.indexOf(booster) <= page * BOOSTERS_NUMBER - 1)
+				.collect(Collectors.toList());
+
 		int maxPage = (int) Math.ceil((boosters.size() > 0 ? boosters.size() : 1) / (double) BOOSTERS_NUMBER);
 
 		this.inventory = Bukkit.createInventory(this, 54, title);
 		toList.forEach(booster -> registerClickConsumer(toList.indexOf(booster), getBoosterItem(booster),
-				getBoosterConsumer(toList.indexOf(booster))));
+				getBoosterConsumer(boosters, toList.indexOf(booster))));
 		registerClickConsumer(51, getCreateItem(), getCreateConsumer(boosterString));
 		if (page != maxPage) {
-			registerClickConsumer(53, HeadsUtil.skullFromValue(ARROW_LEFT_HEAD), e -> e.getWhoClicked().openInventory(
-					new BoostersListInventoryHolder(plugin, title, boosterString, boosters, page + 1).getInventory()));
+			registerClickConsumer(53, HeadUtils.skullFromValue(ARROW_LEFT_HEAD), e -> e.getWhoClicked().openInventory(
+					new BoostersListInventoryHolder(title, boosterString, page + 1, center, range).getInventory()));
 		}
 		if (page != 1) {
-			registerClickConsumer(52, HeadsUtil.skullFromValue(ARROW_RIGHT_HEAD), e -> e.getWhoClicked().openInventory(
-					new BoostersListInventoryHolder(plugin, title, boosterString, boosters, page - 1).getInventory()));
+			registerClickConsumer(52, HeadUtils.skullFromValue(ARROW_RIGHT_HEAD), e -> e.getWhoClicked().openInventory(
+					new BoostersListInventoryHolder(title, boosterString, page - 1, center, range).getInventory()));
 		}
 		fillInventoryWith(Material.GRAY_STAINED_GLASS_PANE);
 	}
@@ -78,7 +88,7 @@ public class BoostersListInventoryHolder extends ElytraBoosterInventoryHolder {
 	private ItemStack getBoosterItem(Booster booster) {
 		ItemStack portalItem = getBoosterSkull(booster);
 		ItemMeta meta = portalItem.getItemMeta();
-		meta.setDisplayName(MessagesUtil.color("&a&l" + booster.getId()));
+		meta.setDisplayName(MessageUtils.color("&a&l" + booster.getId()));
 		meta.setLore(getBoosterItemLore(booster));
 		portalItem.setItemMeta(meta);
 		return portalItem;
@@ -86,32 +96,33 @@ public class BoostersListInventoryHolder extends ElytraBoosterInventoryHolder {
 
 	private ItemStack getBoosterSkull(Booster booster) {
 		if (booster instanceof AbstractPortal) {
-			return ((AbstractPortal) booster).isActive() ? HeadsUtil.skullFromValue(ACTIVE_PORTAL_HEAD)
-					: HeadsUtil.skullFromValue(NOT_ACTIVE_PORTAL_HEAD);
+			return ((AbstractPortal) booster).isActive() ? HeadUtils.skullFromValue(ACTIVE_PORTAL_HEAD)
+					: HeadUtils.skullFromValue(NOT_ACTIVE_PORTAL_HEAD);
 		} else if (booster instanceof AbstractSpawner) {
-			return HeadsUtil.skullFromValue(SPAWNER_HEAD);
+			return HeadUtils.skullFromValue(SPAWNER_HEAD);
 		} else if (booster instanceof AbstractPad) {
-			return HeadsUtil.skullFromValue(PAD_HEAD);
+			return HeadUtils.skullFromValue(PAD_HEAD);
 		}
 		return null;
 	}
 
 	private List<String> getBoosterItemLore(Booster booster) {
 		List<String> lore = new ArrayList<String>();
-		lore.add(MessagesUtil.color(String.format("&6&l- x/y/z: &a%.2f&6&l/&a%.2f&6&l/&a%.2f",
+		lore.add(MessageUtils.color(String.format("&6&l- world: &a%s", booster.getCenter().getWorld().getName())));
+		lore.add(MessageUtils.color(String.format("&6&l- x/y/z: &a%.2f&6&l/&a%.2f&6&l/&a%.2f",
 				booster.getCenter().getX(), booster.getCenter().getY(), booster.getCenter().getZ())));
-		lore.add(MessagesUtil.color("&6&l- &e&lLeft click &6to open settings"));
-		lore.add(MessagesUtil.color("&6&l- &e&lRight click &6to teleport"));
-		lore.add(MessagesUtil.color("&6&l- &e&lMiddle click &6to move the portal to you"));
+		lore.add(MessageUtils.color("&6&l- &e&lLeft click &6to open settings"));
+		lore.add(MessageUtils.color("&6&l- &e&lRight click &6to teleport"));
+		lore.add(MessageUtils.color("&6&l- &e&lMiddle click &6to move the portal to you"));
 		return lore;
 	}
 
-	private Consumer<InventoryClickEvent> getBoosterConsumer(int slot) {
+	private Consumer<InventoryClickEvent> getBoosterConsumer(List<Booster> boosters, int slot) {
 		return e -> {
-			Booster booster = toList.get(slot);
+			Booster booster = boosters.get(slot);
 			if (e.getClick().equals(ClickType.LEFT)) {
-				e.getWhoClicked().openInventory(
-						SettingsInventoryHolderFactory.buildSettingsInventoryHolder(plugin, booster).getInventory());
+				e.getWhoClicked().openInventory(SettingsInventoryHolderFactory
+						.buildSettingsInventoryHolder(boosterString, booster.getId(), this).getInventory());
 			} else if (e.getClick().equals(ClickType.RIGHT)) {
 				e.getWhoClicked().teleport(booster.getCenter(), TeleportCause.PLUGIN);
 			} else if (e.getClick().equals(ClickType.MIDDLE)) {
