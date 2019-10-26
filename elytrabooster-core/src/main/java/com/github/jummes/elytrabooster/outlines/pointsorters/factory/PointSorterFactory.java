@@ -1,0 +1,25 @@
+package com.github.jummes.elytrabooster.outlines.pointsorters.factory;
+
+import org.bukkit.Location;
+
+import com.github.jummes.elytrabooster.outlines.pointsorters.ClosingPointSorter;
+import com.github.jummes.elytrabooster.outlines.pointsorters.NoPointSorter;
+import com.github.jummes.elytrabooster.outlines.pointsorters.PointSorter;
+import com.github.jummes.elytrabooster.outlines.pointsorters.RandomPointSorter;
+
+public class PointSorterFactory {
+
+	public static PointSorter buildPointSorter(String sorter, Location center) {
+		switch(sorter) {
+		case "random":
+			return new RandomPointSorter();
+		case "none":
+			return new NoPointSorter();
+		case "closing":
+		default:
+			return new ClosingPointSorter(center);
+		}
+		
+	}
+	
+}

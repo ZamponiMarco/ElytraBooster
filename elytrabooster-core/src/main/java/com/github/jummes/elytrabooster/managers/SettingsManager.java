@@ -1,0 +1,83 @@
+package com.github.jummes.elytrabooster.managers;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.EnumMap;
+import java.util.Map;
+
+import org.bukkit.configuration.file.YamlConfiguration;
+
+import com.github.jummes.elytrabooster.core.ElytraBooster;
+import com.github.jummes.elytrabooster.settings.Settings;
+
+public class SettingsManager implements DataManager {
+
+	private final static String FILENAME = "config.yml";
+	private final static String CONFIG_VERSION = "1.2";
+
+	private ElytraBooster plugin;
+
+	private File dataFile;
+	private YamlConfiguration dataYaml;
+	private Map<Settings, String> settings = new EnumMap<Settings, String>(Settings.class);
+
+	public SettingsManager(ElytraBooster plugin) {
+		this.plugin = plugin;
+
+		loadDataFile();
+		loadDataYaml();
+		loadData();
+
+		updateConfig();
+	}
+
+	@Override
+	public void loadDataFile() {
+		dataFile = new File(plugin.getDataFolder(), FILENAME);
+		if (!dataFile.exists()) {
+			plugin.saveDefaultConfig();
+		}
+	}
+
+	@Override
+	public void loadDataYaml() {
+		dataYaml = (YamlConfiguration) plugin.getConfig();
+	}
+
+	@Override
+	public void loadData() {
+		settings.put(Settings.METRICS, dataYaml.getString("metrics", "true"));
+		settings.put(Settings.PORTAL_OUTLINE_INTERVAL, dataYaml.getString("portalOutlineInterval", "4"));
+		settings.put(Settings.PORTAL_CHECK_INTERVAL, dataYaml.getString("portalCheckInterval", "1"));
+		settings.put(Settings.SPAWNER_CHECK_INTERVAL, dataYaml.getString("spawnerCheckInterval", "1"));
+		settings.put(Settings.VERSION, dataYaml.getString("version", ""));
+	}
+
+	private void updateConfig() {
+		if (!settings.get(Settings.VERSION).equals(CONFIG_VERSION)) {
+			dataFile.delete();
+			plugin.saveDefaultConfig();
+		}
+	}
+
+	public void saveConfig() {
+		try {
+			dataYaml.save(dataFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public YamlConfiguration getDataYaml() {
+		return dataYaml;
+	}
+
+	public Map<Settings, String> getSettings() {
+		return settings;
+	}
+
+	public String getSetting(Settings setting) {
+		return settings.get(setting);
+	}
+
+}
