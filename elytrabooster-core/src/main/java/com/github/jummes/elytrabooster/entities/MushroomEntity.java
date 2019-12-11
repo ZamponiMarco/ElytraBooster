@@ -10,7 +10,7 @@ import com.github.jummes.elytrabooster.boosts.Boost;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
 import com.github.jummes.elytrabooster.entityholders.EntityHolder;
 
-public class MushroomEntity extends Entity {
+public class MushroomEntity extends AbstractEntity {
 
 	private static final String MUSHROOM_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzU3MTk1MmEzNWMzMTYzYjhjMzNhMDkxOGQ2ZTlhNDUzM2Y2MjA1M2FkNGU2Y2ZjYjFmYTI3ZjU1MWFlZjIifX19==";
 

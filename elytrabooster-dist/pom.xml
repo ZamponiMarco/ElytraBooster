@@ -59,5 +59,10 @@
       <artifactId>elytrabooster-craftbukkit_1_13_R1</artifactId>
       <version>${project.parent.version}</version>
     </dependency>
+     <dependency>
+      <groupId>com.github.jummes</groupId>
+      <artifactId>elytrabooster-craftbukkit_1_15_R1</artifactId>
+      <version>${project.parent.version}</version>
+    </dependency>
   </dependencies>
 </project>

@@ -9,33 +9,31 @@ import org.bukkit.Material;
 
 import com.github.jummes.elytrabooster.boosts.SimpleBoost;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
-import com.github.jummes.elytrabooster.entities.Entity;
+import com.github.jummes.elytrabooster.entities.AbstractEntity;
 import com.github.jummes.elytrabooster.entities.factory.EntityFactory;
 
 public class EntityHolder {
 
 	private ElytraBooster plugin;
-	private Class<? extends Entity> entityClass;
-	private List<Entity> entities;
+	private Class<? extends AbstractEntity> entityClass;
+	private List<AbstractEntity> entities;
 	private int maxEntities;
 	private SimpleBoost boost;
 
-	public EntityHolder(ElytraBooster plugin, Class<? extends Entity> entityClass, int maxEntities, SimpleBoost boost,
+	public EntityHolder(ElytraBooster plugin, Class<? extends AbstractEntity> entityClass, int maxEntities, SimpleBoost boost,
 			String spawner) {
 		this.plugin = plugin;
 		this.entityClass = entityClass;
 		this.maxEntities = maxEntities;
 		this.boost = boost;
-		this.entities = new ArrayList<Entity>();
+		this.entities = new ArrayList<AbstractEntity>();
 	}
 
 	public void spawnEntity(Location center, double minRadius, double maxRadius) {
 		if (entities.size() < maxEntities) {
 			Random r = new Random();
 			double multiply = maxRadius - minRadius;
-			double x;
-			double y;
-			double z;
+			double x, y, z;
 			Location loc;
 			do {
 				double randomX = r.nextDouble() * 2 - 1;
@@ -55,7 +53,7 @@ public class EntityHolder {
 		entities.clear();
 	}
 
-	public List<Entity> getEntities() {
+	public List<AbstractEntity> getEntities() {
 		return entities;
 	}
 
@@ -70,7 +68,7 @@ public class EntityHolder {
 		return maxEntities;
 	}
 
-	public void despawn(Entity entity) {
+	public void despawn(AbstractEntity entity) {
 		entities.remove(entity);
 	}
 

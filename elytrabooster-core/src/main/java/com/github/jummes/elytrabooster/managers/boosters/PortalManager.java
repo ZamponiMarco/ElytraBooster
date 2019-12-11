@@ -71,11 +71,6 @@ public class PortalManager implements BoosterManager<AbstractPortal> {
 		newPortal.set("x", creator.getLocation().getBlockX());
 		newPortal.set("y", creator.getLocation().getBlockY());
 		newPortal.set("z", creator.getLocation().getBlockZ());
-		newPortal.set("axis", 'x');
-		newPortal.set("isBlockOutline", true);
-		newPortal.set("outlineType", "STONE");
-		newPortal.set("shape", "circle");
-		newPortal.set("measures", 10);
 		saveConfig();
 		return newPortal;
 	}

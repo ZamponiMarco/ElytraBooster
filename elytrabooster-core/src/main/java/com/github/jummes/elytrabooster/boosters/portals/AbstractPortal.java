@@ -22,8 +22,7 @@ import com.github.jummes.elytrabooster.settings.Settings;
 import com.github.jummes.elytrabooster.utils.MessageUtils;
 
 /**
- * Handles portal boost process
- * 
+ * Handle portals data
  */
 public abstract class AbstractPortal implements Booster {
 
@@ -147,14 +146,6 @@ public abstract class AbstractPortal implements Booster {
 	 */
 	protected void checkPlayersPassing() {
 		if (!onCooldown()) {
-			
-			/*
-			 * Check in order if:
-			 *  - player is gliding and is being currently boosted
-			 *  - player has correct permission
-			 *  - player is in the same world of the portal
-			 *  - player is inside portal area
-			 */
 			plugin.getStatusMap().keySet().stream()
 					.filter(player -> !plugin.getStatusMap().get(player) && player.hasPermission("eb.boosters.boost")
 							&& player.getWorld().equals(getCenter().getWorld())

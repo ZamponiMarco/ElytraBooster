@@ -11,7 +11,7 @@ import com.github.jummes.elytrabooster.entityholders.EntityHolder;
 import com.github.jummes.elytrabooster.events.PlayerSimpleBoostEvent;
 import com.github.jummes.elytrabooster.settings.Settings;
 
-public abstract class Entity {
+public abstract class AbstractEntity {
 
 	private final int CHECK_INTERVAL;
 	private final double CHECK_RADIUS = 1.0;
@@ -23,7 +23,7 @@ public abstract class Entity {
 
 	private int checkTasknumber;
 
-	public Entity(ElytraBooster plugin, EntityHolder holder, Location location, Boost boost) {
+	public AbstractEntity(ElytraBooster plugin, EntityHolder holder, Location location, Boost boost) {
 		this.plugin = plugin;
 		this.holder = holder;
 		this.location = location;
@@ -39,8 +39,11 @@ public abstract class Entity {
 	}
 
 	private void checkPlayersPassing() {
-		plugin.getStatusMap().keySet().stream().filter(player -> !plugin.getStatusMap().get(player)
-				&& player.hasPermission("eb.boosters.boost") && player.getLocation().distance(location) <= CHECK_RADIUS)
+		
+		plugin.getStatusMap().keySet().stream()
+				.filter(player -> !plugin.getStatusMap().get(player) && player.hasPermission("eb.boosters.boost")
+						&& player.getWorld().equals(location.getWorld())
+						&& player.getLocation().distance(location) <= CHECK_RADIUS)
 				.forEach(this::boostPlayer);
 	}
 

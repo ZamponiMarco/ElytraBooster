@@ -11,7 +11,7 @@ import com.github.jummes.elytrabooster.boosts.Boost;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
 import com.github.jummes.elytrabooster.entityholders.EntityHolder;
 
-public class PotionEntity extends Entity {
+public class PotionEntity extends AbstractEntity {
 
 	private static final String POTION_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTMxMDRmMTlhOTQ1YzYyZTEwMzJkZTZlNmM2MzQyMDY2NDdkOTRlZDljMGE1ODRlNmQ2YjZkM2E0NzVmNTIifX19==";
 

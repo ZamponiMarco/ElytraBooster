@@ -12,7 +12,7 @@ import com.github.jummes.elytrabooster.boosters.spawners.AbstractSpawner;
 import com.github.jummes.elytrabooster.boosters.spawners.SphericSpawner;
 import com.github.jummes.elytrabooster.boosts.SimpleBoost;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
-import com.github.jummes.elytrabooster.entities.Entity;
+import com.github.jummes.elytrabooster.entities.AbstractEntity;
 import com.github.jummes.elytrabooster.entities.FireworkEntity;
 import com.github.jummes.elytrabooster.entityholders.EntityHolder;
 import com.github.jummes.elytrabooster.trails.BoostTrail;
@@ -52,9 +52,9 @@ public class SpawnerFactory implements BoosterFactory {
 		SimpleBoost boost = new SimpleBoost(trail, boostActions, boostDuration, initialVelocity, finalVelocity);
 
 		String entityString = spawnerConfiguration.getString("entity", "firework");
-		Class<? extends Entity> entityClass = FireworkEntity.class;
+		Class<? extends AbstractEntity> entityClass = FireworkEntity.class;
 		try {
-			entityClass = (Class<? extends Entity>) Class.forName(
+			entityClass = (Class<? extends AbstractEntity>) Class.forName(
 					"com.github.zamponimarco.elytrabooster.entities." + WordUtils.capitalize(entityString) + "Entity");
 		} catch (Exception e) {
 		}

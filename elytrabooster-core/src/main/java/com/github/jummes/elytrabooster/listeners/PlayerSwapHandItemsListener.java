@@ -26,7 +26,9 @@ public class PlayerSwapHandItemsListener implements Listener {
 		if (player.hasPermission("eb.boosters.boost") && player.getEquipment().getChestplate() != null
 				&& player.getEquipment().getChestplate().getType().equals(Material.ELYTRA) && !player.isGliding()) {
 			padManager.getBoostersMap().values().stream()
-					.filter(pad -> player.getLocation().distance(pad.getCenter()) <= 1).findFirst().ifPresent(pad -> {
+					.filter(pad -> player.getWorld().equals(pad.getCenter().getWorld())
+							&& player.getLocation().distance(pad.getCenter()) <= 1)
+					.findFirst().ifPresent(pad -> {
 						pad.cooldown();
 						pad.getVisual().onBoost();
 						Bukkit.getPluginManager()
