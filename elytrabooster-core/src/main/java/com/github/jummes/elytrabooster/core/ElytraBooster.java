@@ -1,116 +1,122 @@
 package com.github.jummes.elytrabooster.core;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.github.jummes.elytrabooster.boost.Boost;
+import com.github.jummes.elytrabooster.boost.SimpleBoost;
 import com.github.jummes.elytrabooster.commands.executor.ElytraBoosterCommandExecutor;
-import com.github.jummes.elytrabooster.listeners.InventoryClickListener;
-import com.github.jummes.elytrabooster.listeners.PlayerChatListener;
-import com.github.jummes.elytrabooster.listeners.PlayerGlideListener;
-import com.github.jummes.elytrabooster.listeners.PlayerSwapHandItemsListener;
-import com.github.jummes.elytrabooster.managers.SettingsManager;
-import com.github.jummes.elytrabooster.managers.boosters.PadManager;
-import com.github.jummes.elytrabooster.managers.boosters.PortalManager;
-import com.github.jummes.elytrabooster.managers.boosters.SpawnerManager;
-import com.github.jummes.elytrabooster.settings.Settings;
-import com.github.jummes.elytrabooster.wrapper.VersionWrapper;
+import com.github.jummes.elytrabooster.entity.EntityDescription;
+import com.github.jummes.elytrabooster.entity.FireworkEntityDescription;
+import com.github.jummes.elytrabooster.entity.MushroomEntityDescription;
+import com.github.jummes.elytrabooster.entity.PotionEntityDescription;
+import com.github.jummes.elytrabooster.entityholder.EntityHolder;
+import com.github.jummes.elytrabooster.listener.PlayerGlideListener;
+import com.github.jummes.elytrabooster.listener.PlayerSwapHandItemsListener;
+import com.github.jummes.elytrabooster.manager.PadManager;
+import com.github.jummes.elytrabooster.manager.PortalManager;
+import com.github.jummes.elytrabooster.manager.SpawnerManager;
+import com.github.jummes.elytrabooster.outline.BlockPortalOutline;
+import com.github.jummes.elytrabooster.outline.Outline;
+import com.github.jummes.elytrabooster.outline.ParticlePortalOutline;
+import com.github.jummes.elytrabooster.portal.Portal;
+import com.github.jummes.elytrabooster.shape.CircleShape;
+import com.github.jummes.elytrabooster.shape.ComposedShape;
+import com.github.jummes.elytrabooster.shape.RectangleShape;
+import com.github.jummes.elytrabooster.shape.Shape;
+import com.github.jummes.elytrabooster.shape.TriangleShape;
+import com.github.jummes.elytrabooster.sorter.ClosingPointSorter;
+import com.github.jummes.elytrabooster.sorter.PointSorter;
+import com.github.jummes.elytrabooster.spawner.Spawner;
+import com.github.jummes.elytrabooster.trail.BoostTrail;
+import com.github.jummes.elytrabooster.trail.SimpleBoostTrail;
+import com.github.jummes.elytrabooster.volume.SphericVolume;
+import com.github.jummes.elytrabooster.volume.Volume;
+import com.github.jummes.libs.core.Libs;
+import com.github.jummes.libs.localization.PluginLocale;
 
+import lombok.Getter;
+
+@Getter
 public class ElytraBooster extends JavaPlugin {
 
-	private static ElytraBooster instance;
-	private VersionWrapper wrapper;
+    @Getter
+    private static ElytraBooster instance;
 
-	private SettingsManager settingsManager;
-	private PortalManager portalManager;
-	private SpawnerManager spawnerManager;
-	private PadManager padManager;
+    private PortalManager portalManager;
+    private SpawnerManager spawnerManager;
+    private PadManager padManager;
 
-	private Map<Player, Boolean> statusMap;
+    private Map<Player, Boolean> statusMap;
 
-	public void onEnable() {
-		instance = this;
-		setUpFolder();
-		setUpWrapper();
-		startupTasks();
-		getLogger().info("Enabled ElytraBooster v" + getDescription().getVersion());
-	}
+    static {
+        Libs.registerSerializables();
+        ConfigurationSerialization.registerClass(Portal.class);
+        ConfigurationSerialization.registerClass(Boost.class);
+        ConfigurationSerialization.registerClass(SimpleBoost.class);
+        ConfigurationSerialization.registerClass(BoostTrail.class);
+        ConfigurationSerialization.registerClass(SimpleBoostTrail.class);
+        ConfigurationSerialization.registerClass(Outline.class);
+        ConfigurationSerialization.registerClass(BlockPortalOutline.class);
+        ConfigurationSerialization.registerClass(ParticlePortalOutline.class);
+        ConfigurationSerialization.registerClass(PointSorter.class);
+        ConfigurationSerialization.registerClass(ClosingPointSorter.class);
+        ConfigurationSerialization.registerClass(Shape.class);
+        ConfigurationSerialization.registerClass(CircleShape.class);
+        ConfigurationSerialization.registerClass(RectangleShape.class);
+        ConfigurationSerialization.registerClass(TriangleShape.class);
+        ConfigurationSerialization.registerClass(ComposedShape.class);
+        ConfigurationSerialization.registerClass(ComposedShape.SingleShape.class);
+        ConfigurationSerialization.registerClass(TriangleShape.Vector2D.class);
+        ConfigurationSerialization.registerClass(Spawner.class);
+        ConfigurationSerialization.registerClass(EntityHolder.class);
+        ConfigurationSerialization.registerClass(EntityDescription.class);
+        ConfigurationSerialization.registerClass(FireworkEntityDescription.class);
+        ConfigurationSerialization.registerClass(MushroomEntityDescription.class);
+        ConfigurationSerialization.registerClass(PotionEntityDescription.class);
+        ConfigurationSerialization.registerClass(Volume.class);
+        ConfigurationSerialization.registerClass(SphericVolume.class);
+    }
 
-	public void onDisable() {
-		getServer().getScheduler().cancelTasks(this);
-		spawnerManager.getBoostersMap().values().forEach(spawner -> spawner.stopBoosterTask());
-		padManager.getBoostersMap().values().forEach(pad -> pad.stopBoosterTask());
-	}
+    public void onEnable() {
+        instance = this;
+        setUpFolder();
+        startupTasks();
+    }
 
-	private void setUpFolder() {
-		if (!getDataFolder().exists()) {
-			getDataFolder().mkdir();
-		}
-	}
-	
-	private void setUpWrapper() {
-		String serverVersion = getServer().getClass().getPackage().getName();
-		String version = serverVersion.substring(serverVersion.lastIndexOf('.') + 1);
+    public void onDisable() {
+        getServer().getScheduler().cancelTasks(this);
+        portalManager.getPortals().forEach(portal -> portal.stopBoosterTask());
+        spawnerManager.getSpawners().forEach(spawner -> spawner.stopBoosterTask());
+        padManager.getBoostersMap().values().forEach(pad -> pad.stopBoosterTask());
+    }
 
-		try {
-			wrapper = (VersionWrapper) Class
-					.forName("com.github.jummes.elytrabooster.wrapper.VersionWrapper_" + version).getConstructor()
-					.newInstance();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    private void setUpFolder() {
+        if (!getDataFolder().exists()) {
+            getDataFolder().mkdir();
+        }
+    }
 
-	private void startupTasks() {
-		new UpdateChecker(this).checkForUpdate();
+    private void startupTasks() {
+        PluginLocale locale = new PluginLocale(instance, new ArrayList<String>(), "");
+        Libs.initializeLibrary(instance, locale);
+        new UpdateChecker(this).checkForUpdate();
 
-		settingsManager = new SettingsManager(this);
-		portalManager = new PortalManager(this);
-		spawnerManager = new SpawnerManager(this);
-		padManager = new PadManager(this);
-		if (Boolean.valueOf(settingsManager.getSetting(Settings.METRICS))) {
-			new Metrics(this);
-		}
-		statusMap = new HashMap<Player, Boolean>();
-		CommandExecutor executor = new ElytraBoosterCommandExecutor(this);
-		getCommand("eb").setExecutor(executor);
-		getCommand("eb").setTabCompleter((TabCompleter) executor);
-		getServer().getPluginManager().registerEvents(new PlayerGlideListener(this), this);
-		getServer().getPluginManager().registerEvents(new InventoryClickListener(), this);
-		getServer().getPluginManager().registerEvents(new PlayerChatListener(this), this);
-		getServer().getPluginManager().registerEvents(new PlayerSwapHandItemsListener(this), this);
-	}
-
-	public PortalManager getPortalManager() {
-		return portalManager;
-	}
-
-	public Map<Player, Boolean> getStatusMap() {
-		return statusMap;
-	}
-
-	public SettingsManager getSettingsManager() {
-		return settingsManager;
-	}
-
-	public SpawnerManager getSpawnerManager() {
-		return spawnerManager;
-	}
-
-	public PadManager getPadManager() {
-		return padManager;
-	}
-
-	public static ElytraBooster getInstance() {
-		return instance;
-	}
-
-	public VersionWrapper getWrapper() {
-		return wrapper;
-	}
-
+        portalManager = new PortalManager(Portal.class, "yaml", this);
+        spawnerManager = new SpawnerManager(Spawner.class, "yaml", this);
+        padManager = new PadManager(this);
+        statusMap = new HashMap<Player, Boolean>();
+        CommandExecutor executor = new ElytraBoosterCommandExecutor(this);
+        getCommand("eb").setExecutor(executor);
+        getCommand("eb").setTabCompleter((TabCompleter) executor);
+        getServer().getPluginManager().registerEvents(new PlayerGlideListener(this), this);
+        getServer().getPluginManager().registerEvents(new PlayerSwapHandItemsListener(this), this);
+    }
 }

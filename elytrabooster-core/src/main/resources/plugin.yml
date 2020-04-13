@@ -31,7 +31,7 @@ permissions:
   eb.admin.near:
     description: List near portals permission
     default: op
-  eb.admin.reload: 
+  eb.admin.reload:
     description: Reload plugin data permission
     default: op
   eb.admin.set:
@@ -61,6 +61,6 @@ permissions:
   eb.*:
     description: Wildcard ElytraBooster permission
     default: op
-    children: 
+    children:
       eb.boosters.*: true
       eb.admin.*: true
