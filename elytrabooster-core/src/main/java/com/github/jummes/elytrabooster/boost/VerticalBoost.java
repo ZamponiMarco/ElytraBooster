@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.github.jummes.elytrabooster.action.AbstractAction;
-import com.github.jummes.elytrabooster.trail.BoostTrail;
+import com.github.jummes.elytrabooster.boost.trail.BoostTrail;
 
 import lombok.Getter;
 

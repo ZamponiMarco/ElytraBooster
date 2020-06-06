@@ -7,7 +7,7 @@ import com.github.jummes.elytrabooster.boost.VerticalBoost;
 import com.github.jummes.elytrabooster.booster.Booster;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
 import com.github.jummes.elytrabooster.manager.BoosterManager;
-import com.github.jummes.elytrabooster.visual.PadVisual;
+import com.github.jummes.elytrabooster.pad.visual.PadVisual;
 
 public abstract class AbstractPad implements Booster {
 

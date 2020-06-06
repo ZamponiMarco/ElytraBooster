@@ -4,7 +4,7 @@ import org.bukkit.Location;
 
 import com.github.jummes.elytrabooster.boost.VerticalBoost;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
-import com.github.jummes.elytrabooster.visual.PadVisual;
+import com.github.jummes.elytrabooster.pad.visual.PadVisual;
 
 public class SimplePad extends AbstractPad {
 
