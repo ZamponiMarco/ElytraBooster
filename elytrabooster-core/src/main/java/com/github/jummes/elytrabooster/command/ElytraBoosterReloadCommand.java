@@ -1,10 +1,9 @@
 package com.github.jummes.elytrabooster.command;
 
-import org.bukkit.command.CommandSender;
-import org.bukkit.permissions.Permission;
-
 import com.github.jummes.elytrabooster.core.ElytraBooster;
 import com.github.jummes.libs.util.MessageUtils;
+import org.bukkit.command.CommandSender;
+import org.bukkit.permissions.Permission;
 
 public class ElytraBoosterReloadCommand extends AbstractCommand {
 

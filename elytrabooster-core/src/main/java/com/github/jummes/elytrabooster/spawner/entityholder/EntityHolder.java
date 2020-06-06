@@ -1,11 +1,5 @@
 package com.github.jummes.elytrabooster.spawner.entityholder;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import org.bukkit.Location;
-
 import com.github.jummes.elytrabooster.boost.SimpleBoost;
 import com.github.jummes.elytrabooster.spawner.entityholder.entity.ActiveEntity;
 import com.github.jummes.elytrabooster.spawner.entityholder.entity.EntityDescription;
@@ -13,8 +7,12 @@ import com.github.jummes.elytrabooster.spawner.entityholder.entity.FireworkEntit
 import com.github.jummes.libs.annotation.Serializable;
 import com.github.jummes.libs.model.Model;
 import com.github.jummes.libs.model.wrapper.LocationWrapper;
-
 import lombok.Getter;
+import org.bukkit.Location;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Getter
 public class EntityHolder implements Model {
@@ -40,6 +38,13 @@ public class EntityHolder implements Model {
         this.entities = new ArrayList<>();
     }
 
+    public static EntityHolder deserialize(Map<String, Object> map) {
+        EntityDescription entityDescription = (EntityDescription) map.get("entityDescription");
+        int maxEntities = (int) map.get("maxEntities");
+        SimpleBoost boost = (SimpleBoost) map.get("boost");
+        return new EntityHolder(entityDescription, maxEntities, boost);
+    }
+
     public void spawnEntity(Location center) {
         if (entities.size() < maxEntities) {
             entities.add(new ActiveEntity(entityDescription, new LocationWrapper(center), this));
@@ -51,15 +56,8 @@ public class EntityHolder implements Model {
     }
 
     public void despawnAll() {
-        entities.forEach(entity -> entity.entityDespawn());
+        entities.forEach(ActiveEntity::entityDespawn);
         entities.clear();
-    }
-
-    public static EntityHolder deserialize(Map<String, Object> map) {
-        EntityDescription entityDescription = (EntityDescription) map.get("entityDescription");
-        int maxEntities = (int) map.get("maxEntities");
-        SimpleBoost boost = (SimpleBoost) map.get("boost");
-        return new EntityHolder(entityDescription, maxEntities, boost);
     }
 
 }

@@ -1,12 +1,11 @@
 package com.github.jummes.elytrabooster.action;
 
-import java.util.Map;
-
+import com.github.jummes.elytrabooster.core.ElytraBooster;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 
-import com.github.jummes.elytrabooster.core.ElytraBooster;
+import java.util.Map;
 
 public class HealAction extends AbstractAction {
 
@@ -21,7 +20,7 @@ public class HealAction extends AbstractAction {
     protected void parseParameters(Map<String, String> parameters) {
         target = Bukkit.getPlayer(parameters.get("player"));
 
-        amount = Integer.valueOf(parameters.getOrDefault("amount", "2"));
+        amount = Integer.parseInt(parameters.getOrDefault("amount", "2"));
     }
 
     @Override
@@ -33,7 +32,7 @@ public class HealAction extends AbstractAction {
         double maxHealth = p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
         double currHealth = p.getHealth();
 
-        p.setHealth(currHealth + amount < maxHealth ? currHealth + amount : maxHealth);
+        p.setHealth(Math.min(currHealth + amount, maxHealth));
     }
 
 }

@@ -1,12 +1,11 @@
 package com.github.jummes.elytrabooster.action;
 
-import java.util.Map;
-
+import com.github.jummes.elytrabooster.core.ElytraBooster;
+import com.github.jummes.libs.util.MessageUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import com.github.jummes.elytrabooster.core.ElytraBooster;
-import com.github.jummes.libs.util.MessageUtils;
+import java.util.Map;
 
 public class MessageAction extends AbstractAction {
 

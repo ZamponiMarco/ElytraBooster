@@ -1,14 +1,12 @@
 package com.github.jummes.elytrabooster.portal.shape;
 
-import java.util.List;
-
-import org.bukkit.Location;
-
 import com.github.jummes.libs.annotation.Enumerable;
 import com.github.jummes.libs.annotation.Serializable;
 import com.github.jummes.libs.model.Model;
-
 import lombok.Getter;
+import org.bukkit.Location;
+
+import java.util.List;
 
 @Getter
 @Enumerable(classArray = {CircleShape.class, RectangleShape.class, TriangleShape.class, ComposedShape.class})

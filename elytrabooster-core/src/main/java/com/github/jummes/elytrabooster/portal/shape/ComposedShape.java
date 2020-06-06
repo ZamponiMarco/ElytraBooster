@@ -1,21 +1,19 @@
 package com.github.jummes.elytrabooster.portal.shape;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-
 import com.github.jummes.elytrabooster.portal.Portal;
 import com.github.jummes.libs.annotation.Serializable;
 import com.github.jummes.libs.model.Model;
 import com.github.jummes.libs.model.ModelPath;
 import com.github.jummes.libs.model.wrapper.LocationWrapper;
 import com.google.common.collect.Lists;
-
 import lombok.Getter;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ComposedShape extends Shape {
 

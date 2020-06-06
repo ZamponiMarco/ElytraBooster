@@ -1,16 +1,15 @@
 package com.github.jummes.elytrabooster.pad.visual;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import com.github.jummes.libs.core.Libs;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.util.Vector;
 
-import com.github.jummes.libs.core.Libs;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class FlamePadVisual extends PadVisual {
 

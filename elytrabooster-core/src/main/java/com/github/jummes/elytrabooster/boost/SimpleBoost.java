@@ -1,17 +1,15 @@
 package com.github.jummes.elytrabooster.boost;
 
-import java.util.List;
-import java.util.Map;
-
-import org.bukkit.configuration.serialization.SerializableAs;
-
 import com.github.jummes.elytrabooster.action.AbstractAction;
 import com.github.jummes.elytrabooster.boost.trail.BoostTrail;
 import com.github.jummes.elytrabooster.boost.trail.SimpleBoostTrail;
 import com.github.jummes.libs.annotation.Serializable;
 import com.google.common.collect.Lists;
-
 import lombok.Getter;
+import org.bukkit.configuration.serialization.SerializableAs;
+
+import java.util.List;
+import java.util.Map;
 
 @Getter
 @SerializableAs("SimpleBoost")

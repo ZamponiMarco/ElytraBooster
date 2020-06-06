@@ -1,7 +1,8 @@
 package com.github.jummes.elytrabooster.spawner.entityholder.entity;
 
-import java.util.Map;
-
+import com.github.jummes.libs.core.Libs;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.EntityType;
@@ -9,10 +10,7 @@ import org.bukkit.entity.Item;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import com.github.jummes.libs.core.Libs;
-
-import lombok.Getter;
-import lombok.Setter;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -25,6 +23,11 @@ public class FireworkEntityDescription extends EntityDescription {
 
     public FireworkEntityDescription() {
         super();
+    }
+
+    @SuppressWarnings("unused")
+    public static FireworkEntityDescription deserialize(Map<String, Object> map) {
+        return new FireworkEntityDescription();
     }
 
     @Override
@@ -59,11 +62,6 @@ public class FireworkEntityDescription extends EntityDescription {
             }
         };
         return runnable.runTaskTimer(plugin, 0, 4).getTaskId();
-    }
-
-    @SuppressWarnings("unused")
-    public static FireworkEntityDescription deserialize(Map<String, Object> map) {
-        return new FireworkEntityDescription();
     }
 
     @Override

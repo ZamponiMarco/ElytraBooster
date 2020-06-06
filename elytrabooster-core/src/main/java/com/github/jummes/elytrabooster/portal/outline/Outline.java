@@ -1,11 +1,10 @@
 package com.github.jummes.elytrabooster.portal.outline;
 
-import java.util.List;
-
-import org.bukkit.Location;
-
 import com.github.jummes.libs.annotation.Enumerable;
 import com.github.jummes.libs.model.Model;
+import org.bukkit.Location;
+
+import java.util.List;
 
 /**
  * Manages the creation of portal outline

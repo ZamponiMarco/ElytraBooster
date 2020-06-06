@@ -11,22 +11,6 @@ import org.bukkit.entity.Player;
  */
 public class RainbowBoostTrail extends BoostTrail {
 
-    private enum RainbowColor {
-
-        VIOLET(148, 0, 211), INDOIGO(75, 0, 130), BLUE(0, 0, 255), GREEN(0, 255, 0), YELLOW(255, 255, 0),
-        ORANGE(255, 127, 0), RED(255, 0, 0);
-
-        private Color color;
-
-        RainbowColor(int r, int g, int b) {
-            color = Color.fromRGB(r, g, b);
-        }
-
-        public Color getColor() {
-            return color;
-        }
-    }
-
     int currentColor;
 
     @Override
@@ -39,6 +23,22 @@ public class RainbowBoostTrail extends BoostTrail {
     @Override
     public String getName() {
         return "rainbow";
+    }
+
+    private enum RainbowColor {
+
+        VIOLET(148, 0, 211), INDOIGO(75, 0, 130), BLUE(0, 0, 255), GREEN(0, 255, 0), YELLOW(255, 255, 0),
+        ORANGE(255, 127, 0), RED(255, 0, 0);
+
+        private final Color color;
+
+        RainbowColor(int r, int g, int b) {
+            color = Color.fromRGB(r, g, b);
+        }
+
+        public Color getColor() {
+            return color;
+        }
     }
 
 }

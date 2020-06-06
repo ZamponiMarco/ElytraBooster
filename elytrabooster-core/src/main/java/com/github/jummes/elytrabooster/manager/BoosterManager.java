@@ -1,12 +1,11 @@
 package com.github.jummes.elytrabooster.manager;
 
-import java.util.Map;
-
+import com.github.jummes.elytrabooster.booster.Booster;
+import com.github.jummes.elytrabooster.core.ElytraBooster;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
-import com.github.jummes.elytrabooster.booster.Booster;
-import com.github.jummes.elytrabooster.core.ElytraBooster;
+import java.util.Map;
 
 public interface BoosterManager<T extends Booster> extends DataManager {
 

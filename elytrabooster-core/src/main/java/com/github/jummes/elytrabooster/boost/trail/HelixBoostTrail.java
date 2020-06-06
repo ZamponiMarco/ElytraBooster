@@ -1,12 +1,11 @@
 package com.github.jummes.elytrabooster.boost.trail;
 
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
-
-import net.md_5.bungee.api.ChatColor;
 
 public class HelixBoostTrail extends BoostTrail {
 

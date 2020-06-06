@@ -1,8 +1,7 @@
 package com.github.jummes.elytrabooster.booster;
 
-import org.bukkit.Location;
-
 import com.github.jummes.elytrabooster.manager.BoosterManager;
+import org.bukkit.Location;
 
 public interface Booster {
 

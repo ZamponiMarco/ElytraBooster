@@ -1,8 +1,22 @@
 package com.github.jummes.elytrabooster.portal;
 
-import java.util.ArrayList;
-import java.util.Map;
-
+import com.github.jummes.elytrabooster.action.AbstractAction;
+import com.github.jummes.elytrabooster.boost.SimpleBoost;
+import com.github.jummes.elytrabooster.boost.trail.SimpleBoostTrail;
+import com.github.jummes.elytrabooster.core.ElytraBooster;
+import com.github.jummes.elytrabooster.event.FinishedCooldownEvent;
+import com.github.jummes.elytrabooster.event.PlayerSimpleBoostEvent;
+import com.github.jummes.elytrabooster.portal.outline.BlockPortalOutline;
+import com.github.jummes.elytrabooster.portal.outline.Outline;
+import com.github.jummes.elytrabooster.portal.outline.sorter.ClosingPointSorter;
+import com.github.jummes.elytrabooster.portal.outline.sorter.PointSorter;
+import com.github.jummes.elytrabooster.portal.shape.CircleShape;
+import com.github.jummes.elytrabooster.portal.shape.Shape;
+import com.github.jummes.libs.annotation.Serializable;
+import com.github.jummes.libs.model.Model;
+import com.github.jummes.libs.model.wrapper.LocationWrapper;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang.ClassUtils;
 import org.apache.commons.lang.RandomStringUtils;
 import org.bukkit.Bukkit;
@@ -12,24 +26,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.github.jummes.elytrabooster.action.AbstractAction;
-import com.github.jummes.elytrabooster.boost.SimpleBoost;
-import com.github.jummes.elytrabooster.core.ElytraBooster;
-import com.github.jummes.elytrabooster.event.FinishedCooldownEvent;
-import com.github.jummes.elytrabooster.event.PlayerSimpleBoostEvent;
-import com.github.jummes.elytrabooster.portal.outline.BlockPortalOutline;
-import com.github.jummes.elytrabooster.portal.outline.Outline;
-import com.github.jummes.elytrabooster.portal.shape.CircleShape;
-import com.github.jummes.elytrabooster.portal.shape.Shape;
-import com.github.jummes.elytrabooster.portal.outline.sorter.ClosingPointSorter;
-import com.github.jummes.elytrabooster.portal.outline.sorter.PointSorter;
-import com.github.jummes.elytrabooster.boost.trail.SimpleBoostTrail;
-import com.github.jummes.libs.annotation.Serializable;
-import com.github.jummes.libs.model.Model;
-import com.github.jummes.libs.model.wrapper.LocationWrapper;
-
-import lombok.Getter;
-import lombok.Setter;
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Handle portals data
@@ -83,6 +81,16 @@ public class Portal implements Model {
         this.plugin = ElytraBooster.getInstance();
 
         runBoosterTask();
+    }
+
+    public static Portal deserialize(Map<String, Object> map) {
+        String id = (String) map.get("id");
+        SimpleBoost boost = (SimpleBoost) map.get("boost");
+        Outline outline = (Outline) map.get("outline");
+        int cooldown = (int) map.get("cooldown");
+        PointSorter sorter = (PointSorter) map.get("sorter");
+        Shape shape = (Shape) map.get("shape");
+        return new Portal(id, boost, outline, cooldown, sorter, shape);
     }
 
     public void runBoosterTask() {
@@ -151,16 +159,6 @@ public class Portal implements Model {
 
     private boolean isActive() {
         return checkTaskNumber != 0 && outlineTaskNumber != 0;
-    }
-
-    public static Portal deserialize(Map<String, Object> map) {
-        String id = (String) map.get("id");
-        SimpleBoost boost = (SimpleBoost) map.get("boost");
-        Outline outline = (Outline) map.get("outline");
-        int cooldown = (int) map.get("cooldown");
-        PointSorter sorter = (PointSorter) map.get("sorter");
-        Shape shape = (Shape) map.get("shape");
-        return new Portal(id, boost, outline, cooldown, sorter, shape);
     }
 
     @Override

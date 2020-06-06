@@ -1,7 +1,6 @@
 package com.github.jummes.elytrabooster.spawner.entityholder.entity;
 
-import java.util.Map;
-
+import com.github.jummes.libs.core.Libs;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.EntityType;
@@ -9,7 +8,7 @@ import org.bukkit.entity.Item;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import com.github.jummes.libs.core.Libs;
+import java.util.Map;
 
 public class PotionEntityDescription extends EntityDescription {
 
@@ -20,6 +19,11 @@ public class PotionEntityDescription extends EntityDescription {
 
     public PotionEntityDescription() {
         super();
+    }
+
+    @SuppressWarnings("unused")
+    public static PotionEntityDescription deserialize(Map<String, Object> map) {
+        return new PotionEntityDescription();
     }
 
     @Override
@@ -54,11 +58,6 @@ public class PotionEntityDescription extends EntityDescription {
             }
         };
         return runnable.runTaskTimer(plugin, 0, 10).getTaskId();
-    }
-
-    @SuppressWarnings("unused")
-    public static PotionEntityDescription deserialize(Map<String, Object> map) {
-        return new PotionEntityDescription();
     }
 
     @Override

@@ -1,60 +1,48 @@
 package com.github.jummes.elytrabooster.core;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
+import com.github.jummes.elytrabooster.boost.Boost;
+import com.github.jummes.elytrabooster.boost.SimpleBoost;
+import com.github.jummes.elytrabooster.boost.trail.BoostTrail;
+import com.github.jummes.elytrabooster.boost.trail.SimpleBoostTrail;
+import com.github.jummes.elytrabooster.commands.executor.ElytraBoosterCommandExecutor;
+import com.github.jummes.elytrabooster.listener.PlayerGlideListener;
+import com.github.jummes.elytrabooster.listener.PlayerSwapHandItemsListener;
+import com.github.jummes.elytrabooster.manager.PadManager;
+import com.github.jummes.elytrabooster.manager.PortalManager;
+import com.github.jummes.elytrabooster.manager.SpawnerManager;
+import com.github.jummes.elytrabooster.portal.Portal;
+import com.github.jummes.elytrabooster.portal.outline.BlockPortalOutline;
+import com.github.jummes.elytrabooster.portal.outline.Outline;
+import com.github.jummes.elytrabooster.portal.outline.ParticlePortalOutline;
+import com.github.jummes.elytrabooster.portal.outline.sorter.ClosingPointSorter;
+import com.github.jummes.elytrabooster.portal.outline.sorter.PointSorter;
+import com.github.jummes.elytrabooster.portal.shape.*;
+import com.github.jummes.elytrabooster.spawner.Spawner;
+import com.github.jummes.elytrabooster.spawner.entityholder.EntityHolder;
+import com.github.jummes.elytrabooster.spawner.entityholder.entity.EntityDescription;
+import com.github.jummes.elytrabooster.spawner.entityholder.entity.FireworkEntityDescription;
+import com.github.jummes.elytrabooster.spawner.entityholder.entity.MushroomEntityDescription;
+import com.github.jummes.elytrabooster.spawner.entityholder.entity.PotionEntityDescription;
+import com.github.jummes.elytrabooster.spawner.volume.SphericVolume;
+import com.github.jummes.elytrabooster.spawner.volume.Volume;
+import com.github.jummes.libs.core.Libs;
+import com.github.jummes.libs.localization.PluginLocale;
+import lombok.Getter;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.github.jummes.elytrabooster.boost.Boost;
-import com.github.jummes.elytrabooster.boost.SimpleBoost;
-import com.github.jummes.elytrabooster.commands.executor.ElytraBoosterCommandExecutor;
-import com.github.jummes.elytrabooster.spawner.entityholder.entity.EntityDescription;
-import com.github.jummes.elytrabooster.spawner.entityholder.entity.FireworkEntityDescription;
-import com.github.jummes.elytrabooster.spawner.entityholder.entity.MushroomEntityDescription;
-import com.github.jummes.elytrabooster.spawner.entityholder.entity.PotionEntityDescription;
-import com.github.jummes.elytrabooster.spawner.entityholder.EntityHolder;
-import com.github.jummes.elytrabooster.listener.PlayerGlideListener;
-import com.github.jummes.elytrabooster.listener.PlayerSwapHandItemsListener;
-import com.github.jummes.elytrabooster.manager.PadManager;
-import com.github.jummes.elytrabooster.manager.PortalManager;
-import com.github.jummes.elytrabooster.manager.SpawnerManager;
-import com.github.jummes.elytrabooster.portal.outline.BlockPortalOutline;
-import com.github.jummes.elytrabooster.portal.outline.Outline;
-import com.github.jummes.elytrabooster.portal.outline.ParticlePortalOutline;
-import com.github.jummes.elytrabooster.portal.Portal;
-import com.github.jummes.elytrabooster.portal.shape.CircleShape;
-import com.github.jummes.elytrabooster.portal.shape.ComposedShape;
-import com.github.jummes.elytrabooster.portal.shape.RectangleShape;
-import com.github.jummes.elytrabooster.portal.shape.Shape;
-import com.github.jummes.elytrabooster.portal.shape.TriangleShape;
-import com.github.jummes.elytrabooster.portal.outline.sorter.ClosingPointSorter;
-import com.github.jummes.elytrabooster.portal.outline.sorter.PointSorter;
-import com.github.jummes.elytrabooster.spawner.Spawner;
-import com.github.jummes.elytrabooster.boost.trail.BoostTrail;
-import com.github.jummes.elytrabooster.boost.trail.SimpleBoostTrail;
-import com.github.jummes.elytrabooster.spawner.volume.SphericVolume;
-import com.github.jummes.elytrabooster.spawner.volume.Volume;
-import com.github.jummes.libs.core.Libs;
-import com.github.jummes.libs.localization.PluginLocale;
-
-import lombok.Getter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @Getter
 public class ElytraBooster extends JavaPlugin {
 
     @Getter
     private static ElytraBooster instance;
-
-    private PortalManager portalManager;
-    private SpawnerManager spawnerManager;
-    private PadManager padManager;
-
-    private Map<Player, Boolean> statusMap;
 
     static {
         Libs.registerSerializables();
@@ -84,6 +72,11 @@ public class ElytraBooster extends JavaPlugin {
         ConfigurationSerialization.registerClass(Volume.class);
         ConfigurationSerialization.registerClass(SphericVolume.class);
     }
+
+    private PortalManager portalManager;
+    private SpawnerManager spawnerManager;
+    private PadManager padManager;
+    private Map<Player, Boolean> statusMap;
 
     public void onEnable() {
         instance = this;

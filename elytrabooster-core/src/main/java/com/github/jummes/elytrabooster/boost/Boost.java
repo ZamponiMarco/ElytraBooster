@@ -1,13 +1,12 @@
 package com.github.jummes.elytrabooster.boost;
 
-import java.util.List;
-
 import com.github.jummes.elytrabooster.action.AbstractAction;
 import com.github.jummes.elytrabooster.boost.trail.BoostTrail;
 import com.github.jummes.libs.annotation.Serializable;
 import com.github.jummes.libs.model.Model;
-
 import lombok.Getter;
+
+import java.util.List;
 
 @Getter
 public abstract class Boost implements Model {

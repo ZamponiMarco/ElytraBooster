@@ -27,8 +27,8 @@ public class BoosterHelpCommand extends BoosterCommand {
 
         int pageToPrint;
         if (arguments.length >= 1 && StringUtils.isNumeric(arguments[0])
-                && Integer.valueOf(arguments[0]) > numberOfPages) {
-            pageToPrint = Integer.valueOf(arguments[0]) - 1;
+                && Integer.parseInt(arguments[0]) > numberOfPages) {
+            pageToPrint = Integer.parseInt(arguments[0]) - 1;
         } else {
             pageToPrint = 0;
         }

@@ -1,19 +1,17 @@
 package com.github.jummes.elytrabooster.portal.outline;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.IntStream;
-
+import com.github.jummes.libs.annotation.Serializable;
+import com.google.common.base.Predicate;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.serialization.SerializableAs;
 
-import com.github.jummes.libs.annotation.Serializable;
-import com.google.common.base.Predicate;
-
-import lombok.Getter;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.IntStream;
 
 @Getter
 @SerializableAs("BlockPortalOutline")
@@ -36,6 +34,12 @@ public class BlockPortalOutline extends Outline {
             Bukkit.getLogger().warning(
                     ChatColor.RED + outlineType + " or " + cooldownType + " is not a block, check portals.yml");
         }
+    }
+
+    public static BlockPortalOutline deserialize(Map<String, Object> map) {
+        String outlineType = (String) map.get("outlineType");
+        String cooldownType = (String) map.get("cooldownType");
+        return new BlockPortalOutline(outlineType, cooldownType);
     }
 
     @Override
@@ -72,12 +76,6 @@ public class BlockPortalOutline extends Outline {
                 points.get(i).getBlock().setType(outlineType);
             }
         });
-    }
-
-    public static BlockPortalOutline deserialize(Map<String, Object> map) {
-        String outlineType = (String) map.get("outlineType");
-        String cooldownType = (String) map.get("cooldownType");
-        return new BlockPortalOutline(outlineType, cooldownType);
     }
 
 }

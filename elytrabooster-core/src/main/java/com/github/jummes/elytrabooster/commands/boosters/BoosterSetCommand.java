@@ -1,14 +1,13 @@
 package com.github.jummes.elytrabooster.commands.boosters;
 
-import java.util.Arrays;
-
-import org.bukkit.command.CommandSender;
-import org.bukkit.permissions.Permission;
-
 import com.github.jummes.elytrabooster.booster.Booster;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
 import com.github.jummes.elytrabooster.manager.BoosterManager;
 import com.github.jummes.libs.util.MessageUtils;
+import org.bukkit.command.CommandSender;
+import org.bukkit.permissions.Permission;
+
+import java.util.Arrays;
 
 public class BoosterSetCommand extends BoosterCommand {
 

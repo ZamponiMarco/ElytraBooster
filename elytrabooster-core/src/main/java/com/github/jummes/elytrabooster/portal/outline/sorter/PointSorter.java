@@ -1,10 +1,9 @@
 package com.github.jummes.elytrabooster.portal.outline.sorter;
 
-import java.util.List;
-
+import com.github.jummes.libs.model.Model;
 import org.bukkit.Location;
 
-import com.github.jummes.libs.model.Model;
+import java.util.List;
 
 public abstract class PointSorter implements Model {
 

@@ -1,10 +1,9 @@
 package com.github.jummes.elytrabooster.commands.boosters;
 
-import org.bukkit.command.CommandSender;
-
 import com.github.jummes.elytrabooster.command.AbstractCommand;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
 import com.github.jummes.libs.util.MessageUtils;
+import org.bukkit.command.CommandSender;
 
 public abstract class BoosterCommand extends AbstractCommand {
 

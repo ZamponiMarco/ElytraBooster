@@ -1,11 +1,10 @@
 package com.github.jummes.elytrabooster.action;
 
-import java.util.Map;
-
+import com.github.jummes.elytrabooster.core.ElytraBooster;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import com.github.jummes.elytrabooster.core.ElytraBooster;
+import java.util.Map;
 
 public class DamageAction extends AbstractAction {
 
@@ -20,7 +19,7 @@ public class DamageAction extends AbstractAction {
     protected void parseParameters(Map<String, String> parameters) {
         target = Bukkit.getPlayer(parameters.get("player"));
 
-        amount = Integer.valueOf(parameters.getOrDefault("amount", "2"));
+        amount = Integer.parseInt(parameters.getOrDefault("amount", "2"));
     }
 
     @Override

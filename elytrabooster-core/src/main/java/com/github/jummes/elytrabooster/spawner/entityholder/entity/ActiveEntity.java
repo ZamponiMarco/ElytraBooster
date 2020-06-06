@@ -1,12 +1,11 @@
 package com.github.jummes.elytrabooster.spawner.entityholder.entity;
 
+import com.github.jummes.elytrabooster.core.ElytraBooster;
+import com.github.jummes.elytrabooster.event.PlayerSimpleBoostEvent;
+import com.github.jummes.elytrabooster.spawner.entityholder.EntityHolder;
+import com.github.jummes.libs.model.wrapper.LocationWrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-
-import com.github.jummes.elytrabooster.core.ElytraBooster;
-import com.github.jummes.elytrabooster.spawner.entityholder.EntityHolder;
-import com.github.jummes.elytrabooster.event.PlayerSimpleBoostEvent;
-import com.github.jummes.libs.model.wrapper.LocationWrapper;
 
 public class ActiveEntity {
 
@@ -14,10 +13,9 @@ public class ActiveEntity {
     private final double CHECK_RADIUS = 1.0;
 
     protected ElytraBooster plugin;
-
+    protected EntityHolder holder;
     private EntityDescription description;
     private LocationWrapper location;
-    protected EntityHolder holder;
     private int checkTaskNumber;
 
     public ActiveEntity(EntityDescription description, LocationWrapper location, EntityHolder holder) {

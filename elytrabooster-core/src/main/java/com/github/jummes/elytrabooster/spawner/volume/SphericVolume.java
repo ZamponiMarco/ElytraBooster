@@ -1,18 +1,16 @@
 package com.github.jummes.elytrabooster.spawner.volume;
 
-import java.util.Map;
-import java.util.Random;
-
+import com.github.jummes.libs.annotation.Serializable;
+import com.github.jummes.libs.model.wrapper.LocationWrapper;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-import com.github.jummes.libs.annotation.Serializable;
-import com.github.jummes.libs.model.wrapper.LocationWrapper;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import java.util.Map;
+import java.util.Random;
 
 @Getter
 @Setter
@@ -32,6 +30,13 @@ public class SphericVolume extends Volume {
         this(new LocationWrapper(p.getLocation().getBlock().getLocation()), 1.0, 3.0);
     }
 
+    public static SphericVolume deserialize(Map<String, Object> map) {
+        LocationWrapper center = (LocationWrapper) map.get("center");
+        double minRadius = (double) map.get("minRadius");
+        double maxRadius = (double) map.get("maxRadius");
+        return new SphericVolume(center, minRadius, maxRadius);
+    }
+
     @Override
     public Location getRandomPoint() {
         Random r = new Random();
@@ -49,13 +54,6 @@ public class SphericVolume extends Volume {
             loc = new Location(center.getWorld(), x, y, z);
         } while (loc.getBlock().getType() != Material.AIR);
         return loc;
-    }
-
-    public static SphericVolume deserialize(Map<String, Object> map) {
-        LocationWrapper center = (LocationWrapper) map.get("center");
-        double minRadius = (double) map.get("minRadius");
-        double maxRadius = (double) map.get("maxRadius");
-        return new SphericVolume(center, minRadius, maxRadius);
     }
 
 }

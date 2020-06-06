@@ -1,11 +1,10 @@
 package com.github.jummes.elytrabooster.commands.factory;
 
-import org.bukkit.command.CommandSender;
-
 import com.github.jummes.elytrabooster.command.AbstractCommand;
 import com.github.jummes.elytrabooster.command.ElytraBoosterHelpCommand;
 import com.github.jummes.elytrabooster.command.ElytraBoosterReloadCommand;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
+import org.bukkit.command.CommandSender;
 
 public class ElytraBoosterCommandFactory implements CommandFactory {
 

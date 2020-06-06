@@ -1,8 +1,7 @@
 package com.github.jummes.elytrabooster.boost.trail;
 
-import org.bukkit.entity.Player;
-
 import com.github.jummes.libs.model.Model;
+import org.bukkit.entity.Player;
 
 /**
  * Interface that manages the creation of boost trails

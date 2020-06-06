@@ -1,8 +1,8 @@
 package com.github.jummes.elytrabooster.action;
 
-import java.util.Map;
-
 import com.github.jummes.elytrabooster.core.ElytraBooster;
+
+import java.util.Map;
 
 public abstract class AbstractAction {
 

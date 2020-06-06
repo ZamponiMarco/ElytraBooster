@@ -1,9 +1,9 @@
 package com.github.jummes.elytrabooster.portal.outline.sorter;
 
+import org.bukkit.Location;
+
 import java.util.Collections;
 import java.util.List;
-
-import org.bukkit.Location;
 
 public class RandomPointSorter extends PointSorter {
 

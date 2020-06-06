@@ -1,13 +1,12 @@
 package com.github.jummes.elytrabooster.pad;
 
-import org.bukkit.Location;
-import org.bukkit.scheduler.BukkitRunnable;
-
 import com.github.jummes.elytrabooster.boost.VerticalBoost;
 import com.github.jummes.elytrabooster.booster.Booster;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
 import com.github.jummes.elytrabooster.manager.BoosterManager;
 import com.github.jummes.elytrabooster.pad.visual.PadVisual;
+import org.bukkit.Location;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public abstract class AbstractPad implements Booster {
 

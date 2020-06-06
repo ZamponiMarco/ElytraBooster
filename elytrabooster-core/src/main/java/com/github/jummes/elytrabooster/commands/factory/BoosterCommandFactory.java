@@ -1,11 +1,10 @@
 package com.github.jummes.elytrabooster.commands.factory;
 
-import org.apache.commons.lang.WordUtils;
-import org.bukkit.command.CommandSender;
-
 import com.github.jummes.elytrabooster.commands.boosters.BoosterCommand;
 import com.github.jummes.elytrabooster.commands.boosters.BoosterHelpCommand;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
+import org.apache.commons.lang.WordUtils;
+import org.bukkit.command.CommandSender;
 
 public class BoosterCommandFactory implements CommandFactory {
 

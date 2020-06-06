@@ -1,17 +1,12 @@
 package com.github.jummes.elytrabooster.portal.shape;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.bukkit.Location;
-
 import com.github.jummes.elytrabooster.portal.Portal;
 import com.github.jummes.libs.annotation.Serializable;
 import com.github.jummes.libs.model.ModelPath;
 import com.github.jummes.libs.model.wrapper.LocationWrapper;
+import org.bukkit.Location;
+
+import java.util.*;
 
 public class RectangleShape extends Shape {
 
@@ -41,6 +36,14 @@ public class RectangleShape extends Shape {
         this.halfWidth = halfWidth;
         this.halfHeight = halfHeight;
         setPoints();
+    }
+
+    public static RectangleShape deserialize(Map<String, Object> map) {
+        char axis = ((String) map.get("axis")).charAt(0);
+        LocationWrapper center = (LocationWrapper) map.get("center");
+        double halfWidth = (double) map.get("halfWidth");
+        double halfHeight = (double) map.get("halfHeight");
+        return new RectangleShape(axis, center, halfWidth, halfHeight);
     }
 
     @Override
@@ -118,14 +121,6 @@ public class RectangleShape extends Shape {
         }
 
         return linePoints;
-    }
-
-    public static RectangleShape deserialize(Map<String, Object> map) {
-        char axis = ((String) map.get("axis")).charAt(0);
-        LocationWrapper center = (LocationWrapper) map.get("center");
-        double halfWidth = (double) map.get("halfWidth");
-        double halfHeight = (double) map.get("halfHeight");
-        return new RectangleShape(axis, center, halfWidth, halfHeight);
     }
 
     @Override

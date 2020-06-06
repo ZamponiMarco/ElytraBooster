@@ -1,8 +1,8 @@
 package com.github.jummes.elytrabooster.portal.outline.sorter;
 
-import java.util.List;
-
 import org.bukkit.Location;
+
+import java.util.List;
 
 public class NoPointSorter extends PointSorter {
 

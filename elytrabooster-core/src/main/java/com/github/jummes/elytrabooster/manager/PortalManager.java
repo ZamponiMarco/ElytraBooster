@@ -1,13 +1,11 @@
 package com.github.jummes.elytrabooster.manager;
 
-import java.util.List;
-
-import org.bukkit.plugin.java.JavaPlugin;
-
 import com.github.jummes.elytrabooster.portal.Portal;
 import com.github.jummes.libs.model.ModelManager;
-
 import lombok.Getter;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.List;
 
 /**
  * Handles data of the portals

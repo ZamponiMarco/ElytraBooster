@@ -1,13 +1,12 @@
 package com.github.jummes.elytrabooster.action;
 
-import java.util.Map;
-
+import com.github.jummes.elytrabooster.core.ElytraBooster;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import com.github.jummes.elytrabooster.core.ElytraBooster;
+import java.util.Map;
 
 public class EffectAction extends AbstractAction {
 
@@ -29,15 +28,15 @@ public class EffectAction extends AbstractAction {
 
         type = PotionEffectType.getByName(parameters.getOrDefault("type", "INCREASE_DAMAGE").toUpperCase());
 
-        duration = Integer.valueOf(parameters.getOrDefault("duration", "20"));
+        duration = Integer.parseInt(parameters.getOrDefault("duration", "20"));
 
-        level = Integer.valueOf(parameters.getOrDefault("level", "0"));
+        level = Integer.parseInt(parameters.getOrDefault("level", "0"));
 
-        particles = Boolean.valueOf(parameters.getOrDefault("particles", "true"));
+        particles = Boolean.parseBoolean(parameters.getOrDefault("particles", "true"));
 
-        ambient = Boolean.valueOf(parameters.getOrDefault("ambient", "true"));
+        ambient = Boolean.parseBoolean(parameters.getOrDefault("ambient", "true"));
 
-        icon = Boolean.valueOf(parameters.getOrDefault("icon", "true"));
+        icon = Boolean.parseBoolean(parameters.getOrDefault("icon", "true"));
     }
 
     @Override

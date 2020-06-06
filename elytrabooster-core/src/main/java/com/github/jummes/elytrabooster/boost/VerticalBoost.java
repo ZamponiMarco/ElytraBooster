@@ -1,12 +1,11 @@
 package com.github.jummes.elytrabooster.boost;
 
-import java.util.List;
-import java.util.Map;
-
 import com.github.jummes.elytrabooster.action.AbstractAction;
 import com.github.jummes.elytrabooster.boost.trail.BoostTrail;
-
 import lombok.Getter;
+
+import java.util.List;
+import java.util.Map;
 
 @Getter
 public class VerticalBoost extends Boost {

@@ -1,11 +1,11 @@
 package com.github.jummes.elytrabooster.portal.outline.sorter;
 
+import org.bukkit.Location;
+import org.bukkit.configuration.serialization.SerializableAs;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import org.bukkit.Location;
-import org.bukkit.configuration.serialization.SerializableAs;
 
 @SerializableAs("ClosingPointSorter")
 public class ClosingPointSorter extends PointSorter {

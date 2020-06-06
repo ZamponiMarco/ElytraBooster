@@ -1,20 +1,14 @@
 package com.github.jummes.elytrabooster.portal.shape;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.bukkit.Location;
-
 import com.github.jummes.elytrabooster.portal.Portal;
 import com.github.jummes.libs.annotation.Serializable;
 import com.github.jummes.libs.model.Model;
 import com.github.jummes.libs.model.ModelPath;
 import com.github.jummes.libs.model.wrapper.LocationWrapper;
-
 import lombok.Getter;
+import org.bukkit.Location;
+
+import java.util.*;
 
 public class TriangleShape extends Shape {
 
@@ -42,6 +36,14 @@ public class TriangleShape extends Shape {
         setPoints();
     }
 
+    public static TriangleShape deserialize(Map<String, Object> map) {
+        char axis = ((String) map.get("axis")).charAt(0);
+        LocationWrapper pointOne = (LocationWrapper) map.get("pointOne");
+        Vector2D pointTwo = (Vector2D) map.get("pointTwo");
+        Vector2D pointThree = (Vector2D) map.get("pointThree");
+        return new TriangleShape(axis, pointOne, pointTwo, pointThree);
+    }
+
     @Override
     public boolean isInPortalArea(Location location, double epsilon) {
         return isInTrianglePortalArea(location, pointOne.getWrapped(), sumLocationToVector(pointOne, pointTwo),
@@ -58,14 +60,6 @@ public class TriangleShape extends Shape {
     public Location getCenterPoint() {
         return pointOne.getWrapped().clone().add(sumLocationToVector(pointOne, pointTwo).clone())
                 .add(sumLocationToVector(pointOne, pointThree).clone()).multiply(1 / 3.0);
-    }
-
-    public static TriangleShape deserialize(Map<String, Object> map) {
-        char axis = ((String) map.get("axis")).charAt(0);
-        LocationWrapper pointOne = (LocationWrapper) map.get("pointOne");
-        Vector2D pointTwo = (Vector2D) map.get("pointTwo");
-        Vector2D pointThree = (Vector2D) map.get("pointThree");
-        return new TriangleShape(axis, pointOne, pointTwo, pointThree);
     }
 
     private Location sumLocationToVector(LocationWrapper point, Vector2D vector) {

@@ -43,17 +43,7 @@ public class ElytraBoosterCommandExecutor implements CommandExecutor, TabComplet
             CommandFactory commandFactory = null;
             switch (subType) {
                 case "portal":
-                    commandFactory = new BoosterCommandFactory();
-                    subCommand = args.length >= 2 ? args[1] : "";
-                    arguments = args.length >= 3 ? Arrays.copyOfRange(args, 2, args.length) : new String[0];
-                    extra = subType;
-                    break;
                 case "spawner":
-                    commandFactory = new BoosterCommandFactory();
-                    subCommand = args.length >= 2 ? args[1] : "";
-                    arguments = args.length >= 3 ? Arrays.copyOfRange(args, 2, args.length) : new String[0];
-                    extra = subType;
-                    break;
                 case "pad":
                     commandFactory = new BoosterCommandFactory();
                     subCommand = args.length >= 2 ? args[1] : "";

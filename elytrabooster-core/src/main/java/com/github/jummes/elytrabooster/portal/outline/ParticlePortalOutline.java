@@ -1,15 +1,14 @@
 package com.github.jummes.elytrabooster.portal.outline;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.IntStream;
-
+import com.github.jummes.libs.annotation.Serializable;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 
-import com.github.jummes.libs.annotation.Serializable;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.IntStream;
 
 public class ParticlePortalOutline extends Outline {
 
@@ -36,6 +35,12 @@ public class ParticlePortalOutline extends Outline {
         }
     }
 
+    public static ParticlePortalOutline deserialize(Map<String, Object> map) {
+        String outlineType = (String) map.get("outlineType");
+        String cooldownType = (String) map.get("cooldownType");
+        return new ParticlePortalOutline(outlineType, cooldownType);
+    }
+
     @Override
     public void drawOutline(List<Location> points) {
         points.forEach(point -> {
@@ -58,12 +63,6 @@ public class ParticlePortalOutline extends Outline {
             Location point = points.get(i);
             point.getWorld().spawnParticle(outlineType, point, 1, 0, 0, 0, 0.0, null, true);
         });
-    }
-
-    public static ParticlePortalOutline deserialize(Map<String, Object> map) {
-        String outlineType = (String) map.get("outlineType");
-        String cooldownType = (String) map.get("cooldownType");
-        return new ParticlePortalOutline(outlineType, cooldownType);
     }
 
     @Override

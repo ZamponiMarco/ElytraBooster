@@ -1,5 +1,11 @@
 package com.github.jummes.elytrabooster.event;
 
+import com.github.jummes.elytrabooster.boost.SimpleBoost;
+import com.github.jummes.elytrabooster.core.ElytraBooster;
+import com.github.jummes.libs.util.MessageUtils;
+import lombok.Getter;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
@@ -7,21 +13,13 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.github.jummes.elytrabooster.boost.SimpleBoost;
-import com.github.jummes.elytrabooster.core.ElytraBooster;
-import com.github.jummes.libs.util.MessageUtils;
-
-import lombok.Getter;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-
 @Getter
 public class PlayerSimpleBoostEvent extends Event implements Cancellable {
 
     @Getter
     private static final HandlerList HANDLERS_LIST = new HandlerList();
     private boolean cancelled;
-    private Player player;
+    private final Player player;
 
     public PlayerSimpleBoostEvent(ElytraBooster plugin, Player player, SimpleBoost boost) {
 

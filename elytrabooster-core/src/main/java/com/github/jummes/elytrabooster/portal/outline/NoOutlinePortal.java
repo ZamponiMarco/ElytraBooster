@@ -1,9 +1,9 @@
 package com.github.jummes.elytrabooster.portal.outline;
 
-import java.util.List;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
+
+import java.util.List;
 
 public class NoOutlinePortal extends Outline {
 

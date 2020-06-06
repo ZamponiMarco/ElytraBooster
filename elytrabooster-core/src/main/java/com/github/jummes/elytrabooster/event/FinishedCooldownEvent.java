@@ -1,9 +1,8 @@
 package com.github.jummes.elytrabooster.event;
 
+import com.github.jummes.elytrabooster.portal.Portal;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
-
-import com.github.jummes.elytrabooster.portal.Portal;
 
 public class FinishedCooldownEvent extends Event {
 

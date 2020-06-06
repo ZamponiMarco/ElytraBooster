@@ -1,17 +1,16 @@
 package com.github.jummes.elytrabooster.portal.shape;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.configuration.serialization.SerializableAs;
-
 import com.github.jummes.elytrabooster.portal.Portal;
 import com.github.jummes.libs.annotation.Serializable;
 import com.github.jummes.libs.model.ModelPath;
 import com.github.jummes.libs.model.wrapper.LocationWrapper;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.configuration.serialization.SerializableAs;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @SerializableAs("CircleShape")
 public class CircleShape extends Shape {
@@ -39,6 +38,13 @@ public class CircleShape extends Shape {
         this.radius = radius;
         this.center = center;
         setPoints();
+    }
+
+    public static CircleShape deserialize(Map<String, Object> map) {
+        char axis = ((String) map.get("axis")).charAt(0);
+        double radius = (double) map.get("radius");
+        LocationWrapper center = (LocationWrapper) map.get("center");
+        return new CircleShape(axis, radius, center);
     }
 
     @Override
@@ -95,13 +101,6 @@ public class CircleShape extends Shape {
                 return distanceZ <= AXIS_DISTANCE && Math.hypot(distanceY, distanceX) < radius - epsilon;
         }
         return false;
-    }
-
-    public static CircleShape deserialize(Map<String, Object> map) {
-        char axis = ((String) map.get("axis")).charAt(0);
-        double radius = (double) map.get("radius");
-        LocationWrapper center = (LocationWrapper) map.get("center");
-        return new CircleShape(axis, radius, center);
     }
 
     @Override

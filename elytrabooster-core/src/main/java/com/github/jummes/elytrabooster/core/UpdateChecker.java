@@ -1,12 +1,7 @@
 package com.github.jummes.elytrabooster.core;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-
-import javax.net.ssl.HttpsURLConnection;
-
+import com.github.jummes.libs.util.MessageUtils;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,9 +12,11 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.github.jummes.libs.util.MessageUtils;
-
-import net.md_5.bungee.api.ChatColor;
+import javax.net.ssl.HttpsURLConnection;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 
 /**
  * Credits to Benz56
@@ -27,16 +24,15 @@ import net.md_5.bungee.api.ChatColor;
  */
 public class UpdateChecker {
 
-    private final ElytraBooster plugin;
-    private final String localPluginVersion;
-    private String spigotPluginVersion;
-
     private static final int ID = 59002;
     private static final String ERR_MSG = "&cUpdate checker failed!";
     private static final String UPDATE_MSG = "&eA new update of ElytraBooster is available at:&6 https://www.spigotmc.org/resources/"
             + ID + "/updates";
     private static final Permission UPDATE_PERM = new Permission("eb.admin.*", PermissionDefault.FALSE);
     private static final long CHECK_INTERVAL = 12_000;
+    private final ElytraBooster plugin;
+    private final String localPluginVersion;
+    private String spigotPluginVersion;
 
     public UpdateChecker(final ElytraBooster plugin) {
         this.plugin = plugin;

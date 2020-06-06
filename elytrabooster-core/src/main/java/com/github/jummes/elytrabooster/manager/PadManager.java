@@ -1,17 +1,16 @@
 package com.github.jummes.elytrabooster.manager;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
+import com.github.jummes.elytrabooster.booster.Booster;
+import com.github.jummes.elytrabooster.core.ElytraBooster;
+import com.github.jummes.elytrabooster.pad.AbstractPad;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-import com.github.jummes.elytrabooster.booster.Booster;
-import com.github.jummes.elytrabooster.core.ElytraBooster;
-import com.github.jummes.elytrabooster.pad.AbstractPad;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PadManager implements BoosterManager<AbstractPad> {
 
@@ -47,7 +46,7 @@ public class PadManager implements BoosterManager<AbstractPad> {
 
     @Override
     public void loadData() {
-        pads = new HashMap<String, AbstractPad>();
+        pads = new HashMap<>();
         dataYaml.getKeys(false).forEach(this::addBooster);
     }
 
@@ -118,8 +117,7 @@ public class PadManager implements BoosterManager<AbstractPad> {
         String id = booster.getId();
         removeBooster(id);
         addBooster(id);
-        AbstractPad newPad = getBooster(id);
-        return newPad;
+        return getBooster(id);
     }
 
     @Override
