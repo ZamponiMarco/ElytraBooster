@@ -1,15 +1,15 @@
 package com.github.jummes.elytrabooster.command;
 
-import com.github.jummes.elytrabooster.core.ElytraBooster;
+import com.github.jummes.libs.command.AbstractCommand;
 import com.github.jummes.libs.util.MessageUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
 
 public class ElytraBoosterReloadCommand extends AbstractCommand {
 
-    public ElytraBoosterReloadCommand(ElytraBooster plugin, CommandSender sender, String subCommand, String[] arguments,
+    public ElytraBoosterReloadCommand(CommandSender sender, String subCommand, String[] arguments,
                                       boolean isSenderPlayer) {
-        super(plugin, sender, subCommand, arguments, isSenderPlayer);
+        super(sender, subCommand, arguments, isSenderPlayer);
     }
 
     @Override
@@ -17,12 +17,12 @@ public class ElytraBoosterReloadCommand extends AbstractCommand {
         sender.sendMessage(MessageUtils.color("&cReloading &6ElytraBooster"));
 
 //		plugin.getSpawnerManager().getBoostersMap().values().forEach(spawner -> spawner.stopBoosterTask());
-        plugin.getPortalManager().getPortals().forEach(portal -> portal.stopBoosterTask());
+        //plugin.getPortalManager().getPortals().forEach(portal -> portal.stopBoosterTask());
 //		plugin.getPadManager().getBoostersMap().values().forEach(pad -> pad.stopBoosterTask());
-        plugin.getServer().getScheduler().cancelTasks(plugin);
+        //plugin.getServer().getScheduler().cancelTasks(plugin);
 //		plugin.getPortalManager().reloadData();
 //		plugin.getSpawnerManager().reloadData();
-        plugin.getPadManager().reloadData();
+//        plugin.getPadManager().reloadData();
 
         sender.sendMessage(MessageUtils.color("&aReloaded &6ElytraBooster"));
     }

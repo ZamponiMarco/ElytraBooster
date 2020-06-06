@@ -34,8 +34,7 @@ public class RectangleShape extends Shape {
         super(axis);
         this.center = center;
         this.halfWidth = halfWidth;
-        this.halfHeight = halfHeight;
-        setPoints();
+        this.halfHeight = halfHeight;;
     }
 
     public static RectangleShape deserialize(Map<String, Object> map) {
@@ -52,7 +51,7 @@ public class RectangleShape extends Shape {
     }
 
     @Override
-    protected List<Location> buildPoints() {
+    protected List<Location> buildPoints(boolean isBlockOutline) {
         return getRectangle(center.getWrapped(), axis, halfWidth, halfHeight);
     }
 

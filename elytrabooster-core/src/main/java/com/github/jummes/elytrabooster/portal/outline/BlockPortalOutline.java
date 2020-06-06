@@ -24,6 +24,10 @@ public class BlockPortalOutline extends Outline {
     @Serializable(headTexture = HEAD, stringValue = true)
     private Material cooldownType;
 
+    public BlockPortalOutline() {
+        this("STONE","DIRT");
+    }
+
     public BlockPortalOutline(String outlineType, String cooldownType) {
         try {
             this.outlineType = Material.valueOf(outlineType.toUpperCase());

@@ -61,7 +61,7 @@ public class Portal implements Model {
 
     public Portal(Player p) {
         this(RandomStringUtils.randomAlphabetic(6),
-                new SimpleBoost(new SimpleBoostTrail("CRIT"), new ArrayList<AbstractAction>(), 30, 3.0, 1.0),
+                new SimpleBoost(new SimpleBoostTrail("CRIT"), new ArrayList<>(), 30, 3.0, 1.0),
                 new BlockPortalOutline("STONE", "DIRT"), 0,
                 new ClosingPointSorter(p.getLocation().getBlock().getLocation()),
                 new CircleShape('x', 5, new LocationWrapper(p.getLocation().getBlock().getLocation())));
@@ -95,10 +95,11 @@ public class Portal implements Model {
 
     public void runBoosterTask() {
         if (!isActive()) {
+            shape.setPoints(outline instanceof BlockPortalOutline);
             outlineTaskNumber = Bukkit.getServer().getScheduler()
-                    .runTaskTimer(plugin, () -> drawOutline(), 1, plugin.getConfig().getLong("portalOutlineInterval"))
+                    .runTaskTimer(plugin, this::drawOutline, 1, plugin.getConfig().getLong("portalOutlineInterval"))
                     .getTaskId();
-            checkTaskNumber = plugin.getServer().getScheduler().runTaskTimer(plugin, () -> checkPlayersPassing(), 0,
+            checkTaskNumber = plugin.getServer().getScheduler().runTaskTimer(plugin, this::checkPlayersPassing, 0,
                     plugin.getConfig().getLong("portalCheckInterval")).getTaskId();
         }
     }
@@ -106,6 +107,7 @@ public class Portal implements Model {
     public void stopBoosterTask() {
         if (isActive()) {
             outline.eraseOutline(shape.getPoints());
+            shape.clearPoints();
             plugin.getServer().getScheduler().cancelTask(outlineTaskNumber);
             plugin.getServer().getScheduler().cancelTask(checkTaskNumber);
             outlineTaskNumber = 0;
@@ -179,7 +181,7 @@ public class Portal implements Model {
      */
     @Override
     public void beforeComponentCreation(Class<? extends Model> modelClass) {
-        if (ClassUtils.isAssignable(modelClass, Shape.class)) {
+        if (ClassUtils.isAssignable(modelClass, Shape.class) || ClassUtils.isAssignable(modelClass, Outline.class)) {
             stopBoosterTask();
         }
     }
@@ -189,7 +191,7 @@ public class Portal implements Model {
      */
     @Override
     public void afterComponentSetting(Model model) {
-        if (model instanceof Shape) {
+        if (model instanceof Shape || model instanceof Outline) {
             runBoosterTask();
         }
     }

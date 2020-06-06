@@ -10,18 +10,20 @@ import org.bukkit.permissions.Permission;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ElytraBoosterHelpCommand extends AbstractCommand {
+public class BoosterHelpCommand extends AbstractCommand {
 
     private List<String> pages;
+    private String boosterString;
 
-    public ElytraBoosterHelpCommand(CommandSender sender, String subCommand, String[] arguments,
-                                    boolean isSenderPlayer) {
+    public BoosterHelpCommand(CommandSender sender, String subCommand, String[] arguments,
+                              boolean isSenderPlayer, String boosterString) {
         super(sender, subCommand, arguments, isSenderPlayer);
+        this.boosterString = boosterString;
     }
 
     @Override
     protected void execute() {
-        pages = new ArrayList<String>();
+        pages = new ArrayList<>();
         setUpPages();
         int numberOfPages = 1;
 
@@ -34,7 +36,6 @@ public class ElytraBoosterHelpCommand extends AbstractCommand {
         }
 
         sender.sendMessage(pages.get(pageToPrint));
-
     }
 
     @Override
@@ -42,19 +43,18 @@ public class ElytraBoosterHelpCommand extends AbstractCommand {
         return false;
     }
 
-    private void setUpPages() {
-        String page = MessageUtils.header("ElytraBooster Help") +
-                MessageUtils.color(String.format("&2/eb help &c[page] &7Print the help message.\n"
-                        + "&2/eb reload &7Reload ElytraBooster config files.\n"
-                        + "&2/eb portal help &7Print the portals help message.\n"
-                        + "&2/eb spawner help &7Print the spawners help message.\n"
-                        + "&2/eb pad help &7Print the pads help message.\n"));
-        pages.add(page);
-    }
-
     @Override
     protected Permission getPermission() {
         return new Permission("eb.admin.help");
+    }
+
+    private void setUpPages() {
+        String page = MessageUtils.header("ElytraBooster Help") +
+                MessageUtils.color("&2/eb booster help &c[page] &7Print the boosters help message.\n"
+                        + "&2/eb booster list &7List boosters.\n"
+                        + "&2/eb booster near &c[radius] &7List all the boosters within [radius] blocks.\n"
+                        .replaceAll("booster", boosterString));
+        pages.add(page);
     }
 
 }

@@ -23,19 +23,18 @@ public abstract class Shape implements Model {
         this.axis = axis;
     }
 
-    protected void setPoints() {
-        this.points = buildPoints();
+    public void setPoints(boolean isBlockOutline) {
+        this.points = buildPoints(isBlockOutline);
+    }
+
+    public void clearPoints() {
+        points.clear();
     }
 
     public abstract boolean isInPortalArea(Location location, double epsilon);
 
-    protected abstract List<Location> buildPoints();
+    protected abstract List<Location> buildPoints(boolean isBlockOutline);
 
     public abstract Location getCenterPoint();
-
-    @Override
-    public void onModify() {
-        setPoints();
-    }
 
 }

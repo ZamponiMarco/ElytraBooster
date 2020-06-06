@@ -33,7 +33,6 @@ public class TriangleShape extends Shape {
         this.pointOne = pointOne;
         this.pointTwo = pointTwo;
         this.pointThree = pointThree;
-        setPoints();
     }
 
     public static TriangleShape deserialize(Map<String, Object> map) {
@@ -51,7 +50,7 @@ public class TriangleShape extends Shape {
     }
 
     @Override
-    protected List<Location> buildPoints() {
+    protected List<Location> buildPoints(boolean isBlockOutline) {
         return getTriangle(pointOne.getWrapped(), sumLocationToVector(pointOne, pointTwo),
                 sumLocationToVector(pointOne, pointThree));
     }

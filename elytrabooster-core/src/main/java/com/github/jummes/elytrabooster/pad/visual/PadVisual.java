@@ -1,24 +1,25 @@
 package com.github.jummes.elytrabooster.pad.visual;
 
+import com.github.jummes.elytrabooster.core.ElytraBooster;
+import com.github.jummes.libs.annotation.Enumerable;
+import com.github.jummes.libs.model.Model;
 import org.bukkit.Location;
 
-public abstract class PadVisual {
+@Enumerable(classArray = {FireworkPadVisual.class, FlamePadVisual.class})
+public abstract class PadVisual implements Model {
 
-    protected Location center;
+    protected ElytraBooster plugin;
 
-    public PadVisual(Location center) {
-        this.center = center;
-        initializeVisual();
+    public PadVisual() {
+        this.plugin = ElytraBooster.getInstance();
     }
 
-    public abstract void spawnVisual();
-
-    public abstract void onBoost();
-
-    public abstract void initializeVisual();
+    public abstract void startVisual(Location center);
 
     public abstract void stopVisual();
 
-    public abstract String getName();
+    public abstract void onBoost(Location playerLocation);
+
+    public abstract void initializeVisual(Location center);
 
 }

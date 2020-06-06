@@ -9,44 +9,60 @@ import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class FireworkPadVisual extends PadVisual {
 
     private static final String FIREWORK_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzAyZjQ4ZjM0ZDIyZGVkNzQwNGY3NmU4YTEzMmFmNWQ3OTE5YzhkY2Q1MWRmNmU3YTg1ZGRmYWM4NWFiIn19fQ==";
-
+    protected int visualTaskId;
     private List<Location> circlePoints;
     private Item item;
 
-    public FireworkPadVisual(Location center) {
-        super(center);
+    public FireworkPadVisual() {
+        super();
+    }
+
+    public static FireworkPadVisual deserialize(Map<String, Object> map) {
+        return new FireworkPadVisual();
     }
 
     @Override
-    public void spawnVisual() {
-        Random r = new Random();
-        circlePoints.forEach(point -> point.getWorld().spawnParticle(Particle.END_ROD, point, 0,
-                r.nextDouble() * 0.1 - 0.05, 0.12, r.nextDouble() * 0.1 - 0.05));
-        center.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, center.clone().add(new Vector(0, 2.1, 0)), 1, 0.1, 0,
-                0.1, 0.01);
+    public void startVisual(Location center) {
+        initializeVisual(center);
+        visualTaskId = plugin.getServer().getScheduler().runTaskTimer(plugin, () -> spawnParticles(center), 0, 4)
+                .getTaskId();
+    }
+
+    public void spawnParticles(Location center) {
         if (item.isDead()) {
             stopVisual();
-            initializeVisual();
-        } else {
+            initializeVisual(center);
         }
+        Random r = new Random();
+        center.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, center.clone().add(new Vector(0, 2.1, 0)), 1, 0.1, 0,
+                0.1, 0.01);
+        circlePoints.forEach(point -> point.getWorld().spawnParticle(Particle.END_ROD, point, 0,
+                r.nextDouble() * 0.1 - 0.05, 0.12, r.nextDouble() * 0.1 - 0.05));
     }
 
     @Override
-    public void onBoost() {
-        center.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, center.clone().add(new Vector(0, 1, 0)), 300, 0.3, 1,
+    public void stopVisual() {
+        item.remove();
+        plugin.getServer().getScheduler().cancelTask(visualTaskId);
+    }
+
+    @Override
+    public void onBoost(Location playerLocation) {
+        playerLocation.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, playerLocation.clone().add(new Vector(0, 1, 0)), 300, 0.3, 1,
                 0.3, 0.1, null);
-        center.getWorld().spawnParticle(Particle.END_ROD, center.clone().add(new Vector(0, 1, 0)), 10, 0.3, 1, 0.3, 0.1,
+        playerLocation.getWorld().spawnParticle(Particle.END_ROD, playerLocation.clone().add(new Vector(0, 1, 0)), 10, 0.3, 1, 0.3, 0.1,
                 null);
     }
 
     @Override
-    public void initializeVisual() {
-        circlePoints = new ArrayList<Location>();
+    public void initializeVisual(Location center) {
+        circlePoints = new ArrayList<>();
         int amount = 5;
         double increment = (2 * Math.PI) / amount;
 
@@ -65,16 +81,6 @@ public class FireworkPadVisual extends PadVisual {
         item.setPickupDelay(32767);
         item.setInvulnerable(true);
         item.setItemStack(Libs.getWrapper().skullFromValue(FIREWORK_HEAD));
-    }
-
-    @Override
-    public void stopVisual() {
-        item.remove();
-    }
-
-    @Override
-    public String getName() {
-        return "firework";
     }
 
 }

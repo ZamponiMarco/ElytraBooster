@@ -8,7 +8,7 @@
     <version>2.0</version>
     <packaging>pom</packaging>
 
-    <name>elytrabooster</name>
+    <name>ElytraBooster</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -2,14 +2,21 @@ package com.github.jummes.elytrabooster.core;
 
 import com.github.jummes.elytrabooster.boost.Boost;
 import com.github.jummes.elytrabooster.boost.SimpleBoost;
+import com.github.jummes.elytrabooster.boost.VerticalBoost;
 import com.github.jummes.elytrabooster.boost.trail.BoostTrail;
 import com.github.jummes.elytrabooster.boost.trail.SimpleBoostTrail;
-import com.github.jummes.elytrabooster.commands.executor.ElytraBoosterCommandExecutor;
+import com.github.jummes.elytrabooster.command.ElytraBoosterHelpCommand;
+import com.github.jummes.elytrabooster.command.ElytraBoosterReloadCommand;
+import com.github.jummes.elytrabooster.command.BoosterCommand;
 import com.github.jummes.elytrabooster.listener.PlayerGlideListener;
 import com.github.jummes.elytrabooster.listener.PlayerSwapHandItemsListener;
 import com.github.jummes.elytrabooster.manager.PadManager;
 import com.github.jummes.elytrabooster.manager.PortalManager;
 import com.github.jummes.elytrabooster.manager.SpawnerManager;
+import com.github.jummes.elytrabooster.pad.Pad;
+import com.github.jummes.elytrabooster.pad.visual.FireworkPadVisual;
+import com.github.jummes.elytrabooster.pad.visual.FlamePadVisual;
+import com.github.jummes.elytrabooster.pad.visual.PadVisual;
 import com.github.jummes.elytrabooster.portal.Portal;
 import com.github.jummes.elytrabooster.portal.outline.BlockPortalOutline;
 import com.github.jummes.elytrabooster.portal.outline.Outline;
@@ -25,10 +32,10 @@ import com.github.jummes.elytrabooster.spawner.entityholder.entity.MushroomEntit
 import com.github.jummes.elytrabooster.spawner.entityholder.entity.PotionEntityDescription;
 import com.github.jummes.elytrabooster.spawner.volume.SphericVolume;
 import com.github.jummes.elytrabooster.spawner.volume.Volume;
+import com.github.jummes.libs.command.PluginCommandExecutor;
 import com.github.jummes.libs.core.Libs;
 import com.github.jummes.libs.localization.PluginLocale;
 import lombok.Getter;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Player;
@@ -46,9 +53,14 @@ public class ElytraBooster extends JavaPlugin {
 
     static {
         Libs.registerSerializables();
-        ConfigurationSerialization.registerClass(Portal.class);
+
+        // Boost
         ConfigurationSerialization.registerClass(Boost.class);
         ConfigurationSerialization.registerClass(SimpleBoost.class);
+        ConfigurationSerialization.registerClass(VerticalBoost.class);
+
+        // Portal
+        ConfigurationSerialization.registerClass(Portal.class);
         ConfigurationSerialization.registerClass(BoostTrail.class);
         ConfigurationSerialization.registerClass(SimpleBoostTrail.class);
         ConfigurationSerialization.registerClass(Outline.class);
@@ -63,6 +75,8 @@ public class ElytraBooster extends JavaPlugin {
         ConfigurationSerialization.registerClass(ComposedShape.class);
         ConfigurationSerialization.registerClass(ComposedShape.SingleShape.class);
         ConfigurationSerialization.registerClass(TriangleShape.Vector2D.class);
+
+        // Spawner
         ConfigurationSerialization.registerClass(Spawner.class);
         ConfigurationSerialization.registerClass(EntityHolder.class);
         ConfigurationSerialization.registerClass(EntityDescription.class);
@@ -71,6 +85,12 @@ public class ElytraBooster extends JavaPlugin {
         ConfigurationSerialization.registerClass(PotionEntityDescription.class);
         ConfigurationSerialization.registerClass(Volume.class);
         ConfigurationSerialization.registerClass(SphericVolume.class);
+
+        // Pads
+        ConfigurationSerialization.registerClass(Pad.class);
+        ConfigurationSerialization.registerClass(PadVisual.class);
+        ConfigurationSerialization.registerClass(FireworkPadVisual.class);
+        ConfigurationSerialization.registerClass(FlamePadVisual.class);
     }
 
     private PortalManager portalManager;
@@ -86,9 +106,9 @@ public class ElytraBooster extends JavaPlugin {
 
     public void onDisable() {
         getServer().getScheduler().cancelTasks(this);
-        portalManager.getPortals().forEach(portal -> portal.stopBoosterTask());
-        spawnerManager.getSpawners().forEach(spawner -> spawner.stopBoosterTask());
-        padManager.getBoostersMap().values().forEach(pad -> pad.stopBoosterTask());
+        portalManager.getPortals().forEach(Portal::stopBoosterTask);
+        spawnerManager.getSpawners().forEach(Spawner::stopBoosterTask);
+        padManager.getPads().forEach(Pad::stopBoosterTask);
     }
 
     private void setUpFolder() {
@@ -98,18 +118,22 @@ public class ElytraBooster extends JavaPlugin {
     }
 
     private void startupTasks() {
-        PluginLocale locale = new PluginLocale(instance, new ArrayList<String>(), "");
+        PluginLocale locale = new PluginLocale(instance, new ArrayList<>(), "");
         Libs.initializeLibrary(instance, locale);
         new UpdateChecker(this).checkForUpdate();
 
         portalManager = new PortalManager(Portal.class, "yaml", this);
         spawnerManager = new SpawnerManager(Spawner.class, "yaml", this);
-        padManager = new PadManager(this);
-        statusMap = new HashMap<Player, Boolean>();
-        CommandExecutor executor = new ElytraBoosterCommandExecutor(this);
-        getCommand("eb").setExecutor(executor);
-        getCommand("eb").setTabCompleter((TabCompleter) executor);
-        getServer().getPluginManager().registerEvents(new PlayerGlideListener(this), this);
-        getServer().getPluginManager().registerEvents(new PlayerSwapHandItemsListener(this), this);
+        padManager = new PadManager(Pad.class, "yaml", this);
+        statusMap = new HashMap<>();
+        PluginCommandExecutor ex = new PluginCommandExecutor(ElytraBoosterHelpCommand.class, "help");
+        ex.registerCommand("reload", ElytraBoosterReloadCommand.class);
+        ex.registerCommand("spawner", BoosterCommand.class);
+        ex.registerCommand("portal", BoosterCommand.class);
+        ex.registerCommand("pad", BoosterCommand.class);
+        getCommand("eb").setExecutor(ex);
+        getCommand("eb").setTabCompleter((TabCompleter) ex);
+        getServer().getPluginManager().registerEvents(new PlayerGlideListener(), this);
+        getServer().getPluginManager().registerEvents(new PlayerSwapHandItemsListener(), this);
     }
 }

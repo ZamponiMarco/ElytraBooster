@@ -9,20 +9,14 @@ import com.github.jummes.elytrabooster.core.ElytraBooster;
 
 public class PlayerGlideListener implements Listener {
 
-    private ElytraBooster plugin;
-
-    public PlayerGlideListener(ElytraBooster plugin) {
-        this.plugin = plugin;
-    }
-
     @EventHandler
     public void onPlayerGlideEvent(EntityToggleGlideEvent e) {
         if (e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();
             if (e.isGliding()) {
-                plugin.getStatusMap().put(p, false);
+                ElytraBooster.getInstance().getStatusMap().put(p, false);
             } else {
-                plugin.getStatusMap().remove(p);
+                ElytraBooster.getInstance().getStatusMap().remove(p);
             }
         }
     }

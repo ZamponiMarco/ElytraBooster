@@ -15,35 +15,43 @@ public class FlamePadVisual extends PadVisual {
 
     private static final String ARROW_UP_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmNjYmY5ODgzZGQzNTlmZGYyMzg1YzkwYTQ1OWQ3Mzc3NjUzODJlYzQxMTdiMDQ4OTVhYzRkYzRiNjBmYyJ9fX0===";
 
+    private int visualTaskId;
     private List<Location> circlePoints;
     private Item item;
 
-    public FlamePadVisual(Location center) {
-        super(center);
+    public FlamePadVisual() {
+        super();
     }
 
     @Override
-    public void spawnVisual() {
+    public void startVisual(Location center) {
+        initializeVisual(center);
+        visualTaskId = plugin.getServer().getScheduler().runTaskTimer(plugin, () -> spawnParticles(center), 0, 4)
+                .getTaskId();
+    }
+
+    public void spawnParticles(Location center) {
+        if (item.isDead()) {
+            stopVisual();
+            initializeVisual(center);
+        }
         Random r = new Random();
         circlePoints.forEach(point -> point.getWorld().spawnParticle(Particle.FLAME, point, 0,
                 r.nextDouble() * 0.1 - 0.05, 0.08, r.nextDouble() * 0.1 - 0.05));
         center.getWorld().spawnParticle(Particle.FLAME, center.clone().add(new Vector(0, 2.2, 0)), 1, 0.1, 0.1, 0.1, 0.01);
-        if (item.isDead()) {
-            stopVisual();
-            initializeVisual();
-        }
+
     }
 
     @Override
-    public void onBoost() {
-        center.getWorld().spawnParticle(Particle.FLAME, center.clone().add(new Vector(0, 1, 0)), 300, 0.3, 1, 0.3, 0.1,
+    public void onBoost(Location playerLocation) {
+        playerLocation.getWorld().spawnParticle(Particle.FLAME, playerLocation.clone().add(new Vector(0, 1, 0)), 300, 0.3, 1, 0.3, 0.1,
                 null);
-        center.getWorld().spawnParticle(Particle.LAVA, center.clone().add(new Vector(0, 1, 0)), 10, 0.3, 1, 0.3, 0.1,
+        playerLocation.getWorld().spawnParticle(Particle.LAVA, playerLocation.clone().add(new Vector(0, 1, 0)), 10, 0.3, 1, 0.3, 0.1,
                 null);
     }
 
     @Override
-    public void initializeVisual() {
+    public void initializeVisual(Location center) {
         circlePoints = new ArrayList<Location>();
         int amount = 20;
         double increment = (2 * Math.PI) / amount;
@@ -68,11 +76,7 @@ public class FlamePadVisual extends PadVisual {
     @Override
     public void stopVisual() {
         item.remove();
-    }
-
-    @Override
-    public String getName() {
-        return "flame";
+        plugin.getServer().getScheduler().cancelTask(visualTaskId);
     }
 
 }

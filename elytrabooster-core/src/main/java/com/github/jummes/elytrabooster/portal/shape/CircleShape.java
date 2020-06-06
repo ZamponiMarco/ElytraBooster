@@ -37,7 +37,6 @@ public class CircleShape extends Shape {
         super(axis);
         this.radius = radius;
         this.center = center;
-        setPoints();
     }
 
     public static CircleShape deserialize(Map<String, Object> map) {
@@ -53,14 +52,13 @@ public class CircleShape extends Shape {
     }
 
     @Override
-    public List<Location> buildPoints() {
-        return getCircle(center.getWrapped());
+    public List<Location> buildPoints(boolean isBlockOutline) {
+        return getCircle(center.getWrapped(), isBlockOutline);
     }
 
-    private List<Location> getCircle(Location center) {
+    private List<Location> getCircle(Location center, boolean isBlockOutline) {
         World world = center.getWorld();
-        boolean isBlock = true;
-        int amount = isBlock ? 50 * (int) radius : (int) Math.floor(2 * Math.PI * radius);
+        int amount = isBlockOutline ? 50 * (int) radius : (int) Math.floor(2 * Math.PI * radius);
         double increment = (2 * Math.PI) / amount;
 
         List<Location> locations = new ArrayList<Location>();
@@ -74,7 +72,7 @@ public class CircleShape extends Shape {
                 newY = center.getY() + (radius * Math.sin(angle));
             }
 
-            Location newLocation = isBlock
+            Location newLocation = isBlockOutline
                     ? world.getBlockAt((int) Math.round(newX), (int) Math.round(newY), (int) Math.round(newZ))
                     .getLocation()
                     : new Location(world, newX, newY, newZ);

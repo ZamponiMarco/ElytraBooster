@@ -33,7 +33,6 @@ public class ComposedShape extends Shape {
         super(axis);
         this.shapes = shapes;
         this.center = center;
-        setPoints();
     }
 
     @SuppressWarnings("unchecked")
@@ -60,7 +59,7 @@ public class ComposedShape extends Shape {
     }
 
     @Override
-    protected List<Location> buildPoints() {
+    protected List<Location> buildPoints(boolean isBlockOutline) {
         double epsilon = .05;
         List<Location> locations = Lists.newArrayList();
         shapes.forEach(shape -> locations.addAll(shape.getShape().getPoints()));
@@ -70,11 +69,6 @@ public class ComposedShape extends Shape {
     @Override
     public Location getCenterPoint() {
         return center.getWrapped();
-    }
-
-    @Override
-    public void onModify() {
-        setPoints();
     }
 
     @Getter

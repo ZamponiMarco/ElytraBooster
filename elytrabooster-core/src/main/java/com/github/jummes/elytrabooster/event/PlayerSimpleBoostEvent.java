@@ -26,7 +26,6 @@ public class PlayerSimpleBoostEvent extends Event implements Cancellable {
         this.player = player;
 
         plugin.getStatusMap().replace(player, true);
-        //boost.getBoostActions().forEach(action -> ActionFactory.buildAction(plugin, action, player));
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 20, 1);
         getBoostProcess(plugin, boost).runTaskTimer(plugin, 0, 1);
     }
@@ -65,7 +64,6 @@ public class PlayerSimpleBoostEvent extends Event implements Cancellable {
      * Sends to the player the progress bar in the action bar
      *
      * @param player
-     * @param portal
      * @param counter
      */
     private void sendProgressMessage(Player player, SimpleBoost boost, int counter) {
