@@ -17,31 +17,22 @@ public class SimpleBoostTrail extends BoostTrail {
     @Serializable(headTexture = HEAD, stringValue = true)
     private Particle particle;
 
-    public SimpleBoostTrail(String particle) {
-        try {
-            if (particle == null) {
-                particle = "FIREWORKS_SPARK";
-            }
-            this.particle = Particle.valueOf(particle.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            Bukkit.getLogger().warning(ChatColor.RED + particle + " is not a particle, check portals.yml");
-            this.particle = Particle.FIREWORKS_SPARK;
-        }
+    public SimpleBoostTrail(){
+        this(Particle.FIREWORKS_SPARK);
+    }
+
+    public SimpleBoostTrail(Particle particle) {
+        this.particle = particle;
     }
 
     public static SimpleBoostTrail deserialize(Map<String, Object> map) {
-        String particle = (String) map.get("particle");
+        Particle particle = (Particle) map.get("particle");
         return new SimpleBoostTrail(particle);
     }
 
     @Override
     public void spawnTrail(Player player) {
         player.getWorld().spawnParticle(particle, player.getLocation(), 3, 0.1, 0.1, 0.1, 0.1);
-    }
-
-    @Override
-    public String getName() {
-        return "simple";
     }
 
 }

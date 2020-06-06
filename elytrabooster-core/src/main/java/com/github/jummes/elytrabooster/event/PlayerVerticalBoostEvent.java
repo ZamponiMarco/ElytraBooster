@@ -2,6 +2,8 @@ package com.github.jummes.elytrabooster.event;
 
 import com.github.jummes.elytrabooster.boost.VerticalBoost;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
@@ -10,11 +12,13 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+@Getter
+@Setter
 public class PlayerVerticalBoostEvent extends Event implements Cancellable {
 
     private static final HandlerList HANDLERS_LIST = new HandlerList();
-    private boolean cancelled;
     private final Player player;
+    private boolean cancelled;
 
     public PlayerVerticalBoostEvent(ElytraBooster plugin, Player player, VerticalBoost boost) {
         this.player = player;
@@ -48,20 +52,6 @@ public class PlayerVerticalBoostEvent extends Event implements Cancellable {
     @Override
     public HandlerList getHandlers() {
         return HANDLERS_LIST;
-    }
-
-    @Override
-    public boolean isCancelled() {
-        return cancelled;
-    }
-
-    @Override
-    public void setCancelled(boolean isCancelled) {
-        this.cancelled = isCancelled;
-    }
-
-    public Player getPlayer() {
-        return player;
     }
 
 }

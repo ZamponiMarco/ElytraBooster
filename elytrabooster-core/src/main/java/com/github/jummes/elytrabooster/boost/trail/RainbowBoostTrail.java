@@ -4,6 +4,8 @@ import org.bukkit.Color;
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 
+import java.util.Map;
+
 /**
  * spawns rainbow trail
  *
@@ -13,16 +15,15 @@ public class RainbowBoostTrail extends BoostTrail {
 
     int currentColor;
 
+    public static RainbowBoostTrail deserialize(Map<String, Object> map) {
+        return new RainbowBoostTrail();
+    }
+
     @Override
     public void spawnTrail(Player player) {
         currentColor = (currentColor + 1) % 7;
         player.getWorld().spawnParticle(Particle.REDSTONE, player.getLocation(), 1,
                 new Particle.DustOptions(RainbowColor.values()[currentColor].getColor(), 3));
-    }
-
-    @Override
-    public String getName() {
-        return "rainbow";
     }
 
     private enum RainbowColor {

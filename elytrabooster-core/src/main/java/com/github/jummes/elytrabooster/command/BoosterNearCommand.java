@@ -5,8 +5,6 @@ import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
 
-import com.github.jummes.elytrabooster.core.ElytraBooster;
-
 public class BoosterNearCommand extends AbstractCommand {
 
     private String boosterString;

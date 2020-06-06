@@ -1,6 +1,5 @@
 package com.github.jummes.elytrabooster.portal;
 
-import com.github.jummes.elytrabooster.action.AbstractAction;
 import com.github.jummes.elytrabooster.boost.SimpleBoost;
 import com.github.jummes.elytrabooster.boost.trail.SimpleBoostTrail;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
@@ -61,8 +60,8 @@ public class Portal implements Model {
 
     public Portal(Player p) {
         this(RandomStringUtils.randomAlphabetic(6),
-                new SimpleBoost(new SimpleBoostTrail("CRIT"), new ArrayList<>(), 30, 3.0, 1.0),
-                new BlockPortalOutline("STONE", "DIRT"), 0,
+                new SimpleBoost(new SimpleBoostTrail(), new ArrayList<>(), 30, 3.0, 1.0),
+                new BlockPortalOutline(), 0,
                 new ClosingPointSorter(p.getLocation().getBlock().getLocation()),
                 new CircleShape('x', 5, new LocationWrapper(p.getLocation().getBlock().getLocation())));
     }

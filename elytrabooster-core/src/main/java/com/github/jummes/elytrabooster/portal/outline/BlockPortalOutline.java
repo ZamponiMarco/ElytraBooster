@@ -25,24 +25,17 @@ public class BlockPortalOutline extends Outline {
     private Material cooldownType;
 
     public BlockPortalOutline() {
-        this("STONE","DIRT");
+        this(Material.STONE, Material.DIRT);
     }
 
-    public BlockPortalOutline(String outlineType, String cooldownType) {
-        try {
-            this.outlineType = Material.valueOf(outlineType.toUpperCase());
-            this.cooldownType = Material.valueOf(cooldownType.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            this.outlineType = Material.STONE;
-            this.cooldownType = Material.STONE;
-            Bukkit.getLogger().warning(
-                    ChatColor.RED + outlineType + " or " + cooldownType + " is not a block, check portals.yml");
-        }
+    public BlockPortalOutline(Material outlineType, Material cooldownType) {
+            this.outlineType = outlineType;
+            this.cooldownType = cooldownType;
     }
 
     public static BlockPortalOutline deserialize(Map<String, Object> map) {
-        String outlineType = (String) map.get("outlineType");
-        String cooldownType = (String) map.get("cooldownType");
+        Material outlineType = (Material) map.get("outlineType");
+        Material cooldownType = (Material) map.get("cooldownType");
         return new BlockPortalOutline(outlineType, cooldownType);
     }
 

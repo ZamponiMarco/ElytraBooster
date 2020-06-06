@@ -1,5 +1,6 @@
 package com.github.jummes.elytrabooster.boost.trail;
 
+import com.github.jummes.libs.annotation.Enumerable;
 import com.github.jummes.libs.model.Model;
 import org.bukkit.entity.Player;
 
@@ -8,6 +9,7 @@ import org.bukkit.entity.Player;
  *
  * @author Marco
  */
+@Enumerable(classArray = {HelixBoostTrail.class, SimpleBoostTrail.class, NoBoostTrail.class, RainbowBoostTrail.class})
 public abstract class BoostTrail implements Model {
 
     /**
@@ -16,12 +18,5 @@ public abstract class BoostTrail implements Model {
      * @param player to spawn trail on
      */
     public abstract void spawnTrail(Player player);
-
-    /**
-     * Gets the name of the trail
-     *
-     * @return name of the trail
-     */
-    public abstract String getName();
 
 }

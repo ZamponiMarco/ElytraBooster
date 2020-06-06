@@ -1,13 +1,12 @@
 package com.github.jummes.elytrabooster.command;
 
+import com.github.jummes.elytrabooster.core.ElytraBooster;
 import com.github.jummes.libs.command.AbstractCommand;
+import com.github.jummes.libs.gui.model.ModelCollectionInventoryHolder;
+import com.github.jummes.libs.model.ModelManager;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
-
-import com.github.jummes.elytrabooster.core.ElytraBooster;
-import com.github.jummes.libs.gui.model.ModelCollectionInventoryHolder;
-import com.github.jummes.libs.model.ModelManager;
 
 public class BoosterListCommand extends AbstractCommand {
 

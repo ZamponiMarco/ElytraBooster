@@ -34,7 +34,8 @@ public class RectangleShape extends Shape {
         super(axis);
         this.center = center;
         this.halfWidth = halfWidth;
-        this.halfHeight = halfHeight;;
+        this.halfHeight = halfHeight;
+        ;
     }
 
     public static RectangleShape deserialize(Map<String, Object> map) {

@@ -20,24 +20,17 @@ public class ParticlePortalOutline extends Outline {
     private Particle cooldownType;
 
     public ParticlePortalOutline() {
-        this("FLAME", "FLAME");
+        this(Particle.FLAME, Particle.FIREWORKS_SPARK);
     }
 
-    public ParticlePortalOutline(String outlineType, String cooldownType) {
-        try {
-            this.outlineType = Particle.valueOf(outlineType);
-            this.cooldownType = Particle.valueOf(cooldownType);
-        } catch (Exception e) {
-            this.outlineType = Particle.FLAME;
-            this.cooldownType = Particle.FLAME;
-            Bukkit.getLogger().warning(
-                    ChatColor.RED + outlineType + " or " + cooldownType + " is not a particle, check portals.yml");
-        }
+    public ParticlePortalOutline(Particle outlineType, Particle cooldownType) {
+        this.outlineType = outlineType;
+        this.cooldownType = cooldownType;
     }
 
     public static ParticlePortalOutline deserialize(Map<String, Object> map) {
-        String outlineType = (String) map.get("outlineType");
-        String cooldownType = (String) map.get("cooldownType");
+        Particle outlineType = (Particle) map.get("outlineType");
+        Particle cooldownType = (Particle) map.get("cooldownType");
         return new ParticlePortalOutline(outlineType, cooldownType);
     }
 

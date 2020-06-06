@@ -39,7 +39,7 @@ public class Pad implements Model {
     protected int currCooldown;
 
     public Pad(Player p) {
-        this(RandomStringUtils.randomAlphabetic(6), new LocationWrapper(p.getLocation().getBlock().getLocation()), new VerticalBoost(new SimpleBoostTrail("CRIT"), new ArrayList<AbstractAction>(), 2.0, 0.5), new FireworkPadVisual(), 0);
+        this(RandomStringUtils.randomAlphabetic(6), new LocationWrapper(p.getLocation().getBlock().getLocation()), new VerticalBoost(new SimpleBoostTrail(), new ArrayList<AbstractAction>(), 2.0, 0.5), new FireworkPadVisual(), 0);
     }
 
     public Pad(String id, LocationWrapper center, VerticalBoost boost, PadVisual visual,

@@ -11,9 +11,11 @@ import java.util.List;
 @Getter
 public abstract class Boost implements Model {
 
-    @Serializable()
+    private static final String HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWIyMDY0MzkwZTc5ZDllNTRjY2I0MThiMDczMzE1M2NmOTkyM2ZjNGE4ZDE0YWIxZDJiN2VmNTk2ODgzMWM5MyJ9fX0=";
+
+    @Serializable(headTexture = HEAD)
     private BoostTrail trail;
-    @Serializable()
+    @Serializable(headTexture = HEAD)
     private List<AbstractAction> boostActions;
 
     public Boost(BoostTrail trail, List<AbstractAction> boostActions) {

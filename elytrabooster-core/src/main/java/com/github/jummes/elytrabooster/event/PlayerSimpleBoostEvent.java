@@ -18,8 +18,8 @@ public class PlayerSimpleBoostEvent extends Event implements Cancellable {
 
     @Getter
     private static final HandlerList HANDLERS_LIST = new HandlerList();
-    private boolean cancelled;
     private final Player player;
+    private boolean cancelled;
 
     public PlayerSimpleBoostEvent(ElytraBooster plugin, Player player, SimpleBoost boost) {
 

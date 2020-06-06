@@ -3,11 +3,10 @@ package com.github.jummes.elytrabooster.core;
 import com.github.jummes.elytrabooster.boost.Boost;
 import com.github.jummes.elytrabooster.boost.SimpleBoost;
 import com.github.jummes.elytrabooster.boost.VerticalBoost;
-import com.github.jummes.elytrabooster.boost.trail.BoostTrail;
-import com.github.jummes.elytrabooster.boost.trail.SimpleBoostTrail;
+import com.github.jummes.elytrabooster.boost.trail.*;
+import com.github.jummes.elytrabooster.command.BoosterCommand;
 import com.github.jummes.elytrabooster.command.ElytraBoosterHelpCommand;
 import com.github.jummes.elytrabooster.command.ElytraBoosterReloadCommand;
-import com.github.jummes.elytrabooster.command.BoosterCommand;
 import com.github.jummes.elytrabooster.listener.PlayerGlideListener;
 import com.github.jummes.elytrabooster.listener.PlayerSwapHandItemsListener;
 import com.github.jummes.elytrabooster.manager.PadManager;
@@ -35,7 +34,6 @@ import com.github.jummes.elytrabooster.spawner.volume.Volume;
 import com.github.jummes.libs.command.PluginCommandExecutor;
 import com.github.jummes.libs.core.Libs;
 import com.github.jummes.libs.localization.PluginLocale;
-import lombok.Getter;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Player;
@@ -45,10 +43,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-@Getter
 public class ElytraBooster extends JavaPlugin {
 
-    @Getter
     private static ElytraBooster instance;
 
     static {
@@ -58,6 +54,11 @@ public class ElytraBooster extends JavaPlugin {
         ConfigurationSerialization.registerClass(Boost.class);
         ConfigurationSerialization.registerClass(SimpleBoost.class);
         ConfigurationSerialization.registerClass(VerticalBoost.class);
+        ConfigurationSerialization.registerClass(BoostTrail.class);
+        ConfigurationSerialization.registerClass(SimpleBoostTrail.class);
+        ConfigurationSerialization.registerClass(HelixBoostTrail.class);
+        ConfigurationSerialization.registerClass(NoBoostTrail.class);
+        ConfigurationSerialization.registerClass(RainbowBoostTrail.class);
 
         // Portal
         ConfigurationSerialization.registerClass(Portal.class);
@@ -98,6 +99,10 @@ public class ElytraBooster extends JavaPlugin {
     private PadManager padManager;
     private Map<Player, Boolean> statusMap;
 
+    public static ElytraBooster getInstance() {
+        return ElytraBooster.instance;
+    }
+
     public void onEnable() {
         instance = this;
         setUpFolder();
@@ -135,5 +140,21 @@ public class ElytraBooster extends JavaPlugin {
         getCommand("eb").setTabCompleter((TabCompleter) ex);
         getServer().getPluginManager().registerEvents(new PlayerGlideListener(), this);
         getServer().getPluginManager().registerEvents(new PlayerSwapHandItemsListener(), this);
+    }
+
+    public PortalManager getPortalManager() {
+        return this.portalManager;
+    }
+
+    public SpawnerManager getSpawnerManager() {
+        return this.spawnerManager;
+    }
+
+    public PadManager getPadManager() {
+        return this.padManager;
+    }
+
+    public Map<Player, Boolean> getStatusMap() {
+        return this.statusMap;
     }
 }
