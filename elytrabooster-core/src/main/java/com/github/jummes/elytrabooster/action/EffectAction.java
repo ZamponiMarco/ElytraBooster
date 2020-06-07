@@ -1,11 +1,14 @@
 package com.github.jummes.elytrabooster.action;
 
+import com.github.jummes.elytrabooster.action.target.PlayerTarget;
+import com.github.jummes.elytrabooster.action.target.Target;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
-import org.bukkit.Bukkit;
+import com.google.common.collect.Lists;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.List;
 import java.util.Map;
 
 public class EffectAction extends AbstractAction {
@@ -18,30 +21,14 @@ public class EffectAction extends AbstractAction {
     private boolean ambient;
     private boolean icon;
 
-    public EffectAction(ElytraBooster plugin, Map<String, String> parameters) {
-        super(plugin, parameters);
+    @Override
+    public void execute(Target target) {
+        this.target.addPotionEffect(new PotionEffect(type, duration, level, ambient, particles, icon));
     }
 
     @Override
-    protected void parseParameters(Map<String, String> parameters) {
-        target = Bukkit.getPlayer(parameters.get("player"));
-
-        type = PotionEffectType.getByName(parameters.getOrDefault("type", "INCREASE_DAMAGE").toUpperCase());
-
-        duration = Integer.parseInt(parameters.getOrDefault("duration", "20"));
-
-        level = Integer.parseInt(parameters.getOrDefault("level", "0"));
-
-        particles = Boolean.parseBoolean(parameters.getOrDefault("particles", "true"));
-
-        ambient = Boolean.parseBoolean(parameters.getOrDefault("ambient", "true"));
-
-        icon = Boolean.parseBoolean(parameters.getOrDefault("icon", "true"));
-    }
-
-    @Override
-    public void executeAction() {
-        target.addPotionEffect(new PotionEffect(type, duration, level, ambient, particles, icon));
+    public List<Class<? extends Target>> getPossibleTargets() {
+        return Lists.newArrayList(PlayerTarget.class);
     }
 
 }

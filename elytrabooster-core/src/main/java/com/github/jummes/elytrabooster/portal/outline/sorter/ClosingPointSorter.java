@@ -3,16 +3,16 @@ package com.github.jummes.elytrabooster.portal.outline.sorter;
 import org.bukkit.Location;
 import org.bukkit.configuration.serialization.SerializableAs;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 @SerializableAs("ClosingPointSorter")
 public class ClosingPointSorter extends PointSorter {
 
     private Location center;
 
-    private Comparator<Location> locationComparator = new Comparator<Location>() {
+    private final Comparator<Location> locationComparator = new Comparator<Location>() {
         @Override
         public int compare(Location p1, Location p2) {
             double d1 = Math.abs(p1.clone().toVector().dot(center.toVector()));
@@ -20,14 +20,15 @@ public class ClosingPointSorter extends PointSorter {
             return (int) (d1 - d2);
         }
     };
-
-    public ClosingPointSorter(Location center) {
-        this.center = center;
+    
+    public static ClosingPointSorter deserialize(Map<String, Object> map) {
+        return new ClosingPointSorter();
     }
 
     @Override
-    public void sort(List<Location> points) {
-        Collections.sort(points, locationComparator);
+    public void sort(List<Location> points, Location center) {
+        this.center = center;
+        points.sort(locationComparator);
     }
 
 }

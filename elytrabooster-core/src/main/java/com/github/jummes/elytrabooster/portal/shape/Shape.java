@@ -1,5 +1,6 @@
 package com.github.jummes.elytrabooster.portal.shape;
 
+import com.github.jummes.elytrabooster.portal.outline.sorter.PointSorter;
 import com.github.jummes.libs.annotation.Enumerable;
 import com.github.jummes.libs.annotation.Serializable;
 import com.github.jummes.libs.model.Model;

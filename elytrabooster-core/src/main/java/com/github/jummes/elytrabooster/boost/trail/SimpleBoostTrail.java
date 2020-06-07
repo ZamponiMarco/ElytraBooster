@@ -26,7 +26,7 @@ public class SimpleBoostTrail extends BoostTrail {
     }
 
     public static SimpleBoostTrail deserialize(Map<String, Object> map) {
-        Particle particle = (Particle) map.get("particle");
+        Particle particle = Particle.valueOf((String) map.get("particle"));
         return new SimpleBoostTrail(particle);
     }
 

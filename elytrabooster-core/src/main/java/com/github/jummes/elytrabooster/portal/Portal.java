@@ -62,7 +62,7 @@ public class Portal implements Model {
         this(RandomStringUtils.randomAlphabetic(6),
                 new SimpleBoost(new SimpleBoostTrail(), new ArrayList<>(), 30, 3.0, 1.0),
                 new BlockPortalOutline(), 0,
-                new ClosingPointSorter(p.getLocation().getBlock().getLocation()),
+                new ClosingPointSorter(),
                 new CircleShape('x', 5, new LocationWrapper(p.getLocation().getBlock().getLocation())));
     }
 
@@ -95,6 +95,7 @@ public class Portal implements Model {
     public void runBoosterTask() {
         if (!isActive()) {
             shape.setPoints(outline instanceof BlockPortalOutline);
+            sorter.sort(shape.getPoints(), getShape().getCenterPoint());
             outlineTaskNumber = Bukkit.getServer().getScheduler()
                     .runTaskTimer(plugin, this::drawOutline, 1, plugin.getConfig().getLong("portalOutlineInterval"))
                     .getTaskId();

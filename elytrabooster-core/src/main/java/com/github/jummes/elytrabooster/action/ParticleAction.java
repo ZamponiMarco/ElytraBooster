@@ -1,11 +1,13 @@
 package com.github.jummes.elytrabooster.action;
 
+import com.github.jummes.elytrabooster.action.target.LocationTarget;
+import com.github.jummes.elytrabooster.action.target.Target;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
-import org.bukkit.Bukkit;
+import com.google.common.collect.Lists;
 import org.bukkit.Location;
 import org.bukkit.Particle;
-import org.bukkit.World;
 
+import java.util.List;
 import java.util.Map;
 
 public class ParticleAction extends AbstractAction {
@@ -17,32 +19,14 @@ public class ParticleAction extends AbstractAction {
     private double speed;
     private boolean force;
 
-    public ParticleAction(ElytraBooster plugin, Map<String, String> parameters) {
-        super(plugin, parameters);
-    }
-
     @Override
-    protected void parseParameters(Map<String, String> parameters) {
-        World world = Bukkit.getWorld(parameters.get("world"));
-        double x = Double.parseDouble(parameters.get("x"));
-        double y = Double.parseDouble(parameters.get("y"));
-        double z = Double.parseDouble(parameters.get("z"));
-        location = new Location(world, x, y, z);
-
-        type = Particle.valueOf(parameters.getOrDefault("type", "FLAME").toUpperCase());
-
-        count = Integer.parseInt(parameters.getOrDefault("count", "1"));
-
-        offset = Double.parseDouble(parameters.getOrDefault("offset", "0"));
-
-        speed = Double.parseDouble(parameters.getOrDefault("speed", "0"));
-
-        force = Boolean.parseBoolean(parameters.getOrDefault("force", "false"));
-    }
-
-    @Override
-    public void executeAction() {
+    public void execute(Target target) {
         location.getWorld().spawnParticle(type, location, count, offset, offset, offset, speed, null, force);
+    }
+
+    @Override
+    public List<Class<? extends Target>> getPossibleTargets() {
+        return Lists.newArrayList(LocationTarget.class);
     }
 
 }

@@ -1,27 +1,36 @@
 package com.github.jummes.elytrabooster.action;
 
+import com.github.jummes.elytrabooster.action.target.Target;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
+import com.github.jummes.libs.annotation.Enumerable;
+import com.github.jummes.libs.model.Model;
+import org.apache.commons.lang.ClassUtils;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 
-import java.util.Map;
+import java.util.List;
 
-public abstract class AbstractAction {
-
-    public static final String ERROR_MSG = "Something wrong happened, check the actions you defined on boosters";
+@Enumerable(classArray = {DamageAction.class, EffectAction.class, HealAction.class, MessageAction.class, ParticleAction.class, SoundAction.class})
+public abstract class AbstractAction implements Model {
 
     protected ElytraBooster plugin;
 
-    public AbstractAction(ElytraBooster plugin, Map<String, String> parameters) {
-        this.plugin = plugin;
-        try {
-            parseParameters(parameters);
-            executeAction();
-        } catch (Exception e) {
-            plugin.getLogger().warning(ERROR_MSG);
+    public AbstractAction() {
+        this.plugin = ElytraBooster.getInstance();
+    }
+
+    public void executeAction(Target target) {
+        if (getPossibleTargets().stream().anyMatch(clazz -> ClassUtils.isAssignable(target.getClass(), clazz))) {
+            execute(target);
         }
     }
 
-    protected abstract void parseParameters(Map<String, String> parameters);
+    protected abstract void execute(Target target);
 
-    public abstract void executeAction();
+    public abstract List<Class<? extends Target>> getPossibleTargets();
 
+    @Override
+    public ItemStack getGUIItem() {
+        return new ItemStack(Material.PAPER);
+    }
 }

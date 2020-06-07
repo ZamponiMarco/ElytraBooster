@@ -29,8 +29,8 @@ public class ParticlePortalOutline extends Outline {
     }
 
     public static ParticlePortalOutline deserialize(Map<String, Object> map) {
-        Particle outlineType = (Particle) map.get("outlineType");
-        Particle cooldownType = (Particle) map.get("cooldownType");
+        Particle outlineType = Particle.valueOf((String) map.get("outlineType"));
+        Particle cooldownType = Particle.valueOf((String) map.get("cooldownType"));
         return new ParticlePortalOutline(outlineType, cooldownType);
     }
 

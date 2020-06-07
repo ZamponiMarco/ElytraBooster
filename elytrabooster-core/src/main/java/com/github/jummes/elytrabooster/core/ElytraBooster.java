@@ -1,5 +1,6 @@
 package com.github.jummes.elytrabooster.core;
 
+import com.github.jummes.elytrabooster.action.*;
 import com.github.jummes.elytrabooster.boost.Boost;
 import com.github.jummes.elytrabooster.boost.SimpleBoost;
 import com.github.jummes.elytrabooster.boost.VerticalBoost;
@@ -59,6 +60,15 @@ public class ElytraBooster extends JavaPlugin {
         ConfigurationSerialization.registerClass(HelixBoostTrail.class);
         ConfigurationSerialization.registerClass(NoBoostTrail.class);
         ConfigurationSerialization.registerClass(RainbowBoostTrail.class);
+
+        // Action
+        ConfigurationSerialization.registerClass(AbstractAction.class);
+        ConfigurationSerialization.registerClass(DamageAction.class);
+        ConfigurationSerialization.registerClass(EffectAction.class);
+        ConfigurationSerialization.registerClass(HealAction.class);
+        ConfigurationSerialization.registerClass(MessageAction.class);
+        ConfigurationSerialization.registerClass(ParticleAction.class);
+        ConfigurationSerialization.registerClass(SoundAction.class);
 
         // Portal
         ConfigurationSerialization.registerClass(Portal.class);

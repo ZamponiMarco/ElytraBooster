@@ -1,16 +1,14 @@
 package com.github.jummes.elytrabooster.portal.outline;
 
 import com.github.jummes.libs.annotation.Serializable;
-import com.google.common.base.Predicate;
 import lombok.Getter;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.serialization.SerializableAs;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.stream.IntStream;
 
 @Getter
@@ -34,8 +32,8 @@ public class BlockPortalOutline extends Outline {
     }
 
     public static BlockPortalOutline deserialize(Map<String, Object> map) {
-        Material outlineType = (Material) map.get("outlineType");
-        Material cooldownType = (Material) map.get("cooldownType");
+        Material outlineType = Material.valueOf((String) map.get("outlineType"));
+        Material cooldownType = Material.valueOf((String) map.get("cooldownType"));
         return new BlockPortalOutline(outlineType, cooldownType);
     }
 

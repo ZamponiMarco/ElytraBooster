@@ -25,7 +25,7 @@ public class HelixBoostTrail extends BoostTrail {
     }
 
     public static HelixBoostTrail deserialize(Map<String, Object> map) {
-        Particle particle = (Particle) map.get("particle");
+        Particle particle = Particle.valueOf((String) map.get("particle"));
         return new HelixBoostTrail(particle);
     }
 

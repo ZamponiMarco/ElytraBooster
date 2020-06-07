@@ -1,10 +1,13 @@
 package com.github.jummes.elytrabooster.action;
 
+import com.github.jummes.elytrabooster.action.target.PlayerTarget;
+import com.github.jummes.elytrabooster.action.target.Target;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
 import com.github.jummes.libs.util.MessageUtils;
-import org.bukkit.Bukkit;
+import com.google.common.collect.Lists;
 import org.bukkit.entity.Player;
 
+import java.util.List;
 import java.util.Map;
 
 public class MessageAction extends AbstractAction {
@@ -12,20 +15,14 @@ public class MessageAction extends AbstractAction {
     private Player target;
     private String message;
 
-    public MessageAction(ElytraBooster plugin, Map<String, String> parameters) {
-        super(plugin, parameters);
+    @Override
+    public void execute(Target target) {
+        this.target.sendMessage(MessageUtils.color(message));
     }
 
     @Override
-    protected void parseParameters(Map<String, String> parameters) {
-        target = Bukkit.getPlayer(parameters.get("player"));
-
-        message = parameters.get("message");
-    }
-
-    @Override
-    public void executeAction() {
-        target.sendMessage(MessageUtils.color(message));
+    public List<Class<? extends Target>> getPossibleTargets() {
+        return Lists.newArrayList(PlayerTarget.class);
     }
 
 }

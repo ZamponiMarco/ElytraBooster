@@ -1,30 +1,42 @@
 package com.github.jummes.elytrabooster.action;
 
-import com.github.jummes.elytrabooster.core.ElytraBooster;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
+import com.github.jummes.elytrabooster.action.target.PlayerTarget;
+import com.github.jummes.elytrabooster.action.target.Target;
+import com.github.jummes.libs.annotation.Serializable;
+import com.google.common.collect.Lists;
 
+import java.util.List;
 import java.util.Map;
 
 public class DamageAction extends AbstractAction {
 
-    private Player target;
+    private static final String HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWIyMDY0MzkwZTc5ZDllNTRjY2I0MThiMDczMzE1M2NmOTkyM2ZjNGE4ZDE0YWIxZDJiN2VmNTk2ODgzMWM5MyJ9fX0=";
+
+    @Serializable(headTexture = HEAD)
     private int amount;
 
-    public DamageAction(ElytraBooster plugin, Map<String, String> parameters) {
-        super(plugin, parameters);
+    public DamageAction() {
+        this(1);
+    }
+
+    public DamageAction(int amount) {
+        super();
+        this.amount = amount;
+    }
+
+    public static DamageAction deserialize(Map<String, Object> map) {
+        int amount = (int) map.get("amount");
+        return new DamageAction(amount);
     }
 
     @Override
-    protected void parseParameters(Map<String, String> parameters) {
-        target = Bukkit.getPlayer(parameters.get("player"));
-
-        amount = Integer.parseInt(parameters.getOrDefault("amount", "2"));
+    public void execute(Target target) {
+        ((PlayerTarget) target).getTarget().damage(amount);
     }
 
     @Override
-    public void executeAction() {
-        target.damage(amount);
+    public List<Class<? extends Target>> getPossibleTargets() {
+        return Lists.newArrayList(PlayerTarget.class);
     }
 
 }
