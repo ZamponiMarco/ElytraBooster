@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import java.util.Map;
 import java.util.Random;
@@ -40,18 +41,20 @@ public class SphericVolume extends Volume {
     @Override
     public Location getRandomPoint() {
         Random r = new Random();
-        double multiply = maxRadius - minRadius;
-        double x, y, z;
+        Vector v = new Vector();
         Location center = this.center.getWrapped();
         Location loc;
         do {
             double randomX = r.nextDouble() * 2 - 1;
-            x = center.getX() + randomX * multiply + (Math.signum(randomX) > 0 ? minRadius : -minRadius);
+            v.setX(randomX);
             double randomY = r.nextDouble() * 2 - 1;
-            y = center.getY() + randomY * multiply + (Math.signum(randomX) > 0 ? minRadius : -minRadius);
+            v.setY(randomY);
             double randomZ = r.nextDouble() * 2 - 1;
-            z = center.getZ() + randomZ * multiply + (Math.signum(randomX) > 0 ? minRadius : -minRadius);
-            loc = new Location(center.getWorld(), x, y, z);
+            v.setZ(randomZ);
+            v.normalize();
+            double radius = ((1 - minRadius / maxRadius) * r.nextDouble() + minRadius / maxRadius) * maxRadius;
+            v.multiply(radius);
+            loc = center.clone().add(v);
         } while (loc.getBlock().getType() != Material.AIR);
         return loc;
     }

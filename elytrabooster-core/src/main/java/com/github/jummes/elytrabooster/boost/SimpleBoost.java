@@ -6,6 +6,7 @@ import com.github.jummes.elytrabooster.boost.trail.SimpleBoostTrail;
 import com.github.jummes.libs.annotation.Serializable;
 import com.google.common.collect.Lists;
 import lombok.Getter;
+import org.bukkit.Particle;
 import org.bukkit.configuration.serialization.SerializableAs;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class SimpleBoost extends Boost {
     private double finalVelocity;
 
     public SimpleBoost() {
-        this(new SimpleBoostTrail(null), Lists.newArrayList(), 30, 3.0, 1.0);
+        this(new SimpleBoostTrail(Particle.FIREWORKS_SPARK), Lists.newArrayList(), 30, 3.0, 1.0);
     }
 
     public SimpleBoost(BoostTrail trail, List<AbstractAction> boostActions, int boostDuration, double initialVelocity,

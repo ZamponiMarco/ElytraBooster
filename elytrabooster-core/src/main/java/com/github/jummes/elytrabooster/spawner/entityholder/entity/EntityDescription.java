@@ -16,7 +16,7 @@ public abstract class EntityDescription implements Model, Cloneable {
         this.plugin = ElytraBooster.getInstance();
     }
 
-    public abstract int spawn(Location loc);
+    public abstract void spawn(Location loc);
 
     public abstract void entityDespawn();
 

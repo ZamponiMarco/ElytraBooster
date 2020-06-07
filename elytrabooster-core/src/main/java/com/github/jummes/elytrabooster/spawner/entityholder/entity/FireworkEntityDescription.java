@@ -31,7 +31,7 @@ public class FireworkEntityDescription extends EntityDescription {
     }
 
     @Override
-    public int spawn(Location location) {
+    public void spawn(Location location) {
         item = (Item) location.getWorld().spawnEntity(location, EntityType.DROPPED_ITEM);
         item.setGravity(false);
         item.setVelocity(new Vector());
@@ -39,7 +39,6 @@ public class FireworkEntityDescription extends EntityDescription {
         item.setInvulnerable(true);
         item.setItemStack(Libs.getWrapper().skullFromValue(FIREWORK_HEAD));
         effectTaskNumber = runEffectTask(location);
-        return effectTaskNumber;
     }
 
     @Override

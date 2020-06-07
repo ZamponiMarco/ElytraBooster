@@ -4,8 +4,13 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 
 import java.util.List;
+import java.util.Map;
 
 public class NoOutlinePortal extends Outline {
+
+    public static NoOutlinePortal deserialize(Map<String, Object> map) {
+        return new NoOutlinePortal();
+    }
 
     @Override
     public void drawOutline(List<Location> points) {
