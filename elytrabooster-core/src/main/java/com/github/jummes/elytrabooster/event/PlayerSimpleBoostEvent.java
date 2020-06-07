@@ -1,5 +1,6 @@
 package com.github.jummes.elytrabooster.event;
 
+import com.github.jummes.elytrabooster.action.target.PlayerTarget;
 import com.github.jummes.elytrabooster.boost.SimpleBoost;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
 import com.github.jummes.libs.util.MessageUtils;
@@ -27,6 +28,7 @@ public class PlayerSimpleBoostEvent extends Event implements Cancellable {
 
         plugin.getStatusMap().replace(player, true);
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 20, 1);
+        boost.getBoostActions().forEach(action -> action.executeAction(new PlayerTarget(player)));
         getBoostProcess(plugin, boost).runTaskTimer(plugin, 0, 1);
     }
 

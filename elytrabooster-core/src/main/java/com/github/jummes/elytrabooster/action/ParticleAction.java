@@ -2,26 +2,38 @@ package com.github.jummes.elytrabooster.action;
 
 import com.github.jummes.elytrabooster.action.target.LocationTarget;
 import com.github.jummes.elytrabooster.action.target.Target;
-import com.github.jummes.elytrabooster.core.ElytraBooster;
 import com.google.common.collect.Lists;
-import org.bukkit.Location;
+import lombok.AllArgsConstructor;
 import org.bukkit.Particle;
 
 import java.util.List;
 import java.util.Map;
 
+@AllArgsConstructor
 public class ParticleAction extends AbstractAction {
 
-    private Location location;
     private Particle type;
     private int count;
     private double offset;
     private double speed;
     private boolean force;
 
+    public ParticleAction(){
+        this(Particle.FIREWORKS_SPARK, 1, 0, 0, false);
+    }
+
+    public static ParticleAction deserialize(Map<String, Object> map) {
+        Particle type = Particle.valueOf((String) map.get("type"));
+        int count = (int) map.get("count");
+        double offset = (double) map.get("offset");
+        double speed = (double) map.get("speed");
+        boolean force = (boolean) map.get("force");
+        return new ParticleAction(type, count, offset, speed, force);
+    }
+
     @Override
     public void execute(Target target) {
-        location.getWorld().spawnParticle(type, location, count, offset, offset, offset, speed, null, force);
+        ((LocationTarget) target).getTarget().getWorld().spawnParticle(type, ((LocationTarget) target).getTarget(), count, offset, offset, offset, speed, null, force);
     }
 
     @Override
