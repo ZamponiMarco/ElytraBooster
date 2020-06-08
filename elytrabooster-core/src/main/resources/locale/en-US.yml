@@ -67,6 +67,9 @@ gui:
       - "&7&oThe id of the pad." 
     center:
       - "&7&oThe location of the pad."
+      - "&6&lLeft click &7&oto modify."
+      - "&6&lRight click &7&oto move to your location."
+      - "&6&lMiddle click &7&oto teleport to the location."
     boost:
       - "&7&oThe vertical boost provided by"
       - "&7&othe pad."
@@ -96,9 +99,15 @@ gui:
           - "&7&oThe radius of the circle."
         center:
           - "&7&oThe center location of the circle."
+          - "&6&lLeft click &7&oto modify."
+          - "&6&lRight click &7&oto move to your location."
+          - "&6&lMiddle click &7&oto teleport to the location."
       rectangle:
         center:
           - "&7&oThe center location of the rectangle."
+          - "&6&lLeft click &7&oto modify."
+          - "&6&lRight click &7&oto move to your location."
+          - "&6&lMiddle click &7&oto teleport to the location."
         halfWidth:
           - "&7&oHalf the width of the rectangle."
         halfHeight:
@@ -107,6 +116,9 @@ gui:
         pointOne:
           - "&7&oThe location of the first point of"
           - "&7&othe triangle."
+          - "&6&lLeft click &7&oto modify."
+          - "&6&lRight click &7&oto move to your location."
+          - "&6&lMiddle click &7&oto teleport to the location."
         pointTwo:
           - "&7&oThe distances from the first point of"
           - "&7&othe triangle of the second point."
@@ -116,6 +128,9 @@ gui:
       composed:
         center:
           - "&7&oThe center location of the composed shape."
+          - "&6&lLeft click &7&oto modify."
+          - "&6&lRight click &7&oto move to your location."
+          - "&6&lMiddle click &7&oto teleport to the location."
         shapes:
           - "&7&oThe list of shapes that compose the shape."
         mode:
@@ -154,6 +169,9 @@ gui:
       spheric:
         center:
           - "&7&oThe center location of the sphere."
+          - "&6&lLeft click &7&oto modify."
+          - "&6&lRight click &7&oto move to your location."
+          - "&6&lMiddle click &7&oto teleport to the location."
         minRadius:
           - "&7&oThe minimum distance of entities from"
           - "&7&othe sphere center."
