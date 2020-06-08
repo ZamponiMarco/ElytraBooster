@@ -3,6 +3,7 @@ package com.github.jummes.elytrabooster.action;
 import com.github.jummes.elytrabooster.action.target.LocationTarget;
 import com.github.jummes.elytrabooster.action.target.Target;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
+import com.github.jummes.libs.annotation.Serializable;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import org.bukkit.*;
@@ -13,9 +14,18 @@ import java.util.Map;
 @AllArgsConstructor
 public class SoundAction extends AbstractAction {
 
+    private static final String TYPE_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzkxOWZiZDFkZjQ4YzMyMmMxMzA1YmIxZjhlYWI5Njc0YzIxODQ0YTA0OTNhNTUzNWQ5NGNhYmExZWNhM2MxZCJ9fX0=";
+    private static final String CATEGORY_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMmQzYjJlM2U5OTU0ZjgyMmI0M2ZlNWY5MTUwOTllMGE2Y2FhYTgxZjc5MTIyMmI1ODAzZDQxNDVhODUxNzAifX19";
+    private static final String PITCH_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMmQzYjJlM2U5OTU0ZjgyMmI0M2ZlNWY5MTUwOTllMGE2Y2FhYTgxZjc5MTIyMmI1ODAzZDQxNDVhODUxNzAifX19";
+    private static final String VOLUME_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGYyMTAwNzM3NGQ0ODBkZTFkNzg1Y2E4Njc2NDE3NTY1MGUwMDc3MzU0MDQyN2FhZWYxYzBjYzE3MGRmM2ExNCJ9fX0=";
+
+    @Serializable(headTexture = TYPE_HEAD)
     private Sound type;
+    @Serializable(headTexture = CATEGORY_HEAD)
     private SoundCategory category;
+    @Serializable(headTexture = PITCH_HEAD)
     private float pitch;
+    @Serializable(headTexture = VOLUME_HEAD)
     private float volume;
 
     public SoundAction(){

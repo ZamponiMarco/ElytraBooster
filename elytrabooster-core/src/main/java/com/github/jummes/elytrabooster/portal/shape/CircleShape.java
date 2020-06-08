@@ -17,11 +17,12 @@ public class CircleShape extends Shape {
 
     private static final double AXIS_DISTANCE = 1.0;
 
-    private static final String HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWIyMDY0MzkwZTc5ZDllNTRjY2I0MThiMDczMzE1M2NmOTkyM2ZjNGE4ZDE0YWIxZDJiN2VmNTk2ODgzMWM5MyJ9fX0=";
+    private static final String CENTER_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjhhMDY1NTg4YzdkYmYxMjk0NTk1YWJhNzc3OTFjM2FkNjVmMTliZjFjOWFkN2E1YzIzZGE0MGI4Mjg2MGI3In19fQ==";
+    private static final String RADIUS_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2JmZjgyMTFlM2Q5ZDE2YjRjYTJjMjBjZDJhNmY5OWNjZThmZTRkOThlZjVjYTU1MTZmNTFmMjVjZjFjMzEifX19";
 
-    @Serializable(headTexture = HEAD)
+    @Serializable(headTexture = RADIUS_HEAD)
     private double radius;
-    @Serializable(headTexture = HEAD)
+    @Serializable(headTexture = CENTER_HEAD)
     private LocationWrapper center;
 
     /**
