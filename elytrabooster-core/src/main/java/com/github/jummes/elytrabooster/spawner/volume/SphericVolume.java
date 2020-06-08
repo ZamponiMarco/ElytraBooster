@@ -22,11 +22,11 @@ public class SphericVolume extends Volume {
     private static final String MIN_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWQ2YjEyOTNkYjcyOWQwMTBmNTM0Y2UxMzYxYmJjNTVhZTVhOGM4ZjgzYTE5NDdhZmU3YTg2NzMyZWZjMiJ9fX0=";
     private static final String MAX_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTI0MjMwMmViZDY1NWY2ZDQyOWMxZTRhZWRlMjFiN2Y1YzRkYjY4YTQwNDVlYmFlYzE3NjMzYTA1MGExYTEifX19";
 
-    @Serializable(headTexture = CENTER_HEAD)
+    @Serializable(headTexture = CENTER_HEAD, description = "gui.spawner.volume.spheric.center")
     private LocationWrapper center;
-    @Serializable(headTexture = MIN_HEAD)
+    @Serializable(headTexture = MIN_HEAD, description = "gui.spawner.volume.spheric.minRadius")
     private double minRadius;
-    @Serializable(headTexture = MAX_HEAD)
+    @Serializable(headTexture = MAX_HEAD, description = "gui.spawner.volume.spheric.maxRadius")
     private double maxRadius;
 
     public SphericVolume(Player p) {

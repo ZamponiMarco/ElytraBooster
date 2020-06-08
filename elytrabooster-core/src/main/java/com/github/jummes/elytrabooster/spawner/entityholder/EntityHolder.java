@@ -21,11 +21,11 @@ public class EntityHolder implements Model {
     private static final String MAX_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjdkYzNlMjlhMDkyM2U1MmVjZWU2YjRjOWQ1MzNhNzllNzRiYjZiZWQ1NDFiNDk1YTEzYWJkMzU5NjI3NjUzIn19fQ==";
     private static final String BOOST_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTNmYzUyMjY0ZDhhZDllNjU0ZjQxNWJlZjAxYTIzOTQ3ZWRiY2NjY2Y2NDkzNzMyODliZWE0ZDE0OTU0MWY3MCJ9fX0=";
 
-    @Serializable(headTexture = DESCRIPTION_HEAD)
+    @Serializable(headTexture = DESCRIPTION_HEAD, description = "gui.spawner.entityHolder.entityDescription")
     private EntityDescription entityDescription;
-    @Serializable(headTexture = MAX_HEAD)
+    @Serializable(headTexture = MAX_HEAD, description = "gui.spawner.entityHolder.maxEntities")
     private int maxEntities;
-    @Serializable(headTexture = BOOST_HEAD)
+    @Serializable(headTexture = BOOST_HEAD, description = "gui.spawner.entityHolder.boost")
     private SimpleBoost boost;
     private List<ActiveEntity> entities;
 

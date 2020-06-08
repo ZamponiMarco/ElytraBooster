@@ -28,13 +28,13 @@ public class Spawner implements Model {
     protected ElytraBooster plugin;
     protected int spawnTaskNumber;
 
-    @Serializable(headTexture = ID_HEAD)
+    @Serializable(headTexture = ID_HEAD, description = "gui.spawner.id")
     private String id;
-    @Serializable(headTexture = SHAPE_HEAD)
+    @Serializable(headTexture = SHAPE_HEAD, description = "gui.spawner.volumeDescription")
     private Volume volume;
-    @Serializable(headTexture = COOLDOWN_HEAD)
+    @Serializable(headTexture = COOLDOWN_HEAD, description = "gui.spawner.cooldown")
     private int cooldown;
-    @Serializable(headTexture = SORTER_HEAD)
+    @Serializable(headTexture = SORTER_HEAD, description = "gui.spawner.holderDescription")
     private EntityHolder holder;
 
     public Spawner(Player p) {

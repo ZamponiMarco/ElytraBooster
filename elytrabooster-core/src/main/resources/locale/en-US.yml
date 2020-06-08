@@ -1,0 +1,175 @@
+gui:
+  action:
+    damage:
+      amount:
+        - "&7&oAmount of damage dealt."
+    effect:
+      type:
+        - "&7&oThe type of effect."
+      duration:
+        - "&7&oThe duration of the effect."
+      level:
+        - "&7&oThe level of the effect."
+      particles:
+        - "&7&oWhether effect particles are"
+        - "&7&oshown."
+      ambient:
+        - "&7&oWhether ambient particles are"
+        - "&7&oshown."
+      icon:
+        - "&7&oWhether effect icon is shown."
+    heal:
+      amount:
+        - "&7&oAmount of heal given."
+    message:
+      message:
+        - "&7&oThe message sent."
+    particle:
+      type:
+        - "&7&oThe type of particle."
+      count:
+        - "&7&oThe amount of particles."
+      offset:
+        - "&7&oThe possible offset of particles"
+        - "&7&oaround the center location."
+      speed:
+        - "&7&oThe speed of the particles."
+      force:
+        - "&7&oWhether the particles are forced to"
+        - "&7&obe shown."
+    sound:
+      type:
+        - "&7&oThe type of sound."
+      category:
+        - "&7&oThe category used to play the sound."
+      pitch:
+        - "&7&oThe pitch of the sound."
+      volume:
+        - "&7&oThe volume of the sound."
+  boost:
+    trail:
+      particle:
+        - "&7&oThe particle used in the trail."
+    simple:
+      duration:
+        - "&7&oThe duration of the boost."
+      initial:
+        - "&7&oThe initial velocity of the boost."
+      final:
+        - "&7&oThe final velocity of the boost."
+    vertical:
+      vertical:
+        - "&7&oThe vertical velocity boost."
+      horizontal:
+        - "&7&oThe horizontal velocity boost."
+  pad:
+    id:
+      - "&7&oThe id of the pad." 
+    center:
+      - "&7&oThe location of the pad."
+    boost:
+      - "&7&oThe vertical boost provided by"
+      - "&7&othe pad."
+    visual:
+      - "&7&oThe visual effects created by"
+      - "&7&othe pad."
+    cooldown:
+      - "&7&oThe cooldown between usages of"
+      - "&7&othe pads."
+  portal:
+    outline:
+      block:
+        outlineType:
+          - "&7&oThe material used as outline."
+        cooldownType:
+          - "&7&oThe material used when on cooldown."
+      particle:
+        outlineType:
+          - "&7&oThe particle used as outline."
+        cooldownType:
+          - "&7&oThe particle used when on cooldown."
+    shape:
+      axis:
+        - "&7&oThe axis of the portal."
+      circle:
+        radius:
+          - "&7&oThe radius of the circle."
+        center:
+          - "&7&oThe center location of the circle."
+      rectangle:
+        center:
+          - "&7&oThe center location of the rectangle."
+        halfWidth:
+          - "&7&oHalf the width of the rectangle."
+        halfHeight:
+          - "&7&oHalf the height of the rectangle."
+      triangle:
+        pointOne:
+          - "&7&oThe location of the first point of"
+          - "&7&othe triangle."
+        pointTwo:
+          - "&7&oThe distances from the first point of"
+          - "&7&othe triangle of the second point."
+        pointThree:
+          - "&7&oThe distances from the first point of"
+          - "&7&othe triangle of the third point."
+      composed:
+        center:
+          - "&7&oThe center location of the composed shape."
+        shapes:
+          - "&7&oThe list of shapes that compose the shape."
+        mode:
+          - "&7&oThe mode in which the shapes will be composed."
+        shape:
+          - "&7&oOne of the shapes that compose the final shape."
+    id:
+      - "&7&oThe id of the portal."
+    boost:
+      - "&7&oThe boost provided by the"
+      - "&7&oportal."
+    outlineDescription:
+      - "&7&oThe outline that defines"
+      - "&7&oportal."
+    cooldown:
+      - "&7&oThe cooldown between portal"
+      - "&7&ousages."
+    sorter:
+      - "&7&oThe way points are sorted when"
+      - "&7&othe portal is in cooldown and"
+      - "&7&othe cooldown outliner is being"
+      - "&7&oused."
+    shapeDescription:
+      - "&7&oThe shape of the portal."
+  spawner:
+    entityHolder:
+      entityDescription:
+        - "&7&oThe way the entity is rendered"
+        - "&7&oin the game."
+      maxEntities:
+        - "&7&oThe maximum amount of entities"
+        - "&7&othat can be held by this holder."
+      boost:
+        - "&7&oThe boost provided by the entities."
+    volume:
+      spheric:
+        center:
+          - "&7&oThe center location of the sphere."
+        minRadius:
+          - "&7&oThe minimum distance of entities from"
+          - "&7&othe sphere center."
+        maxRadius:
+          - "&7&oThe maximum distance of entities from"
+          - "&7&othe sphere center."
+    id:
+      - "&7&oThe id of the spawner."
+    volumeDescription:
+      - "&7&oThe volume in which entities"
+      - "&7&owill be spawned."
+    cooldown:
+      - "&7&oThe time interval between two"
+      - "&7&oentities spawns."
+    holderDescription:
+      - "&7&oInformations about the entities"
+      - "&7&othat will be spawned and the boost"
+      - "&7&othat they provide."
+      

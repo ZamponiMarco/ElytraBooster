@@ -19,9 +19,9 @@ public class ComposedShape extends Shape {
 
     private static final String HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWIyMDY0MzkwZTc5ZDllNTRjY2I0MThiMDczMzE1M2NmOTkyM2ZjNGE4ZDE0YWIxZDJiN2VmNTk2ODgzMWM5MyJ9fX0=";
 
-    @Serializable(headTexture = HEAD)
+    @Serializable(headTexture = HEAD, description = "gui.portal.shape.composed.shapes")
     private List<SingleShape> shapes;
-    @Serializable(headTexture = HEAD)
+    @Serializable(headTexture = HEAD, description = "gui.portal.shape.composed.center")
     private LocationWrapper center;
 
     public ComposedShape(ModelPath<Portal> path) {
@@ -76,9 +76,9 @@ public class ComposedShape extends Shape {
 
         private static final String HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWIyMDY0MzkwZTc5ZDllNTRjY2I0MThiMDczMzE1M2NmOTkyM2ZjNGE4ZDE0YWIxZDJiN2VmNTk2ODgzMWM5MyJ9fX0=";
 
-        @Serializable(headTexture = HEAD, stringValue = true)
+        @Serializable(headTexture = HEAD, stringValue = true, description = "gui.portal.shape.composed.mode")
         private CompositionMode mode;
-        @Serializable(headTexture = HEAD)
+        @Serializable(headTexture = HEAD, description = "gui.portal.shape.composed.shape")
         private Shape shape;
 
         public SingleShape(ModelPath<Portal> path) {

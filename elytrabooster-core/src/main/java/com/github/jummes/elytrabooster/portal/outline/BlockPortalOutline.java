@@ -18,9 +18,9 @@ public class BlockPortalOutline extends Outline {
     private static final String OUTLINE_TYPE_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjQ1YzlhY2VhOGRhNzFiNGYyNTJjZDRkZWI1OTQzZjQ5ZTdkYmMwNzY0Mjc0YjI1YTZhNmY1ODc1YmFlYTMifX19";
     private static final String COOLDOWN_TYPE_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmZkYzRjODg5NWUzZjZiM2FjNmE5YjFjZDU1ZGUzYTI5YmJjOGM3ODVlN2ZiZGJkOTMyMmQ4YzIyMzEifX19";
 
-    @Serializable(headTexture = OUTLINE_TYPE_HEAD, stringValue = true)
+    @Serializable(headTexture = OUTLINE_TYPE_HEAD, stringValue = true, description = "gui.portal.outline.block.outlineType")
     private Material outlineType;
-    @Serializable(headTexture = COOLDOWN_TYPE_HEAD, stringValue = true)
+    @Serializable(headTexture = COOLDOWN_TYPE_HEAD, stringValue = true, description = "gui.portal.outline.block.cooldownType")
     private Material cooldownType;
 
     public BlockPortalOutline() {

@@ -23,17 +23,17 @@ public class EffectAction extends AbstractAction {
     private static final String AMBIENT_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWY1NzE5MmIxOTRjNjU4YWFhODg4MTY4NDhjYmNlN2M3NDk0NjZhNzkyYjhhN2UxZDNmYWZhNDFjNDRmMzQxMiJ9fX0=";
     private static final String ICON_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDU5MWYwNGJiNmQ1MjQ5MTFhZGRhNzc1YWYyNDRmODZhOTVkYjE4N2UzMWI4YTNiMTAzYWQ4MGZjNWIyMjU2MCJ9fX0=";
 
-    @Serializable(headTexture = TYPE_HEAD)
+    @Serializable(headTexture = TYPE_HEAD, description = "gui.action.effect.type")
     private PotionEffectType type;
-    @Serializable(headTexture = DURATION_HEAD)
+    @Serializable(headTexture = DURATION_HEAD, description = "gui.action.effect.duration")
     private int duration;
-    @Serializable(headTexture = LEVEL_HEAD)
+    @Serializable(headTexture = LEVEL_HEAD, description = "gui.action.effect.level")
     private int level;
-    @Serializable(headTexture = PARTICLE_HEAD)
+    @Serializable(headTexture = PARTICLE_HEAD, description = "gui.action.effect.particle")
     private boolean particles;
-    @Serializable(headTexture = AMBIENT_HEAD)
+    @Serializable(headTexture = AMBIENT_HEAD, description = "gui.action.effect.ambient")
     private boolean ambient;
-    @Serializable(headTexture = ICON_HEAD)
+    @Serializable(headTexture = ICON_HEAD, description = "gui.action.effect.icon")
     private boolean icon;
 
     public EffectAction(){this(PotionEffectType.INCREASE_DAMAGE, 20, 0, true, true, true);}

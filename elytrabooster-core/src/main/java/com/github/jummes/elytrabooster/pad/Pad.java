@@ -30,15 +30,15 @@ public class Pad implements Model {
 
 
     protected ElytraBooster plugin;
-    @Serializable(headTexture = ID_HEAD)
+    @Serializable(headTexture = ID_HEAD, description = "gui.pad.id")
     protected String id;
-    @Serializable(headTexture = CENTER_HEAD)
+    @Serializable(headTexture = CENTER_HEAD, description = "gui.pad.center")
     protected LocationWrapper center;
-    @Serializable(headTexture = BOOST_HEAD)
+    @Serializable(headTexture = BOOST_HEAD, description = "gui.pad.boost")
     protected VerticalBoost boost;
-    @Serializable(headTexture = VISUAL_HEAD)
+    @Serializable(headTexture = VISUAL_HEAD, description = "gui.pad.visual")
     protected PadVisual visual;
-    @Serializable(headTexture = COOLDOWN_HEAD)
+    @Serializable(headTexture = COOLDOWN_HEAD, description = "gui.pad.cooldown")
     protected int cooldown;
 
     protected int currCooldown;

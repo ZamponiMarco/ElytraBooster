@@ -20,15 +20,15 @@ public class ParticleAction extends AbstractAction {
     private static final String FORCE_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2VkMWFiYTczZjYzOWY0YmM0MmJkNDgxOTZjNzE1MTk3YmUyNzEyYzNiOTYyYzk3ZWJmOWU5ZWQ4ZWZhMDI1In19fQ==";
 
 
-    @Serializable(headTexture = TYPE_HEAD)
+    @Serializable(headTexture = TYPE_HEAD, description = "gui.action.particle.type")
     private Particle type;
-    @Serializable(headTexture = COUNT_HEAD)
+    @Serializable(headTexture = COUNT_HEAD, description = "gui.action.particle.count")
     private int count;
-    @Serializable(headTexture = OFFSET_HEAD)
+    @Serializable(headTexture = OFFSET_HEAD, description = "gui.action.particle.offset")
     private double offset;
-    @Serializable(headTexture = SPEED_HEAD)
+    @Serializable(headTexture = SPEED_HEAD, description = "gui.action.particle.speed")
     private double speed;
-    @Serializable(headTexture = FORCE_HEAD)
+    @Serializable(headTexture = FORCE_HEAD, description = "gui.action.particle.force")
     private boolean force;
 
     public ParticleAction(){

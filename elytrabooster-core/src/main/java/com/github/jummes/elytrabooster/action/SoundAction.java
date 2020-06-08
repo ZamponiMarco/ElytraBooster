@@ -19,13 +19,13 @@ public class SoundAction extends AbstractAction {
     private static final String PITCH_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMmQzYjJlM2U5OTU0ZjgyMmI0M2ZlNWY5MTUwOTllMGE2Y2FhYTgxZjc5MTIyMmI1ODAzZDQxNDVhODUxNzAifX19";
     private static final String VOLUME_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGYyMTAwNzM3NGQ0ODBkZTFkNzg1Y2E4Njc2NDE3NTY1MGUwMDc3MzU0MDQyN2FhZWYxYzBjYzE3MGRmM2ExNCJ9fX0=";
 
-    @Serializable(headTexture = TYPE_HEAD)
+    @Serializable(headTexture = TYPE_HEAD, description = "gui.action.sound.type")
     private Sound type;
-    @Serializable(headTexture = CATEGORY_HEAD)
+    @Serializable(headTexture = CATEGORY_HEAD, description = "gui.action.sound.category")
     private SoundCategory category;
-    @Serializable(headTexture = PITCH_HEAD)
+    @Serializable(headTexture = PITCH_HEAD, description = "gui.action.sound.pitch")
     private float pitch;
-    @Serializable(headTexture = VOLUME_HEAD)
+    @Serializable(headTexture = VOLUME_HEAD, description = "gui.action.sound.volume")
     private float volume;
 
     public SoundAction(){

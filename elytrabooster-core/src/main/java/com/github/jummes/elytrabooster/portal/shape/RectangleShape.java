@@ -16,11 +16,11 @@ public class RectangleShape extends Shape {
     private static final String HORIZONTAL_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTNmYzUyMjY0ZDhhZDllNjU0ZjQxNWJlZjAxYTIzOTQ3ZWRiY2NjY2Y2NDkzNzMyODliZWE0ZDE0OTU0MWY3MCJ9fX0=";
     private static final String VERTICAL_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTk5YWFmMjQ1NmE2MTIyZGU4ZjZiNjI2ODNmMmJjMmVlZDlhYmI4MWZkNWJlYTFiNGMyM2E1ODE1NmI2NjkifX19";
 
-    @Serializable(headTexture = CENTER_HEAD)
+    @Serializable(headTexture = CENTER_HEAD, description = "gui.portal.shape.rectangle.center")
     private LocationWrapper center;
-    @Serializable(headTexture = HORIZONTAL_HEAD)
+    @Serializable(headTexture = HORIZONTAL_HEAD, description = "gui.portal.shape.rectangle.halfWidth")
     private double halfWidth;
-    @Serializable(headTexture = VERTICAL_HEAD)
+    @Serializable(headTexture = VERTICAL_HEAD, description = "gui.portal.shape.rectangle.halfHeight")
     private double halfHeight;
 
     /**

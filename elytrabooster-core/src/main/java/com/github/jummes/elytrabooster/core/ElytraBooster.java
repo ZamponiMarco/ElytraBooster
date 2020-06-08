@@ -35,6 +35,7 @@ import com.github.jummes.elytrabooster.spawner.volume.Volume;
 import com.github.jummes.libs.command.PluginCommandExecutor;
 import com.github.jummes.libs.core.Libs;
 import com.github.jummes.libs.localization.PluginLocale;
+import com.google.common.collect.Lists;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Player;
@@ -133,7 +134,7 @@ public class ElytraBooster extends JavaPlugin {
     }
 
     private void startupTasks() {
-        PluginLocale locale = new PluginLocale(instance, new ArrayList<>(), "");
+        PluginLocale locale = new PluginLocale(instance, Lists.newArrayList("en-US"), "en-US");
         Libs.initializeLibrary(instance, locale);
         new UpdateChecker(this).checkForUpdate();
 

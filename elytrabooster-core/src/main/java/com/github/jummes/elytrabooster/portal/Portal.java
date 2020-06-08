@@ -43,17 +43,17 @@ public class Portal implements Model {
     private static final String SORTER_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzIxNmQxN2RlNDJiZDA5NzY2OWI4ZTA5ZThlNjJkZjhiZjc4MzdkMzk1OTc1NDk2ZTYzNmZkYTRmYTk1ZjNkIn19fQ==========";
     private static final String SHAPE_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2IyYjVkNDhlNTc1Nzc1NjNhY2EzMTczNTUxOWNiNjIyMjE5YmMwNThiMWYzNDY0OGI2N2I4ZTcxYmMwZmEifX19";
 
-    @Serializable(headTexture = ID_HEAD)
+    @Serializable(headTexture = ID_HEAD, description = "gui.portal.id")
     private String id;
-    @Serializable(headTexture = BOOST_HEAD)
+    @Serializable(headTexture = BOOST_HEAD, description = "gui.portal.boost")
     private SimpleBoost boost;
-    @Serializable(headTexture = OUTLINE_HEAD)
+    @Serializable(headTexture = OUTLINE_HEAD, description = "gui.portal.outlineDescription")
     private Outline outline;
-    @Serializable(headTexture = COOLDOWN_HEAD)
+    @Serializable(headTexture = COOLDOWN_HEAD, description = "gui.portal.cooldown")
     private int cooldown;
-    @Serializable(headTexture = SORTER_HEAD)
+    @Serializable(headTexture = SORTER_HEAD, description = "gui.portal.sorter")
     private PointSorter sorter;
-    @Serializable(headTexture = SHAPE_HEAD)
+    @Serializable(headTexture = SHAPE_HEAD, description = "gui.portal.shapeDescription")
     private Shape shape;
 
     private Portal portal;
