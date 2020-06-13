@@ -3,14 +3,14 @@
   <parent>
     <artifactId>elytrabooster</artifactId>
     <groupId>com.github.jummes</groupId>
-    <version>1.4</version>
+    <version>2.0</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>elytrabooster-dist</artifactId>
   <name>elytrabooster-dist</name>
   <build>
     <directory>../target</directory>
-    <finalName>elytrabooster-${project.version}</finalName>
+    <finalName>${project.name}-${project.version}</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
@@ -22,11 +22,37 @@
               <goal>shade</goal>
             </goals>
             <configuration>
-              <artifactSet>
-                <includes>
-                  <include>com.github.jummes:elytrabooster-*</include>
-                </includes>
-              </artifactSet>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/</exclude>
+                  </excludes>
+                </filter>
+              </filters>
+              <relocations>
+                <relocation>
+                  <pattern>com.github.jummes.libs</pattern>
+                  <shadedPattern>${project.groupId}.${project.parent.artifactId}.libs</shadedPattern>
+                </relocation>
+              </relocations>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.8</version>
+        <executions>
+          <execution>
+            <phase>install</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <copy />
+              </target>
             </configuration>
           </execution>
         </executions>

@@ -3,39 +3,20 @@ version: ${version}
 main: com.github.jummes.elytrabooster.core.ElytraBooster
 author: jummes
 api-version: 1.13
+load: POSTWORLD
+softdepend: [Multiverse-Core, MultiWorld]
 commands:
   eb:
     description: Base ElytraBooster command
 permissions:
-  eb.admin.create:
-    description: Booster creation permission
-    default: op
-  eb.admin.delete:
-    description: Booster deletion permission
-    default: op
-  eb.admin.disable:
-    description: Booster disabling permission
-    default: op
-  eb.admin.enable:
-    description: Booster enabling permission
-    default: op
   eb.admin.help:
     description: Show help message permission
     default: op
-  eb.admin.list:
-    description: List existing boosters permission
+  eb.admin.modify:
+    description: Modify booster permission
     default: op
-  eb.admin.move:
-    description: Booster moving permission
-    default: op
-  eb.admin.near:
-    description: List near portals permission
-    default: op
-  eb.admin.reload: 
+  eb.admin.reload:
     description: Reload plugin data permission
-    default: op
-  eb.admin.set:
-    description: Set booster parameters
     default: op
   eb.boosters.boost:
     default: true
@@ -48,19 +29,12 @@ permissions:
     description: Wildcard booster editing permission
     default: op
     children:
-      eb.admin.create: true
-      eb.admin.delete: true
-      eb.admin.disable: true
-      eb.admin.enable: true
       eb.admin.help: true
-      eb.admin.list: true
-      eb.admin.move: true
-      eb.admin.near: true
+      eb.admin.modify: true
       eb.admin.reload: true
-      eb.admin.set: true
   eb.*:
     description: Wildcard ElytraBooster permission
     default: op
-    children: 
+    children:
       eb.boosters.*: true
       eb.admin.*: true
