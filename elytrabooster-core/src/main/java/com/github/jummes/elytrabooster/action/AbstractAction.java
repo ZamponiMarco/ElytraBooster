@@ -1,6 +1,6 @@
 package com.github.jummes.elytrabooster.action;
 
-import com.github.jummes.elytrabooster.action.target.Target;
+import com.github.jummes.elytrabooster.action.targeter.Target;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
 import com.github.jummes.libs.annotation.Enumerable;
 import com.github.jummes.libs.model.Model;

@@ -1,7 +1,7 @@
 package com.github.jummes.elytrabooster.action;
 
-import com.github.jummes.elytrabooster.action.target.PlayerTarget;
-import com.github.jummes.elytrabooster.action.target.Target;
+import com.github.jummes.elytrabooster.action.targeter.PlayerTarget;
+import com.github.jummes.elytrabooster.action.targeter.Target;
 import com.github.jummes.libs.annotation.Serializable;
 import com.github.jummes.libs.util.MessageUtils;
 import com.google.common.collect.Lists;

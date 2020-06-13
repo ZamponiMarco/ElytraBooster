@@ -1,8 +1,7 @@
 package com.github.jummes.elytrabooster.action;
 
-import com.github.jummes.elytrabooster.action.target.LocationTarget;
-import com.github.jummes.elytrabooster.action.target.Target;
-import com.github.jummes.elytrabooster.core.ElytraBooster;
+import com.github.jummes.elytrabooster.action.targeter.LocationTarget;
+import com.github.jummes.elytrabooster.action.targeter.Target;
 import com.github.jummes.libs.annotation.Serializable;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;

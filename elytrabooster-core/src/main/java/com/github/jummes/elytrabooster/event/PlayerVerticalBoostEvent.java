@@ -1,7 +1,7 @@
 package com.github.jummes.elytrabooster.event;
 
-import com.github.jummes.elytrabooster.action.target.LocationTarget;
-import com.github.jummes.elytrabooster.action.target.PlayerTarget;
+import com.github.jummes.elytrabooster.action.targeter.LocationTarget;
+import com.github.jummes.elytrabooster.action.targeter.PlayerTarget;
 import com.github.jummes.elytrabooster.boost.VerticalBoost;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
 import lombok.Getter;
