@@ -1,5 +1,6 @@
 package com.github.jummes.elytrabooster.manager;
 
+import com.github.jummes.elytrabooster.core.ElytraBooster;
 import com.github.jummes.elytrabooster.portal.Portal;
 import com.github.jummes.libs.model.ModelManager;
 import lombok.Getter;
@@ -21,5 +22,11 @@ public class PortalManager extends ModelManager<Portal> {
         super(classObject, databaseType, plugin);
         this.portals = database.loadObjects();
     }
+
+    public void reloadData() {
+        portals.forEach(Portal::stopBoosterTask);
+        this.portals = database.loadObjects();
+    }
+
 
 }

@@ -1,3 +1,7 @@
+command:
+  reload:
+    start: "&cReloading &6ElytraBooster"
+    success: "&aReloaded &6ElytraBooster"
 gui:
   action:
     damage:

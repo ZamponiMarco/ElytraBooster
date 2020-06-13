@@ -89,6 +89,7 @@ public class Portal implements Model {
     }
 
     public static Portal deserialize(Map<String, Object> map) {
+        // TODO getOrDefault
         String id = (String) map.get("id");
         SimpleBoost boost = (SimpleBoost) map.get("boost");
         Outline outline = (Outline) map.get("outline");
