@@ -47,13 +47,13 @@ public class Portal implements Model {
     private String id;
     @Serializable(headTexture = BOOST_HEAD, description = "gui.portal.boost")
     private SimpleBoost boost;
-    @Serializable(headTexture = OUTLINE_HEAD, description = "gui.portal.outlineDescription")
+    @Serializable(headTexture = OUTLINE_HEAD, description = "gui.portal.outlineDescription", recreateTooltip = true)
     private Outline outline;
     @Serializable(headTexture = COOLDOWN_HEAD, description = "gui.portal.cooldown")
     private int cooldown;
-    @Serializable(headTexture = SORTER_HEAD, description = "gui.portal.sorter")
+    @Serializable(headTexture = SORTER_HEAD, description = "gui.portal.sorter", recreateTooltip = true)
     private PointSorter sorter;
-    @Serializable(headTexture = SHAPE_HEAD, description = "gui.portal.shapeDescription")
+    @Serializable(headTexture = SHAPE_HEAD, description = "gui.portal.shapeDescription", recreateTooltip = true)
     private Shape shape;
 
     private Portal portal;

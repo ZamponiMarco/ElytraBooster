@@ -73,7 +73,7 @@ public class BoosterNearCommand extends AbstractCommand {
 
     @Override
     protected Permission getPermission() {
-        return new Permission("eb.admin.near");
+        return new Permission("eb.admin.modify");
     }
 
 }

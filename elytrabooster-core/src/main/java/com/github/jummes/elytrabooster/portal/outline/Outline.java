@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Marco
  */
-@Enumerable(classArray = {BlockPortalOutline.class, ParticlePortalOutline.class})
+@Enumerable(classArray = {BlockPortalOutline.class, ParticlePortalOutline.class, NoOutlinePortal.class})
 public abstract class Outline implements Model {
 
     /**

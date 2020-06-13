@@ -47,7 +47,7 @@ public class BoosterListCommand extends AbstractCommand {
 
     @Override
     protected Permission getPermission() {
-        return new Permission("eb.admin.list");
+        return new Permission("eb.admin.modify");
     }
 
 }
