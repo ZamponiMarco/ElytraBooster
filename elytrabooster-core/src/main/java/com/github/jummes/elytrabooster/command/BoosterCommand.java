@@ -14,7 +14,6 @@ public class BoosterCommand extends AbstractCommand {
                           boolean isSenderPlayer) {
         super(sender, subCommand, arguments, isSenderPlayer);
         this.boosterString = subCommand;
-        // TODO add command messages
     }
 
     @Override

@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
@@ -46,19 +45,16 @@ public class SphericVolume extends Volume {
         Vector v = new Vector();
         Location center = this.center.getWrapped();
         Location loc;
-        do {
-            double randomX = r.nextDouble() * 2 - 1;
-            v.setX(randomX);
-            double randomY = r.nextDouble() * 2 - 1;
-            v.setY(randomY);
-            double randomZ = r.nextDouble() * 2 - 1;
-            v.setZ(randomZ);
-            v.normalize();
-            double radius = ((1 - minRadius / maxRadius) * r.nextDouble() + minRadius / maxRadius) * maxRadius;
-            v.multiply(radius);
-            loc = center.clone().add(v);
-        } while (loc.getBlock().getType() != Material.AIR);
-        // TODO stop if no points available
+        double randomX = r.nextDouble() * 2 - 1;
+        v.setX(randomX);
+        double randomY = r.nextDouble() * 2 - 1;
+        v.setY(randomY);
+        double randomZ = r.nextDouble() * 2 - 1;
+        v.setZ(randomZ);
+        v.normalize();
+        double radius = ((1 - minRadius / maxRadius) * r.nextDouble() + minRadius / maxRadius) * maxRadius;
+        v.multiply(radius);
+        loc = center.clone().add(v);
         return loc;
     }
 

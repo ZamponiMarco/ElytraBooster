@@ -13,8 +13,6 @@ public class FinishedCooldownEvent extends Event {
         this.portal = portal;
     }
 
-    // TODO make events in the proper way
-
     @Override
     public HandlerList getHandlers() {
         return HANDLERS_LIST;

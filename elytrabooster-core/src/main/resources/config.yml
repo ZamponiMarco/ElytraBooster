@@ -7,6 +7,12 @@ portalCheckInterval: 1
 #The interval between two searches by the spawner entities for players passing nearby
 spawnerCheckInterval: 1
 
+#Sets the locale file for translations
+locale: en-US
+
+#If it is true, the plugin will check for updates
+updateChecker: true
+
 #config.yml file version
 # DO NOT MODIFY
-version: 1.2
+version: 2.0

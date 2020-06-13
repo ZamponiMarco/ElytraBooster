@@ -37,17 +37,19 @@ import com.github.jummes.libs.core.Libs;
 import com.github.jummes.libs.localization.PluginLocale;
 import com.google.common.collect.Lists;
 import lombok.Getter;
-import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.FileUtil;
 
-import java.util.ArrayList;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 @Getter
 public class ElytraBooster extends JavaPlugin {
+
+    private static final String CONFIG_VERSION = "2.0";
 
     private static ElytraBooster instance;
 
@@ -120,7 +122,6 @@ public class ElytraBooster extends JavaPlugin {
         instance = this;
         setUpFolder();
         startupTasks();
-        // TODO clean code + update checker config option
     }
 
     public void onDisable() {
@@ -134,12 +135,30 @@ public class ElytraBooster extends JavaPlugin {
         if (!getDataFolder().exists()) {
             getDataFolder().mkdir();
         }
+
+        File configFile = new File(getDataFolder(), "config.yml");
+
+        if (!configFile.exists()) {
+            saveDefaultConfig();
+        }
+
+        if (!getConfig().getString("version").equals(CONFIG_VERSION)) {
+            getLogger().info("config.yml has changed. Old config is stored inside config-"
+                    + getConfig().getString("version") + ".yml");
+            File outputFile = new File(getDataFolder(), "config-" + getConfig().getString("version") + ".yml");
+            FileUtil.copy(configFile, outputFile);
+            configFile.delete();
+            saveDefaultConfig();
+        }
     }
 
     private void startupTasks() {
         PluginLocale locale = new PluginLocale(instance, Lists.newArrayList("en-US"), "en-US");
         Libs.initializeLibrary(instance, locale);
-        new UpdateChecker(this).checkForUpdate();
+
+        if (getConfig().getBoolean("updateChecker")) {
+            new UpdateChecker(this).checkForUpdate();
+        }
 
         portalManager = new PortalManager(Portal.class, "yaml", this);
         spawnerManager = new SpawnerManager(Spawner.class, "yaml", this);
