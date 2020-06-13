@@ -62,4 +62,9 @@ public class SphericVolume extends Volume {
         return loc;
     }
 
+    @Override
+    public Location getCenterPoint() {
+        return center.getWrapped();
+    }
+
 }

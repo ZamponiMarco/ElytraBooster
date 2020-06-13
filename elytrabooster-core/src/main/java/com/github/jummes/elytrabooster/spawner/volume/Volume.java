@@ -9,4 +9,6 @@ public abstract class Volume implements Model {
 
     public abstract Location getRandomPoint();
 
+    public abstract Location getCenterPoint();
+
 }
