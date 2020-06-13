@@ -3,6 +3,8 @@ version: ${version}
 main: com.github.jummes.elytrabooster.core.ElytraBooster
 author: jummes
 api-version: 1.13
+load: POSTWORLD
+softdepend: [Multiverse-Core, MultiWorld]
 commands:
   eb:
     description: Base ElytraBooster command

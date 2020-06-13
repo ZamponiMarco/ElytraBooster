@@ -7,8 +7,12 @@ import com.github.jummes.elytrabooster.core.ElytraBooster;
 import com.github.jummes.elytrabooster.pad.visual.FireworkPadVisual;
 import com.github.jummes.elytrabooster.pad.visual.PadVisual;
 import com.github.jummes.libs.annotation.Serializable;
+import com.github.jummes.libs.core.Libs;
 import com.github.jummes.libs.model.Model;
 import com.github.jummes.libs.model.wrapper.LocationWrapper;
+import com.github.jummes.libs.util.ItemUtils;
+import com.github.jummes.libs.util.MessageUtils;
+import com.google.common.collect.Lists;
 import org.apache.commons.lang.ClassUtils;
 import org.apache.commons.lang.RandomStringUtils;
 import org.bukkit.Location;
@@ -27,6 +31,7 @@ public class Pad implements Model {
     private static final String BOOST_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTk5YWFmMjQ1NmE2MTIyZGU4ZjZiNjI2ODNmMmJjMmVlZDlhYmI4MWZkNWJlYTFiNGMyM2E1ODE1NmI2NjkifX19";
     private static final String VISUAL_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmU2NTUxNmQ4MWFjOTYzZGJjMjQ4NTEzOGRkZGNmOTQzZDdmNzIxMWUzN2VmZWNkNWE1ZmI4ZjVhZDQ5MjAifX19========";
     private static final String COOLDOWN_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjMyYzYxNzE1MzJhMmE4N2YwZWViMjhlZGQwMTA4MzNmMzNmMGFlNjg0MWE1MjRlMWI1MjAwYTM1ZDM4NTA1MCJ9fX0=";
+    private static final String PAD_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjQ0Yzk3OTgzY2E4YWFmNThjNjk2MTgyOTExZTNiYzY4NTEwZjI5ZDk2MzJkMTM0ZjgzNDU3YTUyZjRlNWY5NSJ9fX0=";
 
 
     protected ElytraBooster plugin;
@@ -135,6 +140,8 @@ public class Pad implements Model {
 
     @Override
     public ItemStack getGUIItem() {
-        return new ItemStack(Material.ELYTRA);
+        return ItemUtils.getNamedItem(Libs.getWrapper().skullFromValue(PAD_HEAD), "&6&lId: &c" + id,
+                Lists.newArrayList(MessageUtils.color("&6&lLeft click &eto modify."),
+                        MessageUtils.color("&6&lRight click &eto delete.")));
     }
 }
