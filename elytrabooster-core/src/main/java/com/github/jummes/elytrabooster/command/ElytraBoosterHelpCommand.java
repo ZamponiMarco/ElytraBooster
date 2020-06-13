@@ -20,7 +20,7 @@ public class ElytraBoosterHelpCommand extends AbstractCommand {
 
     @Override
     protected void execute() {
-        pages = new ArrayList<String>();
+        pages = new ArrayList<>();
         setUpPages();
         int numberOfPages = 1;
 

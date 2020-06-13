@@ -58,6 +58,7 @@ public class SphericVolume extends Volume {
             v.multiply(radius);
             loc = center.clone().add(v);
         } while (loc.getBlock().getType() != Material.AIR);
+        // TODO stop if no points available
         return loc;
     }
 

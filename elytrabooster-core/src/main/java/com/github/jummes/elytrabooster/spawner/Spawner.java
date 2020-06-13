@@ -9,15 +9,16 @@ import com.github.jummes.libs.model.Model;
 import com.github.jummes.libs.util.ItemUtils;
 import com.google.common.collect.Lists;
 import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang.RandomStringUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import sun.security.provider.SHA;
 
 import java.util.Map;
 
 @Getter
+@Setter
 public class Spawner implements Model {
 
     private static final String ID_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2RkNjM5NzhlODRlMjA5MjI4M2U5Y2QwNmU5ZWY0YmMyMjhiYjlmMjIyMmUxN2VlMzgzYjFjOWQ5N2E4YTAifX19";
@@ -37,6 +38,7 @@ public class Spawner implements Model {
     @Serializable(headTexture = SORTER_HEAD, description = "gui.spawner.holderDescription")
     private EntityHolder holder;
 
+    @SuppressWarnings("unused")
     public Spawner(Player p) {
         this(RandomStringUtils.randomAlphabetic(6), new SphericVolume(p), 20, new EntityHolder());
     }
@@ -59,7 +61,7 @@ public class Spawner implements Model {
     }
 
     public void runBoosterTask() {
-        this.spawnTaskNumber = plugin.getServer().getScheduler().runTaskTimer(plugin, () -> spawnEntity(), 0, cooldown)
+        this.spawnTaskNumber = plugin.getServer().getScheduler().runTaskTimer(plugin, this::spawnEntity, 0, cooldown)
                 .getTaskId();
     }
 
@@ -79,17 +81,11 @@ public class Spawner implements Model {
         return ItemUtils.getNamedItem(new ItemStack(Material.CARROT), "&6&l" + id, Lists.newArrayList());
     }
 
-    /**
-     * When the portal is deleted stop the booster task
-     */
     @Override
     public void onRemoval() {
         stopBoosterTask();
     }
 
-    /**
-     * If a setting is modified reload the portal tasks
-     */
     @Override
     public void onModify() {
         stopBoosterTask();

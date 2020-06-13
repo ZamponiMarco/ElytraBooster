@@ -6,10 +6,12 @@ import com.github.jummes.libs.model.Model;
 import com.github.jummes.libs.model.ModelPath;
 import com.github.jummes.libs.model.wrapper.LocationWrapper;
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Location;
 
 import java.util.*;
 
+@Setter
 public class TriangleShape extends Shape {
 
     private static final double AXIS_DISTANCE = 1.0;
@@ -23,6 +25,7 @@ public class TriangleShape extends Shape {
     @Serializable(headTexture = CENTER_HEAD, description = "gui.portal.shape.triangle.pointThree")
     private Vector2D pointThree;
 
+    @SuppressWarnings("unused")
     public TriangleShape(ModelPath<Portal> path) {
         this(path.getRoot().getShape().getAxis(), new LocationWrapper(path.getRoot().getShape().getCenterPoint()),
                 new Vector2D(5, 5), new Vector2D(-5, 5));
@@ -75,7 +78,7 @@ public class TriangleShape extends Shape {
     }
 
     private List<Location> getTriangle(Location point1, Location point2, Location point3) {
-        List<Location> locations = new ArrayList<Location>();
+        List<Location> locations = new ArrayList<>();
         getTriangleLines(point1, point2, point3).forEach(line -> locations.addAll(splitLine(line)));
         return locations;
     }
@@ -119,7 +122,7 @@ public class TriangleShape extends Shape {
     }
 
     private Set<Location[]> getTriangleLines(Location point1, Location point2, Location point3) {
-        Set<Location[]> linesSet = new HashSet<Location[]>();
+        Set<Location[]> linesSet = new HashSet<>();
         linesSet.add(new Location[]{point3, point2});
         linesSet.add(new Location[]{point2, point1});
         linesSet.add(new Location[]{point1, point3});
@@ -130,7 +133,7 @@ public class TriangleShape extends Shape {
     private List<Location> splitLine(Location[] line) {
         int amount = (int) line[0].distance(line[1]);
         Location decrement = line[0].clone().subtract(line[1]).multiply(1.0 / amount);
-        List<Location> linePoints = new ArrayList<Location>();
+        List<Location> linePoints = new ArrayList<>();
         Location loc = line[0].clone();
         for (int i = 0; i < amount; i++) {
             linePoints.add(loc);
@@ -141,6 +144,7 @@ public class TriangleShape extends Shape {
     }
 
     @Getter
+    @Setter
     public static class Vector2D implements Model {
         private static final String HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWIyMDY0MzkwZTc5ZDllNTRjY2I0MThiMDczMzE1M2NmOTkyM2ZjNGE4ZDE0YWIxZDJiN2VmNTk2ODgzMWM5MyJ9fX0=";
 

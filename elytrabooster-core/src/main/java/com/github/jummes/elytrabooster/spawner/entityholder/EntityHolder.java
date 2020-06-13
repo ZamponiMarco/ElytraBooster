@@ -8,6 +8,7 @@ import com.github.jummes.libs.annotation.Serializable;
 import com.github.jummes.libs.model.Model;
 import com.github.jummes.libs.model.wrapper.LocationWrapper;
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Location;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Getter
+@Setter
 public class EntityHolder implements Model {
 
     private static final String DESCRIPTION_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTZkNTU0YWQ1ZTBkYzYwMWVmYmI5MjVkMTM0MjRjY2VhNTMyYzgzMWE5MGI5Y2E3M2Q1ZTkzYWI2ZGJjNWRhZiJ9fX0=";

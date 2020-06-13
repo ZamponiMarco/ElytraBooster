@@ -15,7 +15,7 @@ public class ActiveEntity {
     protected ElytraBooster plugin;
     protected EntityHolder holder;
     private EntityDescription description;
-    private LocationWrapper location;
+    private final LocationWrapper location;
     private int checkTaskNumber;
 
     public ActiveEntity(EntityDescription description, LocationWrapper location, EntityHolder holder) {

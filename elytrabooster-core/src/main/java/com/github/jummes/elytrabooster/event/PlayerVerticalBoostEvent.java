@@ -1,5 +1,7 @@
 package com.github.jummes.elytrabooster.event;
 
+import com.github.jummes.elytrabooster.action.target.LocationTarget;
+import com.github.jummes.elytrabooster.action.target.PlayerTarget;
 import com.github.jummes.elytrabooster.boost.VerticalBoost;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
 import lombok.Getter;
@@ -27,7 +29,8 @@ public class PlayerVerticalBoostEvent extends Event implements Cancellable {
         player.setVelocity(player.getLocation().getDirection().setY(0).multiply(boost.getHorizontalVelocity())
                 .add(new Vector(0, boost.getVerticalVelocity(), 0)));
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 20, 1);
-        //boost.getBoostActions().forEach(action -> ActionFactory.buildAction(plugin, action, player));
+        boost.getBoostActions().forEach(abstractAction -> abstractAction.executeAction(new PlayerTarget(player)));
+        boost.getBoostActions().forEach(abstractAction -> abstractAction.executeAction(new LocationTarget(player.getLocation())));
         getOpenElytraProcess(plugin, player, boost).runTaskTimer(plugin, 0, 1);
     }
 

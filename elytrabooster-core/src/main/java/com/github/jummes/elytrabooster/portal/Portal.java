@@ -63,6 +63,7 @@ public class Portal implements Model {
     private int checkTaskNumber;
     private int currCooldown;
 
+    @SuppressWarnings("unused")
     public Portal(Player p) {
         this(RandomStringUtils.randomAlphabetic(6),
                 new SimpleBoost(new SimpleBoostTrail(), new ArrayList<>(), 30, 3.0, 1.0),

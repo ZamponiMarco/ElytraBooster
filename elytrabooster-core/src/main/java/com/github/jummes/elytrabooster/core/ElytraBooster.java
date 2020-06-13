@@ -36,6 +36,7 @@ import com.github.jummes.libs.command.PluginCommandExecutor;
 import com.github.jummes.libs.core.Libs;
 import com.github.jummes.libs.localization.PluginLocale;
 import com.google.common.collect.Lists;
+import lombok.Getter;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Player;
@@ -45,6 +46,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+@Getter
 public class ElytraBooster extends JavaPlugin {
 
     private static ElytraBooster instance;
@@ -118,6 +120,7 @@ public class ElytraBooster extends JavaPlugin {
         instance = this;
         setUpFolder();
         startupTasks();
+        // TODO clean code + update checker config option
     }
 
     public void onDisable() {
@@ -148,24 +151,8 @@ public class ElytraBooster extends JavaPlugin {
         ex.registerCommand("portal", BoosterCommand.class);
         ex.registerCommand("pad", BoosterCommand.class);
         getCommand("eb").setExecutor(ex);
-        getCommand("eb").setTabCompleter((TabCompleter) ex);
+        getCommand("eb").setTabCompleter(ex);
         getServer().getPluginManager().registerEvents(new PlayerGlideListener(), this);
         getServer().getPluginManager().registerEvents(new PlayerSwapHandItemsListener(), this);
-    }
-
-    public PortalManager getPortalManager() {
-        return this.portalManager;
-    }
-
-    public SpawnerManager getSpawnerManager() {
-        return this.spawnerManager;
-    }
-
-    public PadManager getPadManager() {
-        return this.padManager;
-    }
-
-    public Map<Player, Boolean> getStatusMap() {
-        return this.statusMap;
     }
 }
