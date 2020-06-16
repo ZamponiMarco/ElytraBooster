@@ -1,6 +1,7 @@
 package com.github.jummes.elytrabooster.portal.shape;
 
 import com.github.jummes.elytrabooster.portal.Portal;
+import com.github.jummes.libs.annotation.Enumerable;
 import com.github.jummes.libs.annotation.Serializable;
 import com.github.jummes.libs.model.ModelPath;
 import com.github.jummes.libs.model.wrapper.LocationWrapper;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @SerializableAs("CircleShape")
+@Enumerable.Child(name = "&c&lShape Shape", description = "gui.portal.shape.circle.description", headTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2JmZjgyMTFlM2Q5ZDE2YjRjYTJjMjBjZDJhNmY5OWNjZThmZTRkOThlZjVjYTU1MTZmNTFmMjVjZjFjMzEifX19")
 public class CircleShape extends Shape {
 
     private static final double AXIS_DISTANCE = 1.0;

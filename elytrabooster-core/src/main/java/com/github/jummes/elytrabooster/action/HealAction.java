@@ -2,6 +2,7 @@ package com.github.jummes.elytrabooster.action;
 
 import com.github.jummes.elytrabooster.action.targeter.PlayerTarget;
 import com.github.jummes.elytrabooster.action.targeter.Target;
+import com.github.jummes.libs.annotation.Enumerable;
 import com.github.jummes.libs.annotation.Serializable;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @AllArgsConstructor
+@Enumerable.Child(name = "&c&lHeal", description = "gui.action.heal.description", headTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjEyNjZiNzQ4MjQyMTE1YjMwMzcwOGQ1OWNlOWQ1NTIzYjdkNzljMTNmNmRiNGViYzkxZGQ0NzIwOWViNzU5YyJ9fX0=")
 public class HealAction extends AbstractAction {
 
     private static final String HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjdkYzNlMjlhMDkyM2U1MmVjZWU2YjRjOWQ1MzNhNzllNzRiYjZiZWQ1NDFiNDk1YTEzYWJkMzU5NjI3NjUzIn19fQ==";

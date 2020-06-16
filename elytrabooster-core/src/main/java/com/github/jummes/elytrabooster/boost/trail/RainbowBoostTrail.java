@@ -1,16 +1,13 @@
 package com.github.jummes.elytrabooster.boost.trail;
 
+import com.github.jummes.libs.annotation.Enumerable;
 import org.bukkit.Color;
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 
 import java.util.Map;
 
-/**
- * spawns rainbow trail
- *
- * @author Marco
- */
+@Enumerable.Child(name = "&c&lRainbow", description = "gui.boost.trail.rainbow.description", headTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWZkOGJlZDJkZmU0YzMyMTY4Yzk3MjE1NGVlYTMzNWE4MDQyZTlkNjRiODUwNzY3YzZlYTA0Y2U4Zjg1ZjEyYSJ9fX0=")
 public class RainbowBoostTrail extends BoostTrail {
 
     int currentColor;
@@ -28,7 +25,7 @@ public class RainbowBoostTrail extends BoostTrail {
 
     private enum RainbowColor {
 
-        VIOLET(148, 0, 211), INDOIGO(75, 0, 130), BLUE(0, 0, 255), GREEN(0, 255, 0), YELLOW(255, 255, 0),
+        VIOLET(148, 0, 211), INDIGO(75, 0, 130), BLUE(0, 0, 255), GREEN(0, 255, 0), YELLOW(255, 255, 0),
         ORANGE(255, 127, 0), RED(255, 0, 0);
 
         private final Color color;

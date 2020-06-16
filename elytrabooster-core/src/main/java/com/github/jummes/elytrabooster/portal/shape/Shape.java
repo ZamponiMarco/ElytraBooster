@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.function.Function;
 
 @Getter
-@Enumerable(classArray = {CircleShape.class, RectangleShape.class, TriangleShape.class, ComposedShape.class})
+@Enumerable.Parent(classArray = {CircleShape.class, RectangleShape.class, TriangleShape.class, ComposedShape.class})
 public abstract class Shape implements Model {
 
     private static final String AXIS_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDBlNzViZTJmZWYxODNlOTAwMDljMGQyZTJkZmQ4MjliMjUwMzBmY2E0MTk5NTFlMzk1Y2E5NTYyZTY0N2U2MyJ9fX0=";

@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
  *
  * @author Marco
  */
-@Enumerable(classArray = {HelixBoostTrail.class, SimpleBoostTrail.class, NoBoostTrail.class, RainbowBoostTrail.class})
+@Enumerable.Parent(classArray = {HelixBoostTrail.class, SimpleBoostTrail.class, NoBoostTrail.class, RainbowBoostTrail.class})
 public abstract class BoostTrail implements Model {
 
     /**

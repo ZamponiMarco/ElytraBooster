@@ -7,7 +7,7 @@ import lombok.Getter;
 import org.bukkit.Location;
 
 @Getter
-@Enumerable(classArray = {FireworkEntityDescription.class, MushroomEntityDescription.class,
+@Enumerable.Parent(classArray = {FireworkEntityDescription.class, MushroomEntityDescription.class,
         PotionEntityDescription.class})
 public abstract class EntityDescription implements Model, Cloneable {
     protected ElytraBooster plugin;

@@ -1,6 +1,7 @@
 package com.github.jummes.elytrabooster.portal.shape;
 
 import com.github.jummes.elytrabooster.portal.Portal;
+import com.github.jummes.libs.annotation.Enumerable;
 import com.github.jummes.libs.annotation.Serializable;
 import com.github.jummes.libs.model.ModelPath;
 import com.github.jummes.libs.model.wrapper.LocationWrapper;
@@ -8,6 +9,7 @@ import org.bukkit.Location;
 
 import java.util.*;
 
+@Enumerable.Child(name = "&c&lRectangle Shape", description = "gui.portal.shape.rectangle.description", headTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGRlY2ZkYTM2NzA4MTUyOWI1MDZhOTMzYTI2ZDlhNzIxMTY1MjQyMDhhYzI3MWVmNThkZDY4MzMyMGFhZWQyZCJ9fX0=" )
 public class RectangleShape extends Shape {
 
     private static final double AXIS_DISTANCE = 1.0;

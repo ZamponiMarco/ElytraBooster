@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
-@Enumerable(classArray = {DamageAction.class, EffectAction.class, HealAction.class, MessageAction.class, ParticleAction.class, SoundAction.class})
+@Enumerable.Parent(classArray = {DamageAction.class, EffectAction.class, HealAction.class, MessageAction.class, ParticleAction.class, SoundAction.class})
 public abstract class AbstractAction implements Model {
 
     protected ElytraBooster plugin;

@@ -5,7 +5,7 @@ import com.github.jummes.libs.annotation.Enumerable;
 import com.github.jummes.libs.model.Model;
 import org.bukkit.Location;
 
-@Enumerable(classArray = {FireworkPadVisual.class, FlamePadVisual.class})
+@Enumerable.Parent(classArray = {FireworkPadVisual.class, FlamePadVisual.class})
 public abstract class PadVisual implements Model {
 
     protected ElytraBooster plugin;

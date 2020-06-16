@@ -4,7 +4,7 @@ import com.github.jummes.libs.annotation.Enumerable;
 import com.github.jummes.libs.model.Model;
 import org.bukkit.Location;
 
-@Enumerable(classArray = {SphericVolume.class})
+@Enumerable.Parent(classArray = {SphericVolume.class})
 public abstract class Volume implements Model {
 
     public abstract Location getRandomPoint();

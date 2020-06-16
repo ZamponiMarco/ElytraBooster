@@ -2,6 +2,7 @@ package com.github.jummes.elytrabooster.action;
 
 import com.github.jummes.elytrabooster.action.targeter.LocationTarget;
 import com.github.jummes.elytrabooster.action.targeter.Target;
+import com.github.jummes.libs.annotation.Enumerable;
 import com.github.jummes.libs.annotation.Serializable;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @AllArgsConstructor
+@Enumerable.Child(name = "&c&lSound", description = "gui.action.sound.description", headTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWIxZTIwNDEwYmI2YzdlNjk2OGFmY2QzZWM4NTU1MjBjMzdhNDBkNTRhNTRlOGRhZmMyZTZiNmYyZjlhMTkxNSJ9fX0=")
 public class SoundAction extends AbstractAction {
 
     private static final String TYPE_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzkxOWZiZDFkZjQ4YzMyMmMxMzA1YmIxZjhlYWI5Njc0YzIxODQ0YTA0OTNhNTUzNWQ5NGNhYmExZWNhM2MxZCJ9fX0=";

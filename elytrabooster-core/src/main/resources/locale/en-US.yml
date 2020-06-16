@@ -5,9 +5,15 @@ command:
 gui:
   action:
     damage:
+      description:
+        - "&7&oSet the damage to apply"
+        - "&7&oto the player."
       amount:
         - "&7&oAmount of damage dealt."
     effect:
+      description:
+        - "&7&oSet the effect to apply to"
+        - "&7&othe player."
       type:
         - "&7&oThe type of effect."
       duration:
@@ -23,12 +29,21 @@ gui:
       icon:
         - "&7&oWhether effect icon is shown."
     heal:
+      description:
+        - "&7&oSet the heal to apply to"
+        - "&7&othe player."
       amount:
         - "&7&oAmount of heal given."
     message:
+      description:
+        - "&7&oSet the message to send"
+        - "&7&oto the player."
       message:
         - "&7&oThe message sent."
     particle:
+      description:
+        - "&7&oSet the particles to show"
+        - "&7&oin the location."
       type:
         - "&7&oThe type of particle."
       count:
@@ -42,6 +57,9 @@ gui:
         - "&7&oWhether the particles are forced to"
         - "&7&obe shown."
     sound:
+      description:
+        - "&7&oSet the sound to play"
+        - "&7&oin the location."
       type:
         - "&7&oThe type of sound."
       category:
@@ -52,6 +70,18 @@ gui:
         - "&7&oThe volume of the sound."
   boost:
     trail:
+      helix:
+        description:
+          - "&7&oSet an helix shaped trail."
+      none:
+        description:
+          - "&7&oSet no boost trail."
+      rainbow:
+        description:
+          - "&7&oSet a rainbow particle."
+      simple:
+        description:
+          - "&7&oSet a simple particle trail."
       particle:
         - "&7&oThe particle used in the trail."
     simple:
@@ -68,7 +98,7 @@ gui:
         - "&7&oThe horizontal velocity boost."
   pad:
     id:
-      - "&7&oThe id of the pad." 
+      - "&7&oThe id of the pad."
     center:
       - "&7&oThe location of the pad."
       - "&6&lLeft click &7&oto modify."
@@ -78,27 +108,62 @@ gui:
       - "&7&oThe vertical boost provided by"
       - "&7&othe pad."
     visual:
-      - "&7&oThe visual effects created by"
-      - "&7&othe pad."
+      description:
+        - "&7&oThe visual effects created by"
+        - "&7&othe pad."
+      flame:
+        description:
+          - "&7&oSet a pad with flame particles."
+      firework:
+        description:
+          - "&7&oSet a pad with firework particles."
     cooldown:
       - "&7&oThe cooldown between usages of"
       - "&7&othe pads."
   portal:
     outline:
+      sorter:
+        description:
+          - "&7&oThe way points are sorted when"
+          - "&7&othe portal is in cooldown and"
+          - "&7&othe cooldown outliner is being"
+          - "&7&oused."
+        closing:
+          description:
+            - "&7&oSort points to obtain a closing"
+            - "&7&oanimation on cooldown."
+        none:
+          description:
+            - "&7&oDon't sort points. Usually it produces"
+            - "&7&oa cool animation anyway."
+        random:
+          description:
+            - "&7&oSort points randomly."
       block:
+        description:
+          - "&7&oSet a portal outline made of"
+          - "&7&oblocks."
         outlineType:
           - "&7&oThe material used as outline."
         cooldownType:
           - "&7&oThe material used when on cooldown."
       particle:
+        description:
+          - "&7&oSet a portal outline made of"
+          - "&7&oparticles."
         outlineType:
           - "&7&oThe particle used as outline."
         cooldownType:
           - "&7&oThe particle used when on cooldown."
+      none:
+        description:
+          - "&7&oNo portal outline is shown."
     shape:
       axis:
         - "&7&oThe axis of the portal."
       circle:
+        description:
+          - "&7&oSet a circle shape."
         radius:
           - "&7&oThe radius of the circle."
         center:
@@ -107,6 +172,8 @@ gui:
           - "&6&lRight click &7&oto move to your location."
           - "&6&lMiddle click &7&oto teleport to the location."
       rectangle:
+        description:
+          - "&7&oSet a rectangle shape."
         center:
           - "&7&oThe center location of the rectangle."
           - "&6&lLeft click &7&oto modify."
@@ -117,6 +184,8 @@ gui:
         halfHeight:
           - "&7&oHalf the height of the rectangle."
       triangle:
+        description:
+          - "&7&oSet a triangle shape."
         pointOne:
           - "&7&oThe location of the first point of"
           - "&7&othe triangle."
@@ -130,6 +199,8 @@ gui:
           - "&7&oThe distances from the first point of"
           - "&7&othe triangle of the third point."
       composed:
+        description:
+          - "&7&oSet a shape composed by other shapes."
         center:
           - "&7&oThe center location of the composed shape."
           - "&6&lLeft click &7&oto modify."
@@ -152,18 +223,23 @@ gui:
     cooldown:
       - "&7&oThe cooldown between portal"
       - "&7&ousages."
-    sorter:
-      - "&7&oThe way points are sorted when"
-      - "&7&othe portal is in cooldown and"
-      - "&7&othe cooldown outliner is being"
-      - "&7&oused."
     shapeDescription:
       - "&7&oThe shape of the portal."
   spawner:
     entityHolder:
       entityDescription:
-        - "&7&oThe way the entity is rendered"
-        - "&7&oin the game."
+        description:
+          - "&7&oThe way the entity is rendered"
+          - "&7&oin the game."
+        firework:
+          description:
+            - "&7&oEntities are fireworks"
+        mushroom:
+          description:
+            - "&7&oEntities are Mario mushrooms"
+        potion:
+          description:
+            - "&7&oEntities are flying speed potions"
       maxEntities:
         - "&7&oThe maximum amount of entities"
         - "&7&othat can be held by this holder."
@@ -171,6 +247,8 @@ gui:
         - "&7&oThe boost provided by the entities."
     volume:
       spheric:
+        description:
+          - "&7&oSet the spatial volume of the spawner."
         center:
           - "&7&oThe center location of the sphere."
           - "&6&lLeft click &7&oto modify."

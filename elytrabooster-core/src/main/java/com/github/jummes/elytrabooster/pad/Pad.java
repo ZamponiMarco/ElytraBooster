@@ -41,7 +41,7 @@ public class Pad implements Model {
     protected LocationWrapper center;
     @Serializable(headTexture = BOOST_HEAD, description = "gui.pad.boost")
     protected VerticalBoost boost;
-    @Serializable(headTexture = VISUAL_HEAD, description = "gui.pad.visual", recreateTooltip = true)
+    @Serializable(headTexture = VISUAL_HEAD, description = "gui.pad.visual.description", recreateTooltip = true)
     protected PadVisual visual;
     @Serializable(headTexture = COOLDOWN_HEAD, description = "gui.pad.cooldown")
     protected int cooldown;
