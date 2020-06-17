@@ -8,8 +8,11 @@ import com.github.jummes.elytrabooster.boost.trail.*;
 import com.github.jummes.elytrabooster.command.BoosterCommand;
 import com.github.jummes.elytrabooster.command.ElytraBoosterHelpCommand;
 import com.github.jummes.elytrabooster.command.ElytraBoosterReloadCommand;
+import com.github.jummes.elytrabooster.item.Item;
 import com.github.jummes.elytrabooster.listener.PlayerGlideListener;
+import com.github.jummes.elytrabooster.listener.PlayerInteractListener;
 import com.github.jummes.elytrabooster.listener.PlayerSwapHandItemsListener;
+import com.github.jummes.elytrabooster.manager.ItemManager;
 import com.github.jummes.elytrabooster.manager.PadManager;
 import com.github.jummes.elytrabooster.manager.PortalManager;
 import com.github.jummes.elytrabooster.manager.SpawnerManager;
@@ -107,11 +110,15 @@ public class ElytraBooster extends JavaPlugin {
         ConfigurationSerialization.registerClass(PadVisual.class);
         ConfigurationSerialization.registerClass(FireworkPadVisual.class);
         ConfigurationSerialization.registerClass(FlamePadVisual.class);
+
+        // Items
+        ConfigurationSerialization.registerClass(Item.class);
     }
 
     private PortalManager portalManager;
     private SpawnerManager spawnerManager;
     private PadManager padManager;
+    private ItemManager itemManager;
     private Map<Player, Boolean> statusMap;
 
     public static ElytraBooster getInstance() {
@@ -163,15 +170,18 @@ public class ElytraBooster extends JavaPlugin {
         portalManager = new PortalManager(Portal.class, "yaml", this);
         spawnerManager = new SpawnerManager(Spawner.class, "yaml", this);
         padManager = new PadManager(Pad.class, "yaml", this);
+        itemManager = new ItemManager(Item.class, "yaml", this);
         statusMap = new HashMap<>();
         PluginCommandExecutor ex = new PluginCommandExecutor(ElytraBoosterHelpCommand.class, "help");
         ex.registerCommand("reload", ElytraBoosterReloadCommand.class);
         ex.registerCommand("spawner", BoosterCommand.class);
         ex.registerCommand("portal", BoosterCommand.class);
         ex.registerCommand("pad", BoosterCommand.class);
+        ex.registerCommand("item", BoosterCommand.class);
         getCommand("eb").setExecutor(ex);
         getCommand("eb").setTabCompleter(ex);
         getServer().getPluginManager().registerEvents(new PlayerGlideListener(), this);
         getServer().getPluginManager().registerEvents(new PlayerSwapHandItemsListener(), this);
+        getServer().getPluginManager().registerEvents(new PlayerInteractListener(), this);
     }
 }

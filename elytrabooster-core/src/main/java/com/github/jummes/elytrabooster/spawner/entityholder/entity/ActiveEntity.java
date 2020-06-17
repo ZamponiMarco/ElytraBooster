@@ -11,11 +11,10 @@ public class ActiveEntity {
 
     private final int CHECK_INTERVAL;
     private final double CHECK_RADIUS = 1.0;
-
+    private final LocationWrapper location;
     protected ElytraBooster plugin;
     protected EntityHolder holder;
     private EntityDescription description;
-    private final LocationWrapper location;
     private int checkTaskNumber;
 
     public ActiveEntity(EntityDescription description, LocationWrapper location, EntityHolder holder) {
@@ -46,8 +45,11 @@ public class ActiveEntity {
     }
 
     public void boostPlayer(Player player) {
-        Bukkit.getPluginManager()
-                .callEvent(new PlayerSimpleBoostEvent(plugin, player, holder.getBoost()));
+        PlayerSimpleBoostEvent event = new PlayerSimpleBoostEvent(player);
+        Bukkit.getPluginManager().callEvent(event);
+        if (!event.isCancelled()) {
+            holder.getBoost().boostPlayer(player);
+        }
         holderDespawn();
     }
 

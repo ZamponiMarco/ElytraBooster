@@ -136,7 +136,11 @@ public class Portal implements Model {
     }
 
     private void boostPlayer(Player player) {
-        Bukkit.getPluginManager().callEvent(new PlayerSimpleBoostEvent(plugin, player, boost));
+        PlayerSimpleBoostEvent event = new PlayerSimpleBoostEvent(player);
+        Bukkit.getPluginManager().callEvent(event);
+        if (!event.isCancelled()){
+            boost.boostPlayer(player);
+        }
         if (cooldown > 0)
             cooldown();
     }

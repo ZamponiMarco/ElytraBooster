@@ -16,77 +16,15 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.scheduler.BukkitRunnable;
 
 @Getter
-public class PlayerSimpleBoostEvent extends Event implements Cancellable {
+public class PlayerSimpleBoostEvent extends PlayerBoostEvent {
 
     @Getter
     private static final HandlerList HANDLERS_LIST = new HandlerList();
     private final Player player;
     private boolean cancelled;
 
-    public PlayerSimpleBoostEvent(ElytraBooster plugin, Player player, SimpleBoost boost) {
-
+    public PlayerSimpleBoostEvent(Player player) {
         this.player = player;
-
-        plugin.getStatusMap().replace(player, true);
-        player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 20, 1);
-        boost.getBoostActions().forEach(abstractAction -> abstractAction.executeAction(new PlayerTarget(player)));
-        boost.getBoostActions().forEach(abstractAction -> abstractAction.executeAction(new LocationTarget(player.getLocation())));
-        getBoostProcess(plugin, boost).runTaskTimer(plugin, 0, 1);
-    }
-
-    private BukkitRunnable getBoostProcess(ElytraBooster plugin, SimpleBoost boost) {
-        return new BukkitRunnable() {
-
-            double tempVelocity = boost.getInitialVelocity();
-            double d = Math.pow((boost.getFinalVelocity() / boost.getInitialVelocity()),
-                    (1.0 / boost.getBoostDuration()));
-
-            int counter = 0;
-
-            @Override
-            public void run() {
-
-                if (counter == boost.getBoostDuration()) {
-                    plugin.getStatusMap().replace(player, false);
-                    this.cancel();
-                } else if (!player.isGliding()) {
-                    plugin.getStatusMap().remove(player);
-                    this.cancel();
-                }
-
-                sendProgressMessage(player, boost, counter);
-                boost.getTrail().spawnTrail(player);
-                player.setVelocity(player.getLocation().getDirection().normalize().multiply(tempVelocity));
-
-                counter++;
-                tempVelocity *= d;
-            }
-        };
-    }
-
-    /**
-     * Sends to the player the progress bar in the action bar
-     *
-     * @param player
-     * @param counter
-     */
-    private void sendProgressMessage(Player player, SimpleBoost boost, int counter) {
-        int progress = (int) Math.floor((counter / (double) boost.getBoostDuration()) * 30);
-
-        StringBuilder sb = new StringBuilder("");
-        sb.append("&a");
-        sb.append(repeat(30 - progress, "|"));
-        sb.append("&c");
-        sb.append(repeat(progress, "|"));
-
-        player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                new ComponentBuilder(
-                        MessageUtils.color(MessageUtils.color(String.format("&2Boost &6[%s&6]", sb.toString()))))
-                        .create());
-    }
-
-    private String repeat(int count, String with) {
-        return new String(new char[count]).replace("\0", with);
     }
 
     @Override

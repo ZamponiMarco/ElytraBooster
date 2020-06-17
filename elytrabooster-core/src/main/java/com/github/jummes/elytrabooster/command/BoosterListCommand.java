@@ -32,6 +32,9 @@ public class BoosterListCommand extends AbstractCommand {
             case "pad":
                 manager = ElytraBooster.getInstance().getPadManager();
                 break;
+            case "item":
+                manager = ElytraBooster.getInstance().getItemManager();
+                break;
         }
         try {
             p.openInventory(new ModelCollectionInventoryHolder(ElytraBooster.getInstance(), manager, boosterString + "s").getInventory());

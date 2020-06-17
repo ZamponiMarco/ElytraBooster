@@ -4,6 +4,7 @@ import com.github.jummes.elytrabooster.action.AbstractAction;
 import com.github.jummes.elytrabooster.boost.VerticalBoost;
 import com.github.jummes.elytrabooster.boost.trail.SimpleBoostTrail;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
+import com.github.jummes.elytrabooster.event.PlayerVerticalBoostEvent;
 import com.github.jummes.elytrabooster.pad.visual.FireworkPadVisual;
 import com.github.jummes.elytrabooster.pad.visual.PadVisual;
 import com.github.jummes.libs.annotation.Serializable;
@@ -13,8 +14,10 @@ import com.github.jummes.libs.model.wrapper.LocationWrapper;
 import com.github.jummes.libs.util.ItemUtils;
 import com.github.jummes.libs.util.MessageUtils;
 import com.google.common.collect.Lists;
+import lombok.Getter;
 import org.apache.commons.lang.ClassUtils;
 import org.apache.commons.lang.RandomStringUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -24,6 +27,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.Map;
 
+@Getter
 public class Pad implements Model {
 
     private static final String ID_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2RkNjM5NzhlODRlMjA5MjI4M2U5Y2QwNmU5ZWY0YmMyMjhiYjlmMjIyMmUxN2VlMzgzYjFjOWQ5N2E4YTAifX19";
@@ -49,7 +53,8 @@ public class Pad implements Model {
     protected int currCooldown;
 
     public Pad(Player p) {
-        this(RandomStringUtils.randomAlphabetic(6), new LocationWrapper(p.getLocation().getBlock().getLocation()), new VerticalBoost(new SimpleBoostTrail(), new ArrayList<AbstractAction>(), 2.0, 0.5), new FireworkPadVisual(), 0);
+        this(RandomStringUtils.randomAlphabetic(6), new LocationWrapper(p.getLocation().getBlock().getLocation()),
+                new VerticalBoost(), new FireworkPadVisual(), 0);
     }
 
     public Pad(String id, LocationWrapper center, VerticalBoost boost, PadVisual visual,
@@ -78,6 +83,21 @@ public class Pad implements Model {
 
     public void stopBoosterTask() {
         visual.stopVisual();
+    }
+
+    public void boostPlayer(Player player) {
+        if (player.hasPermission("eb.boosters.boost") && player.getEquipment().getChestplate() != null
+                && player.getEquipment().getChestplate().getType().equals(Material.ELYTRA) && !player.isGliding()
+                && player.isOnGround()) {
+            cooldown();
+            visual.onBoost(player.getLocation());
+            PlayerVerticalBoostEvent event = new PlayerVerticalBoostEvent(player);
+            Bukkit.getPluginManager()
+                    .callEvent(event);
+            if (!event.isCancelled()) {
+                boost.boostPlayer(player);
+            }
+        }
     }
 
     public void cooldown() {
@@ -120,18 +140,6 @@ public class Pad implements Model {
 
     public boolean onCooldown() {
         return currCooldown > 0;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public VerticalBoost getBoost() {
-        return boost;
-    }
-
-    public PadVisual getVisual() {
-        return visual;
     }
 
     public Location getCenter() {
