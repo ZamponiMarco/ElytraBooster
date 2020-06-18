@@ -10,6 +10,7 @@ import com.github.jummes.elytrabooster.event.PlayerVerticalBoostEvent;
 import com.github.jummes.libs.annotation.Serializable;
 import com.github.jummes.libs.model.Model;
 import com.github.jummes.libs.model.wrapper.ItemStackWrapper;
+import com.github.jummes.libs.util.ItemUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 @Getter
@@ -27,13 +29,14 @@ import java.util.Map;
 @AllArgsConstructor
 public class Item implements Model {
 
-    private static final String ACTION_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzdlNmM0MGY2OGI3NzVmMmVmY2Q3YmQ5OTE2YjMyNzg2OWRjZjI3ZTI0Yzg1NWQwYTE4ZTA3YWMwNGZlMSJ9fX0=";
+    private static final String ID_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2RkNjM5NzhlODRlMjA5MjI4M2U5Y2QwNmU5ZWY0YmMyMjhiYjlmMjIyMmUxN2VlMzgzYjFjOWQ5N2E4YTAifX19";
+    private static final String BOOST_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzAyZjQ4ZjM0ZDIyZGVkNzQwNGY3NmU4YTEzMmFmNWQ3OTE5YzhkY2Q1MWRmNmU3YTg1ZGRmYWM4NWFiIn19fQ==";
 
-    @Serializable(headTexture = ACTION_HEAD)
+    @Serializable(headTexture = ID_HEAD, description = "gui.item.id")
     private String id;
-    @Serializable(headTexture = ACTION_HEAD)
+    @Serializable(displayItem = "getFlatItem", description = "gui.item.item")
     private ItemStackWrapper item;
-    @Serializable(headTexture = ACTION_HEAD)
+    @Serializable(headTexture = BOOST_HEAD, description = "gui.item.boost", recreateTooltip = true)
     private Boost boost;
 
     public Item() {
@@ -72,6 +75,10 @@ public class Item implements Model {
 
     @Override
     public ItemStack getGUIItem() {
-        return item.getWrapped();
+        return ItemUtils.getNamedItem(getFlatItem(), "&6&l" + id, new ArrayList<>());
+    }
+
+    public ItemStack getFlatItem() {
+        return item.getWrapped().clone();
     }
 }

@@ -2,7 +2,6 @@ package com.github.jummes.elytrabooster.listener;
 
 import com.github.jummes.elytrabooster.core.ElytraBooster;
 import com.github.jummes.elytrabooster.manager.PadManager;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

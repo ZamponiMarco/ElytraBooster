@@ -47,7 +47,8 @@ public class ElytraBoosterHelpCommand extends AbstractCommand {
                         + "&2/eb reload &7Reload ElytraBooster config files.\n"
                         + "&2/eb portal help &7Print the portals help message.\n"
                         + "&2/eb spawner help &7Print the spawners help message.\n"
-                        + "&2/eb pad help &7Print the pads help message.\n"));
+                        + "&2/eb pad help &7Print the pads help message.\n"
+                        + "&2/eb item help &7Print the item help message.\n"));
         pages.add(page);
     }
 

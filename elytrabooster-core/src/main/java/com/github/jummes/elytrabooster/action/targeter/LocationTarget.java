@@ -6,7 +6,7 @@ import org.bukkit.Location;
 
 @AllArgsConstructor
 @Getter
-public class LocationTarget implements Target{
+public class LocationTarget implements Target {
 
     private final Location target;
 }

@@ -13,7 +13,6 @@ import com.google.common.collect.Lists;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang.RandomStringUtils;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -83,7 +82,7 @@ public class Spawner implements Model {
     public ItemStack getGUIItem() {
         return ItemUtils.getNamedItem(Libs.getWrapper().skullFromValue(SPAWNER_HEAD), "&6&lId: &c" + id,
                 Lists.newArrayList(MessageUtils.color("&6&lLeft click &eto modify."),
-                MessageUtils.color("&6&lRight click &eto delete.")));
+                        MessageUtils.color("&6&lRight click &eto delete.")));
     }
 
     @Override

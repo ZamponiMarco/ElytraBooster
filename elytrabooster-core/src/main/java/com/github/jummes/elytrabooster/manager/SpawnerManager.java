@@ -1,15 +1,11 @@
 package com.github.jummes.elytrabooster.manager;
 
-import com.github.jummes.elytrabooster.core.ElytraBooster;
-import com.github.jummes.elytrabooster.portal.Portal;
 import com.github.jummes.elytrabooster.spawner.Spawner;
 import com.github.jummes.libs.model.ModelManager;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Handles data of the spawners

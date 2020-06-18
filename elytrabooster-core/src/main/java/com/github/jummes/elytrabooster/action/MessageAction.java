@@ -22,7 +22,7 @@ public class MessageAction extends AbstractAction {
     @Serializable(headTexture = MESSAGE_HEAD, description = "gui.action.message.message")
     private String message;
 
-    public MessageAction(){
+    public MessageAction() {
         this("");
     }
 

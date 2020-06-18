@@ -33,7 +33,7 @@ public class ParticleAction extends AbstractAction {
     @Serializable(headTexture = FORCE_HEAD, description = "gui.action.particle.force")
     private boolean force;
 
-    public ParticleAction(){
+    public ParticleAction() {
         this(Particle.FIREWORKS_SPARK, 1, 0, 0, false);
     }
 

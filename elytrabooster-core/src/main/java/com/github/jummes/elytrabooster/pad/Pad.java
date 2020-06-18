@@ -1,8 +1,6 @@
 package com.github.jummes.elytrabooster.pad;
 
-import com.github.jummes.elytrabooster.action.AbstractAction;
 import com.github.jummes.elytrabooster.boost.VerticalBoost;
-import com.github.jummes.elytrabooster.boost.trail.SimpleBoostTrail;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
 import com.github.jummes.elytrabooster.event.PlayerVerticalBoostEvent;
 import com.github.jummes.elytrabooster.pad.visual.FireworkPadVisual;
@@ -24,7 +22,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 @Getter

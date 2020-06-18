@@ -6,7 +6,8 @@ import com.github.jummes.libs.annotation.Enumerable;
 import com.github.jummes.libs.annotation.Serializable;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
-import org.bukkit.*;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class SoundAction extends AbstractAction {
     @Serializable(headTexture = VOLUME_HEAD, description = "gui.action.sound.volume")
     private float volume;
 
-    public SoundAction(){
+    public SoundAction() {
         this(Sound.BLOCK_ANVIL_BREAK, SoundCategory.MASTER, 1f, 10f);
     }
 
@@ -43,7 +44,7 @@ public class SoundAction extends AbstractAction {
 
     @Override
     public void execute(Target target) {
-        ((LocationTarget)target).getTarget().getWorld().playSound(((LocationTarget)target).getTarget(), type, category, volume, pitch);
+        ((LocationTarget) target).getTarget().getWorld().playSound(((LocationTarget) target).getTarget(), type, category, volume, pitch);
     }
 
     @Override

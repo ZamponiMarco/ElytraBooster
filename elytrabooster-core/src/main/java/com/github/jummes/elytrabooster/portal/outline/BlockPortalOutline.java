@@ -30,8 +30,8 @@ public class BlockPortalOutline extends Outline {
     }
 
     public BlockPortalOutline(Material outlineType, Material cooldownType) {
-            this.outlineType = outlineType;
-            this.cooldownType = cooldownType;
+        this.outlineType = outlineType;
+        this.cooldownType = cooldownType;
     }
 
     public static BlockPortalOutline deserialize(Map<String, Object> map) {

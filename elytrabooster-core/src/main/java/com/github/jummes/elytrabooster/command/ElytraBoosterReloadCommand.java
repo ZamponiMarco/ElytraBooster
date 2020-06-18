@@ -1,12 +1,8 @@
 package com.github.jummes.elytrabooster.command;
 
 import com.github.jummes.elytrabooster.core.ElytraBooster;
-import com.github.jummes.elytrabooster.pad.Pad;
-import com.github.jummes.elytrabooster.portal.Portal;
-import com.github.jummes.elytrabooster.spawner.Spawner;
 import com.github.jummes.libs.command.AbstractCommand;
 import com.github.jummes.libs.core.Libs;
-import com.github.jummes.libs.util.MessageUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;

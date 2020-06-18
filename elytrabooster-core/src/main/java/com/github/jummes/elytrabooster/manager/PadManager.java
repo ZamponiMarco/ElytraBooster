@@ -1,6 +1,5 @@
 package com.github.jummes.elytrabooster.manager;
 
-import com.github.jummes.elytrabooster.core.ElytraBooster;
 import com.github.jummes.elytrabooster.pad.Pad;
 import com.github.jummes.libs.model.ModelManager;
 import lombok.Getter;

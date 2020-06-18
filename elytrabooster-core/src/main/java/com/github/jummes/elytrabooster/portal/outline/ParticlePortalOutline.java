@@ -2,8 +2,6 @@ package com.github.jummes.elytrabooster.portal.outline;
 
 import com.github.jummes.libs.annotation.Enumerable;
 import com.github.jummes.libs.annotation.Serializable;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 

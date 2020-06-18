@@ -20,8 +20,8 @@ public class HealAction extends AbstractAction {
 
     @Serializable(headTexture = HEAD, description = "gui.action.heal.amount")
     private int amount;
-    
-    public HealAction(){
+
+    public HealAction() {
         this(1);
     }
 

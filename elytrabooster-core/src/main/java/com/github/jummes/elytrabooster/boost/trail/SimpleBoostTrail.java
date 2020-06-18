@@ -2,8 +2,6 @@ package com.github.jummes.elytrabooster.boost.trail;
 
 import com.github.jummes.libs.annotation.Enumerable;
 import com.github.jummes.libs.annotation.Serializable;
-import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Bukkit;
 import org.bukkit.Particle;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.entity.Player;
@@ -19,7 +17,7 @@ public class SimpleBoostTrail extends BoostTrail {
     @Serializable(headTexture = PARTICLE_HEAD, stringValue = true, description = "gui.boost.trail.particle")
     private Particle particle;
 
-    public SimpleBoostTrail(){
+    public SimpleBoostTrail() {
         this(Particle.FIREWORKS_SPARK);
     }
 

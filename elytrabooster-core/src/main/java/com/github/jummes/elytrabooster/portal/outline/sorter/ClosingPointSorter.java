@@ -22,7 +22,7 @@ public class ClosingPointSorter extends PointSorter {
             return (int) (d1 - d2);
         }
     };
-    
+
     public static ClosingPointSorter deserialize(Map<String, Object> map) {
         return new ClosingPointSorter();
     }
