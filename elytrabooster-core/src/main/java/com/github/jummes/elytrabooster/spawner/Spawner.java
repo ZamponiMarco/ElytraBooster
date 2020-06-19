@@ -81,8 +81,7 @@ public class Spawner implements Model {
     @Override
     public ItemStack getGUIItem() {
         return ItemUtils.getNamedItem(Libs.getWrapper().skullFromValue(SPAWNER_HEAD), "&6&lId: &c" + id,
-                Lists.newArrayList(MessageUtils.color("&6&lLeft click &eto modify."),
-                        MessageUtils.color("&6&lRight click &eto delete.")));
+                Libs.getLocale().getList("gui.spawner.description"));
     }
 
     @Override
@@ -91,8 +90,12 @@ public class Spawner implements Model {
     }
 
     @Override
-    public void onModify() {
+    public void beforeModify() {
         stopBoosterTask();
+    }
+
+    @Override
+    public void onModify() {
         runBoosterTask();
     }
 

@@ -62,7 +62,7 @@ public class BoosterNearCommand extends AbstractCommand {
         try {
             p.openInventory(new ModelCollectionInventoryHolder(ElytraBooster.getInstance(), manager, boosterString + "s", predicate).getInventory());
         } catch (NoSuchFieldException | SecurityException e) {
-            e.printStackTrace();
+            new BoosterHelpCommand(sender, subCommand, arguments, isSenderPlayer, boosterString).checkExecution();
         }
     }
 

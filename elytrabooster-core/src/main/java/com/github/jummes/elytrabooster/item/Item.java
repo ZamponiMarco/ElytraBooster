@@ -7,26 +7,38 @@ import com.github.jummes.elytrabooster.core.ElytraBooster;
 import com.github.jummes.elytrabooster.event.PlayerBoostEvent;
 import com.github.jummes.elytrabooster.event.PlayerSimpleBoostEvent;
 import com.github.jummes.elytrabooster.event.PlayerVerticalBoostEvent;
+import com.github.jummes.libs.annotation.CustomClickable;
 import com.github.jummes.libs.annotation.Serializable;
+import com.github.jummes.libs.core.Libs;
+import com.github.jummes.libs.gui.PluginInventoryHolder;
+import com.github.jummes.libs.gui.model.ModelObjectInventoryHolder;
 import com.github.jummes.libs.model.Model;
+import com.github.jummes.libs.model.ModelPath;
 import com.github.jummes.libs.model.wrapper.ItemStackWrapper;
 import com.github.jummes.libs.util.ItemUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang.reflect.FieldUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.java.JavaPlugin;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Map;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@CustomClickable(customCollectionClickConsumer = "defaultClickConsumer")
 public class Item implements Model {
 
     private static final String ID_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2RkNjM5NzhlODRlMjA5MjI4M2U5Y2QwNmU5ZWY0YmMyMjhiYjlmMjIyMmUxN2VlMzgzYjFjOWQ5N2E4YTAifX19";
@@ -73,9 +85,27 @@ public class Item implements Model {
         }
     }
 
+    public void defaultClickConsumer(JavaPlugin plugin, PluginInventoryHolder parent, ModelPath<?> path, Field field,
+                                     InventoryClickEvent e) throws IllegalAccessException {
+        if (e.getClick().equals(ClickType.LEFT)) {
+            path.addModel(this);
+            e.getWhoClicked().openInventory(new ModelObjectInventoryHolder(plugin, parent, path).getInventory());
+        } else if (e.getClick().equals(ClickType.RIGHT)) {
+            ((Collection<Item>) FieldUtils.readField(field,
+                    path.getLast() != null ? path.getLast() : path.getModelManager(), true)).remove(this);
+            path.addModel(this);
+            path.deleteModel();
+            path.popModel();
+            onRemoval();
+            e.getWhoClicked().openInventory(parent.getInventory());
+        } else if (e.getClick().equals(ClickType.MIDDLE)) {
+            e.getWhoClicked().getInventory().addItem(item.getWrapped().clone());
+        }
+    }
+
     @Override
     public ItemStack getGUIItem() {
-        return ItemUtils.getNamedItem(getFlatItem(), "&6&l" + id, new ArrayList<>());
+        return ItemUtils.getNamedItem(getFlatItem(), "&6&lId: &c" + id, Libs.getLocale().getList("gui.item.description"));
     }
 
     public ItemStack getFlatItem() {

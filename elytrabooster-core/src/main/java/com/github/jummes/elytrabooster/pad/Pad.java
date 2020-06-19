@@ -10,10 +10,7 @@ import com.github.jummes.libs.core.Libs;
 import com.github.jummes.libs.model.Model;
 import com.github.jummes.libs.model.wrapper.LocationWrapper;
 import com.github.jummes.libs.util.ItemUtils;
-import com.github.jummes.libs.util.MessageUtils;
-import com.google.common.collect.Lists;
 import lombok.Getter;
-import org.apache.commons.lang.ClassUtils;
 import org.apache.commons.lang.RandomStringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -121,18 +118,15 @@ public class Pad implements Model {
         stopBoosterTask();
     }
 
+
     @Override
-    public void beforeComponentCreation(Class<? extends Model> modelClass) {
-        if (ClassUtils.isAssignable(modelClass, PadVisual.class)) {
-            stopBoosterTask();
-        }
+    public void beforeModify() {
+        stopBoosterTask();
     }
 
     @Override
-    public void afterComponentSetting(Model model) {
-        if (model instanceof PadVisual) {
-            runBoosterTask();
-        }
+    public void onModify() {
+        runBoosterTask();
     }
 
     public boolean onCooldown() {
@@ -146,7 +140,6 @@ public class Pad implements Model {
     @Override
     public ItemStack getGUIItem() {
         return ItemUtils.getNamedItem(Libs.getWrapper().skullFromValue(PAD_HEAD), "&6&lId: &c" + id,
-                Lists.newArrayList(MessageUtils.color("&6&lLeft click &eto modify."),
-                        MessageUtils.color("&6&lRight click &eto delete.")));
+                Libs.getLocale().getList("gui.pad.description"));
     }
 }

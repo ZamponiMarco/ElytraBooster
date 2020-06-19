@@ -105,6 +105,9 @@ gui:
       horizontal:
         - "&7&oThe horizontal velocity boost."
   pad:
+    description:
+      - "&6&lLeft click &eto modify."
+      - "&6&lRight click &eto delete."
     id:
       - "&7&oThe id of the pad."
     center:
@@ -129,6 +132,9 @@ gui:
       - "&7&oThe cooldown between usages of"
       - "&7&othe pads."
   portal:
+    description:
+      - "&6&lLeft click &eto modify."
+      - "&6&lRight click &eto delete."
     outline:
       sorter:
         description:
@@ -234,6 +240,9 @@ gui:
     shapeDescription:
       - "&7&oThe shape of the portal."
   spawner:
+    description:
+      - "&6&lLeft click &eto modify."
+      - "&6&lRight click &eto delete."
     entityHolder:
       entityDescription:
         description:
@@ -280,8 +289,12 @@ gui:
       - "&7&oInformations about the entities"
       - "&7&othat will be spawned and the boost"
       - "&7&othat they provide."
-
   item:
+    description:
+      - "&6&lLeft click &eto modify."
+      - "&6&lRight click &eto delete."
+      - "&6&lMiddle click &eto get a"
+      - "&ecopy of the item in inventory."
     id:
       - "&7&oThe id of the item"
     item:
@@ -289,6 +302,7 @@ gui:
       - "&7&oboost. This will boost the"
       - "&7&oplayer when right clicked holding"
       - "&7&oit in the hands."
+      - "&6&lDrag and drop &ean item to set it."
     boost:
       - "&7&oThe boost crated when the item is"
       - "&7&oright clicked. If it's a vertical"

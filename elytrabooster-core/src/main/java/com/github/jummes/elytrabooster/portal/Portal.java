@@ -180,8 +180,7 @@ public class Portal implements Model {
     @Override
     public ItemStack getGUIItem() {
         return ItemUtils.getNamedItem(Libs.getWrapper().skullFromValue(PORTAL_HEAD), "&6&lId: &c" + id,
-                Lists.newArrayList(MessageUtils.color("&6&lLeft click &eto modify."),
-                        MessageUtils.color("&6&lRight click &eto delete.")));
+                Libs.getLocale().getList("gui.portal.description"));
     }
 
     /**
@@ -192,33 +191,13 @@ public class Portal implements Model {
         stopBoosterTask();
     }
 
-    /**
-     * Before creating a Shape component stop the booster tasks
-     */
     @Override
-    public void beforeComponentCreation(Class<? extends Model> modelClass) {
-        if (ClassUtils.isAssignable(modelClass, Shape.class) || ClassUtils.isAssignable(modelClass, Outline.class)) {
-            stopBoosterTask();
-        }
+    public void beforeModify() {
+        stopBoosterTask();
     }
 
-    /**
-     * After setting the new Shape component run the booster task
-     */
-    @Override
-    public void afterComponentSetting(Model model) {
-        if (model instanceof Shape || model instanceof Outline) {
-            runBoosterTask();
-        }
-    }
-
-    /**
-     * If a setting is modified reload the portal tasks
-     */
     @Override
     public void onModify() {
-        stopBoosterTask();
         runBoosterTask();
     }
-
 }

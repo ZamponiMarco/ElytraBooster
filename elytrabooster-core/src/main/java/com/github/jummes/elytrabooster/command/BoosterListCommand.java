@@ -37,7 +37,7 @@ public class BoosterListCommand extends AbstractCommand {
                 break;
         }
         try {
-            p.openInventory(new ModelCollectionInventoryHolder(ElytraBooster.getInstance(), manager, boosterString + "s").getInventory());
+            p.openInventory(new ModelCollectionInventoryHolder<>(ElytraBooster.getInstance(), manager, boosterString + "s").getInventory());
         } catch (NoSuchFieldException | SecurityException e) {
             e.printStackTrace();
         }

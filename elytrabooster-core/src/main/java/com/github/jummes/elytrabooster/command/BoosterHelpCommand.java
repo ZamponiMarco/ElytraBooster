@@ -48,9 +48,13 @@ public class BoosterHelpCommand extends AbstractCommand {
     }
 
     private void setUpPages() {
+        String help = "&2/eb booster help &7Print the boosters help message.\n".replaceAll("booster", boosterString) +
+                "&2/eb booster list &7List boosters.\n".replaceAll("booster", boosterString);
+        help +=
+                boosterString.equals("item") ? "" : "&2/eb booster near &c[radius] &7List all the boosters within [radius] blocks.\n".
+                        replaceAll("booster", boosterString);
         String page = MessageUtils.header("ElytraBooster Help") +
-                MessageUtils.color("&2/eb booster help &c[page] &7Print the boosters help message.\n&2/eb booster list &7List boosters.\n&2/eb booster near &c[radius] &7List all the boosters within [radius] blocks.\n"
-                        .replaceAll("booster", boosterString));
+                MessageUtils.color(help);
         pages.add(page);
     }
 
