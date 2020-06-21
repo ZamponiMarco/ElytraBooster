@@ -5,6 +5,7 @@ import com.github.jummes.elytrabooster.action.targeter.Target;
 import com.github.jummes.libs.annotation.Enumerable;
 import com.github.jummes.libs.annotation.Serializable;
 import com.github.jummes.libs.core.Libs;
+import com.github.jummes.libs.model.ModelPath;
 import com.github.jummes.libs.util.ItemUtils;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
@@ -12,8 +13,10 @@ import org.apache.commons.lang.WordUtils;
 import org.bukkit.Particle;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 @AllArgsConstructor
 @Enumerable.Child(name = "&c&lEffect", description = "gui.action.particle.description", headTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDQ2MWQ5ZDA2YzBiZjRhN2FmNGIxNmZkMTI4MzFlMmJlMGNmNDJlNmU1NWU5YzBkMzExYTJhODk2NWEyM2IzNCJ9fX0=")
@@ -26,7 +29,7 @@ public class ParticleAction extends AbstractAction {
     private static final String FORCE_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2VkMWFiYTczZjYzOWY0YmM0MmJkNDgxOTZjNzE1MTk3YmUyNzEyYzNiOTYyYzk3ZWJmOWU5ZWQ4ZWZhMDI1In19fQ==";
 
 
-    @Serializable(headTexture = TYPE_HEAD, stringValue = true, description = "gui.action.particle.type")
+    @Serializable(headTexture = TYPE_HEAD, stringValue = true, description = "gui.action.particle.type", fromListMapper = "particlesMapper", fromList = "getParticles")
     private Particle type;
     @Serializable(headTexture = COUNT_HEAD, description = "gui.action.particle.count")
     private int count;
@@ -48,6 +51,18 @@ public class ParticleAction extends AbstractAction {
         double speed = (double) map.get("speed");
         boolean force = (boolean) map.get("force");
         return new ParticleAction(type, count, offset, speed, force);
+    }
+
+    public static List<Object> getParticles(ModelPath path) {
+        return Lists.newArrayList(Particle.values());
+    }
+
+    public static Function<Object, ItemStack> particlesMapper() {
+        return obj -> {
+            Particle type = (Particle) obj;
+            return ItemUtils.getNamedItem(Libs.getWrapper().skullFromValue("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDQ2MWQ5ZDA2YzBiZjRhN2FmNGIxNmZkMTI4MzFlMmJlMGNmNDJlNmU1NWU5YzBkMzExYTJhODk2NWEyM2IzNCJ9fX0=")
+                    , type.name(), new ArrayList<>());
+        };
     }
 
     @Override

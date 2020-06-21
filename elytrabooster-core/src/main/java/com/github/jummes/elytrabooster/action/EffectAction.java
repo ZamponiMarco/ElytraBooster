@@ -5,16 +5,20 @@ import com.github.jummes.elytrabooster.action.targeter.Target;
 import com.github.jummes.libs.annotation.Enumerable;
 import com.github.jummes.libs.annotation.Serializable;
 import com.github.jummes.libs.core.Libs;
+import com.github.jummes.libs.model.ModelPath;
 import com.github.jummes.libs.util.ItemUtils;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang.WordUtils;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 @AllArgsConstructor
 @Enumerable.Child(name = "&c&lEffect", description = "gui.action.effect.description", headTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzJhN2RjYmY3ZWNhNmI2ZjYzODY1OTFkMjM3OTkxY2ExYjg4OGE0ZjBjNzUzZmY5YTMyMDJjZjBlOTIyMjllMyJ9fX0=")
@@ -27,7 +31,7 @@ public class EffectAction extends AbstractAction {
     private static final String AMBIENT_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWY1NzE5MmIxOTRjNjU4YWFhODg4MTY4NDhjYmNlN2M3NDk0NjZhNzkyYjhhN2UxZDNmYWZhNDFjNDRmMzQxMiJ9fX0=";
     private static final String ICON_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDU5MWYwNGJiNmQ1MjQ5MTFhZGRhNzc1YWYyNDRmODZhOTVkYjE4N2UzMWI4YTNiMTAzYWQ4MGZjNWIyMjU2MCJ9fX0=";
 
-    @Serializable(headTexture = TYPE_HEAD, stringValue = true, description = "gui.action.effect.type")
+    @Serializable(headTexture = TYPE_HEAD, stringValue = true, description = "gui.action.effect.type", fromList = "getPotionEffects", fromListMapper = "potionEffectsMapper")
     private PotionEffectType type;
     @Serializable(headTexture = DURATION_HEAD, description = "gui.action.effect.duration")
     private int duration;
@@ -53,6 +57,17 @@ public class EffectAction extends AbstractAction {
         boolean ambient = (boolean) map.get("ambient");
         boolean icon = (boolean) map.get("icon");
         return new EffectAction(type, duration, level, particles, ambient, icon);
+    }
+
+    public static List<Object> getPotionEffects(ModelPath path) {
+        return Lists.newArrayList(PotionEffectType.values());
+    }
+
+    public static Function<Object, ItemStack> potionEffectsMapper() {
+        return obj -> {
+            PotionEffectType type = (PotionEffectType) obj;
+            return ItemUtils.getNamedItem(new ItemStack(Material.POTION), type.getName(), new ArrayList<>());
+        };
     }
 
     @Override
