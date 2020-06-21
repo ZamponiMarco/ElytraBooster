@@ -4,6 +4,9 @@ command:
     success: "&aReloaded &6ElytraBooster"
 gui:
   action:
+    description:
+      - "&6&lLeft click &eto modify."
+      - "&6&lRight click &eto delete."
     damage:
       description:
         - "&7&oSet the damage to apply"

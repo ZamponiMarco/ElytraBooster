@@ -4,9 +4,13 @@ import com.github.jummes.elytrabooster.action.targeter.LocationTarget;
 import com.github.jummes.elytrabooster.action.targeter.Target;
 import com.github.jummes.libs.annotation.Enumerable;
 import com.github.jummes.libs.annotation.Serializable;
+import com.github.jummes.libs.core.Libs;
+import com.github.jummes.libs.util.ItemUtils;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
+import org.apache.commons.lang.WordUtils;
 import org.bukkit.Particle;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 import java.util.Map;
@@ -22,7 +26,7 @@ public class ParticleAction extends AbstractAction {
     private static final String FORCE_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2VkMWFiYTczZjYzOWY0YmM0MmJkNDgxOTZjNzE1MTk3YmUyNzEyYzNiOTYyYzk3ZWJmOWU5ZWQ4ZWZhMDI1In19fQ==";
 
 
-    @Serializable(headTexture = TYPE_HEAD, description = "gui.action.particle.type")
+    @Serializable(headTexture = TYPE_HEAD, stringValue = true, description = "gui.action.particle.type")
     private Particle type;
     @Serializable(headTexture = COUNT_HEAD, description = "gui.action.particle.count")
     private int count;
@@ -54,6 +58,12 @@ public class ParticleAction extends AbstractAction {
     @Override
     public List<Class<? extends Target>> getPossibleTargets() {
         return Lists.newArrayList(LocationTarget.class);
+    }
+
+    @Override
+    public ItemStack getGUIItem() {
+        return ItemUtils.getNamedItem(Libs.getWrapper().skullFromValue(TYPE_HEAD),
+                "&6&lParticle: &c" + WordUtils.capitalize(type.toString()), Libs.getLocale().getList("gui.action.description"));
     }
 
 }

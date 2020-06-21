@@ -4,8 +4,12 @@ import com.github.jummes.elytrabooster.action.targeter.PlayerTarget;
 import com.github.jummes.elytrabooster.action.targeter.Target;
 import com.github.jummes.libs.annotation.Enumerable;
 import com.github.jummes.libs.annotation.Serializable;
+import com.github.jummes.libs.core.Libs;
+import com.github.jummes.libs.util.ItemUtils;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
+import org.apache.commons.lang.WordUtils;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -23,13 +27,13 @@ public class EffectAction extends AbstractAction {
     private static final String AMBIENT_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWY1NzE5MmIxOTRjNjU4YWFhODg4MTY4NDhjYmNlN2M3NDk0NjZhNzkyYjhhN2UxZDNmYWZhNDFjNDRmMzQxMiJ9fX0=";
     private static final String ICON_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDU5MWYwNGJiNmQ1MjQ5MTFhZGRhNzc1YWYyNDRmODZhOTVkYjE4N2UzMWI4YTNiMTAzYWQ4MGZjNWIyMjU2MCJ9fX0=";
 
-    @Serializable(headTexture = TYPE_HEAD, description = "gui.action.effect.type")
+    @Serializable(headTexture = TYPE_HEAD, stringValue = true, description = "gui.action.effect.type")
     private PotionEffectType type;
     @Serializable(headTexture = DURATION_HEAD, description = "gui.action.effect.duration")
     private int duration;
     @Serializable(headTexture = LEVEL_HEAD, description = "gui.action.effect.level")
     private int level;
-    @Serializable(headTexture = PARTICLE_HEAD, description = "gui.action.effect.particle")
+    @Serializable(headTexture = PARTICLE_HEAD, description = "gui.action.effect.particles")
     private boolean particles;
     @Serializable(headTexture = AMBIENT_HEAD, description = "gui.action.effect.ambient")
     private boolean ambient;
@@ -41,7 +45,8 @@ public class EffectAction extends AbstractAction {
     }
 
     public static EffectAction deserialize(Map<String, Object> map) {
-        PotionEffectType type = PotionEffectType.getByName((String) map.get("type"));
+        PotionEffectType type = PotionEffectType.getByName(((String) map.get("type"))
+                .replaceAll("[\\[\\]\\d, ]|PotionEffectType", ""));
         int duration = (int) map.get("duration");
         int level = (int) map.get("level");
         boolean particles = (boolean) map.get("particles");
@@ -58,6 +63,12 @@ public class EffectAction extends AbstractAction {
     @Override
     public List<Class<? extends Target>> getPossibleTargets() {
         return Lists.newArrayList(PlayerTarget.class);
+    }
+
+    @Override
+    public ItemStack getGUIItem() {
+        return ItemUtils.getNamedItem(Libs.getWrapper().skullFromValue(TYPE_HEAD),
+                "&6&lEffect: &c" + WordUtils.capitalize(type.toString()), Libs.getLocale().getList("gui.action.description"));
     }
 
 }
