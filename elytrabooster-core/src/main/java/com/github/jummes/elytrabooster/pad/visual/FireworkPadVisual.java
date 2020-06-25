@@ -4,7 +4,6 @@ import com.github.jummes.libs.annotation.Enumerable;
 import com.github.jummes.libs.core.Libs;
 import org.bukkit.Location;
 import org.bukkit.Particle;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.util.Vector;
 
@@ -13,7 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-@Enumerable.Child(name = "&c&lFirework", description = "gui.pad.visual.firework.description", headTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzAyZjQ4ZjM0ZDIyZGVkNzQwNGY3NmU4YTEzMmFmNWQ3OTE5YzhkY2Q1MWRmNmU3YTg1ZGRmYWM4NWFiIn19fQ==")
+@Enumerable.Child
+@Enumerable.Displayable(name = "&c&lFirework", description = "gui.pad.visual.firework.description", headTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzAyZjQ4ZjM0ZDIyZGVkNzQwNGY3NmU4YTEzMmFmNWQ3OTE5YzhkY2Q1MWRmNmU3YTg1ZGRmYWM4NWFiIn19fQ==")
 public class FireworkPadVisual extends PadVisual {
 
     private static final String FIREWORK_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzAyZjQ4ZjM0ZDIyZGVkNzQwNGY3NmU4YTEzMmFmNWQ3OTE5YzhkY2Q1MWRmNmU3YTg1ZGRmYWM4NWFiIn19fQ==";
@@ -32,8 +32,6 @@ public class FireworkPadVisual extends PadVisual {
     @Override
     public void startVisual(Location center) {
         initializeVisual(center);
-        visualTaskId = plugin.getServer().getScheduler().runTaskTimer(plugin, () -> spawnParticles(center), 0, 4)
-                .getTaskId();
     }
 
     public void spawnParticles(Location center) {
@@ -77,12 +75,14 @@ public class FireworkPadVisual extends PadVisual {
             circlePoints.add(new Location(center.getWorld(), x, center.getY(), z));
         }
 
-        item = (Item) center.getWorld().spawnEntity(center.clone().add(new Vector(0, 2, 0)), EntityType.DROPPED_ITEM);
+        item = center.getWorld().dropItem(center.clone().add(new Vector(0, 2, 0)), Libs.getWrapper().skullFromValue(FIREWORK_HEAD));
         item.setGravity(false);
         item.setVelocity(new Vector());
         item.setPickupDelay(32767);
         item.setInvulnerable(true);
-        item.setItemStack(Libs.getWrapper().skullFromValue(FIREWORK_HEAD));
+
+        visualTaskId = plugin.getServer().getScheduler().runTaskTimer(plugin, () -> spawnParticles(center), 0, 4)
+                .getTaskId();
     }
 
 }

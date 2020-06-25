@@ -9,7 +9,8 @@ import org.bukkit.util.Vector;
 
 import java.util.Map;
 
-@Enumerable.Child(name = "&c&lHelix", description = "gui.boost.trail.helix.description", headTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2VmMjQzMmVmMzA1MzYxMzg0ZDQzMThkZjViZGE1YmQxYWMyZDliZWEwNmQxZjVjZmVhZDZkZDg3ZTM3ZGRmNSJ9fX0=")
+@Enumerable.Child
+@Enumerable.Displayable(name = "&c&lHelix", description = "gui.boost.trail.helix.description", headTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2VmMjQzMmVmMzA1MzYxMzg0ZDQzMThkZjViZGE1YmQxYWMyZDliZWEwNmQxZjVjZmVhZDZkZDg3ZTM3ZGRmNSJ9fX0=")
 public class HelixBoostTrail extends BoostTrail {
 
     private static final String PARTICLE_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWY4NDczNWZjOWM3NjBlOTVlYWYxMGNlYzRmMTBlZGI1ZjM4MjJhNWZmOTU1MWVlYjUwOTUxMzVkMWZmYTMwMiJ9fX0=";

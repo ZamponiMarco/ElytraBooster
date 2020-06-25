@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Location;
 import org.bukkit.Particle;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
@@ -15,7 +14,8 @@ import java.util.Map;
 
 @Getter
 @Setter
-@Enumerable.Child(name = "&c&lFirework Entity", description = "gui.spawner.entityHolder.entityDescription.firework.description", headTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzAyZjQ4ZjM0ZDIyZGVkNzQwNGY3NmU4YTEzMmFmNWQ3OTE5YzhkY2Q1MWRmNmU3YTg1ZGRmYWM4NWFiIn19fQ==")
+@Enumerable.Child
+@Enumerable.Displayable(name = "&c&lFirework Entity", description = "gui.spawner.entityHolder.entityDescription.firework.description", headTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzAyZjQ4ZjM0ZDIyZGVkNzQwNGY3NmU4YTEzMmFmNWQ3OTE5YzhkY2Q1MWRmNmU3YTg1ZGRmYWM4NWFiIn19fQ==")
 public class FireworkEntityDescription extends EntityDescription {
 
     private static final String FIREWORK_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzAyZjQ4ZjM0ZDIyZGVkNzQwNGY3NmU4YTEzMmFmNWQ3OTE5YzhkY2Q1MWRmNmU3YTg1ZGRmYWM4NWFiIn19fQ==";
@@ -34,12 +34,11 @@ public class FireworkEntityDescription extends EntityDescription {
 
     @Override
     public void spawn(Location location) {
-        item = (Item) location.getWorld().spawnEntity(location, EntityType.DROPPED_ITEM);
+        item = location.getWorld().dropItem(location, Libs.getWrapper().skullFromValue(FIREWORK_HEAD));
         item.setGravity(false);
         item.setVelocity(new Vector());
         item.setPickupDelay(32767);
         item.setInvulnerable(true);
-        item.setItemStack(Libs.getWrapper().skullFromValue(FIREWORK_HEAD));
         effectTaskNumber = runEffectTask(location);
     }
 

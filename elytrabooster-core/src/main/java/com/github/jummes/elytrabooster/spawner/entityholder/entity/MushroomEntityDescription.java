@@ -11,7 +11,8 @@ import org.bukkit.util.Vector;
 
 import java.util.Map;
 
-@Enumerable.Child(name = "&c&lMushroom Entity", description = "gui.spawner.entityHolder.entityDescription.mushroom.description", headTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzU3MTk1MmEzNWMzMTYzYjhjMzNhMDkxOGQ2ZTlhNDUzM2Y2MjA1M2FkNGU2Y2ZjYjFmYTI3ZjU1MWFlZjIifX19==")
+@Enumerable.Child
+@Enumerable.Displayable(name = "&c&lMushroom Entity", description = "gui.spawner.entityHolder.entityDescription.mushroom.description", headTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzU3MTk1MmEzNWMzMTYzYjhjMzNhMDkxOGQ2ZTlhNDUzM2Y2MjA1M2FkNGU2Y2ZjYjFmYTI3ZjU1MWFlZjIifX19==")
 public class MushroomEntityDescription extends EntityDescription {
 
     private static final String MUSHROOM_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzU3MTk1MmEzNWMzMTYzYjhjMzNhMDkxOGQ2ZTlhNDUzM2Y2MjA1M2FkNGU2Y2ZjYjFmYTI3ZjU1MWFlZjIifX19==";
@@ -30,12 +31,11 @@ public class MushroomEntityDescription extends EntityDescription {
 
     @Override
     public void spawn(Location location) {
-        item = (Item) location.getWorld().spawnEntity(location, EntityType.DROPPED_ITEM);
+        item = location.getWorld().dropItem(location, Libs.getWrapper().skullFromValue(MUSHROOM_HEAD));
         item.setGravity(false);
         item.setVelocity(new Vector());
         item.setPickupDelay(32767);
         item.setInvulnerable(true);
-        item.setItemStack(Libs.getWrapper().skullFromValue(MUSHROOM_HEAD));
         effectTaskNumber = runEffectTask(location);
     }
 

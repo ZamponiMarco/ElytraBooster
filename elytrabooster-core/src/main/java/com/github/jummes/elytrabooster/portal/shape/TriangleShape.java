@@ -13,7 +13,8 @@ import org.bukkit.Location;
 import java.util.*;
 
 @Setter
-@Enumerable.Child(name = "&c&lTriangle Shape", description = "gui.portal.shape.triangle.description", headTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWQ2OGJkOGRjM2IyYTgzZjc0MDgwY2FmMmZiZDM4NzIyYWQzNzQ2NDA4YjZkMTFhNmJiNzc1NzFkNDZmYzY3In19fQ==")
+@Enumerable.Child
+@Enumerable.Displayable(name = "&c&lTriangle Shape", description = "gui.portal.shape.triangle.description", headTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWQ2OGJkOGRjM2IyYTgzZjc0MDgwY2FmMmZiZDM4NzIyYWQzNzQ2NDA4YjZkMTFhNmJiNzc1NzFkNDZmYzY3In19fQ==")
 public class TriangleShape extends Shape {
 
     private static final double AXIS_DISTANCE = 1.0;

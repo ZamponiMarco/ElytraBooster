@@ -7,7 +7,8 @@ import org.bukkit.entity.Player;
 
 import java.util.Map;
 
-@Enumerable.Child(name = "&c&lRainbow", description = "gui.boost.trail.rainbow.description", headTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWZkOGJlZDJkZmU0YzMyMTY4Yzk3MjE1NGVlYTMzNWE4MDQyZTlkNjRiODUwNzY3YzZlYTA0Y2U4Zjg1ZjEyYSJ9fX0=")
+@Enumerable.Child
+@Enumerable.Displayable(name = "&c&lRainbow", description = "gui.boost.trail.rainbow.description", headTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWZkOGJlZDJkZmU0YzMyMTY4Yzk3MjE1NGVlYTMzNWE4MDQyZTlkNjRiODUwNzY3YzZlYTA0Y2U4Zjg1ZjEyYSJ9fX0=")
 public class RainbowBoostTrail extends BoostTrail {
 
     int currentColor;

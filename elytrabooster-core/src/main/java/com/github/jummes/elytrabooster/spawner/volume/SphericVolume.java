@@ -16,7 +16,8 @@ import java.util.Random;
 @Getter
 @Setter
 @AllArgsConstructor
-@Enumerable.Child(name = "&c&lSpheric Volume", description = "gui.spawner.volume.spheric.description", headTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjcyYmNkZjZhNTQ4OTc0YmY3YjExNWFjZWU2M2NiMjg0MzY3YTBmNzQ1YmMwZmYzNTdjMTQyMzE1MjQzZDhkOSJ9fX0=")
+@Enumerable.Child
+@Enumerable.Displayable(name = "&c&lSpheric Volume", description = "gui.spawner.volume.spheric.description", headTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjcyYmNkZjZhNTQ4OTc0YmY3YjExNWFjZWU2M2NiMjg0MzY3YTBmNzQ1YmMwZmYzNTdjMTQyMzE1MjQzZDhkOSJ9fX0=")
 public class SphericVolume extends Volume {
 
     private static final String CENTER_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjhhMDY1NTg4YzdkYmYxMjk0NTk1YWJhNzc3OTFjM2FkNjVmMTliZjFjOWFkN2E1YzIzZGE0MGI4Mjg2MGI3In19fQ==";

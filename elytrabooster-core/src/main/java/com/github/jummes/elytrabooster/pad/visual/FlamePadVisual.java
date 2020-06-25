@@ -4,7 +4,6 @@ import com.github.jummes.libs.annotation.Enumerable;
 import com.github.jummes.libs.core.Libs;
 import org.bukkit.Location;
 import org.bukkit.Particle;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.util.Vector;
 
@@ -13,7 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-@Enumerable.Child(name = "&c&lFlame", description = "gui.pad.visual.flame.description", headTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmNjYmY5ODgzZGQzNTlmZGYyMzg1YzkwYTQ1OWQ3Mzc3NjUzODJlYzQxMTdiMDQ4OTVhYzRkYzRiNjBmYyJ9fX0===")
+@Enumerable.Child
+@Enumerable.Displayable(name = "&c&lFlame", description = "gui.pad.visual.flame.description", headTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmNjYmY5ODgzZGQzNTlmZGYyMzg1YzkwYTQ1OWQ3Mzc3NjUzODJlYzQxMTdiMDQ4OTVhYzRkYzRiNjBmYyJ9fX0===")
 public class FlamePadVisual extends PadVisual {
 
     private static final String ARROW_UP_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmNjYmY5ODgzZGQzNTlmZGYyMzg1YzkwYTQ1OWQ3Mzc3NjUzODJlYzQxMTdiMDQ4OTVhYzRkYzRiNjBmYyJ9fX0===";
@@ -33,8 +33,6 @@ public class FlamePadVisual extends PadVisual {
     @Override
     public void startVisual(Location center) {
         initializeVisual(center);
-        visualTaskId = plugin.getServer().getScheduler().runTaskTimer(plugin, () -> spawnParticles(center), 0, 4)
-                .getTaskId();
     }
 
     public void spawnParticles(Location center) {
@@ -59,7 +57,7 @@ public class FlamePadVisual extends PadVisual {
 
     @Override
     public void initializeVisual(Location center) {
-        circlePoints = new ArrayList<Location>();
+        circlePoints = new ArrayList<>();
         int amount = 20;
         double increment = (2 * Math.PI) / amount;
 
@@ -72,12 +70,14 @@ public class FlamePadVisual extends PadVisual {
             circlePoints.add(new Location(center.getWorld(), x, center.getY(), z));
         }
 
-        item = (Item) center.getWorld().spawnEntity(center.clone().add(new Vector(0, 2, 0)), EntityType.DROPPED_ITEM);
+        item = center.getWorld().dropItem(center.clone().add(new Vector(0, 2, 0)), Libs.getWrapper().skullFromValue(ARROW_UP_HEAD));
         item.setGravity(false);
         item.setVelocity(new Vector());
         item.setPickupDelay(32767);
         item.setInvulnerable(true);
-        item.setItemStack(Libs.getWrapper().skullFromValue(ARROW_UP_HEAD));
+
+        visualTaskId = plugin.getServer().getScheduler().runTaskTimer(plugin, () -> spawnParticles(center), 0, 4)
+                .getTaskId();
     }
 
     @Override
