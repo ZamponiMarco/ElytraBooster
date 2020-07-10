@@ -16,11 +16,14 @@ public class PlayerInteractListener implements Listener {
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent e) {
         Player player = e.getPlayer();
-        if (e.getAction().equals(Action.RIGHT_CLICK_AIR) && Objects.equals(e.getHand(), EquipmentSlot.HAND) && e.getItem() != null) {
+        if (e.getAction().equals(Action.RIGHT_CLICK_AIR) &&
+                e.getItem() != null &&
+                (Objects.equals(e.getHand(), EquipmentSlot.HAND) ||
+                        Objects.equals(e.getHand(), EquipmentSlot.OFF_HAND))) {
             ElytraBooster.getInstance().getItemManager().getItems().stream()
                     .filter(item -> ItemUtils.isSimilar(item.getItem().getWrapped(), e.getItem()))
                     .findFirst().ifPresent(item -> {
-                item.boostPlayer(player);
+                item.boostPlayer(player, e.getHand());
                 e.setCancelled(true);
             });
         }

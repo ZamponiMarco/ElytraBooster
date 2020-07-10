@@ -21,6 +21,6 @@ public abstract class EntityDescription implements Model, Cloneable {
     public abstract void entityDespawn();
 
     @Override
-    protected abstract Object clone() throws CloneNotSupportedException;
+    public abstract Object clone() throws CloneNotSupportedException;
 
 }

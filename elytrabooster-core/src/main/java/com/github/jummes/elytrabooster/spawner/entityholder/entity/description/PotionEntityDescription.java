@@ -61,7 +61,7 @@ public class PotionEntityDescription extends EntityDescription {
     }
 
     @Override
-    protected Object clone() {
+    public Object clone() {
         return new PotionEntityDescription();
     }
 }

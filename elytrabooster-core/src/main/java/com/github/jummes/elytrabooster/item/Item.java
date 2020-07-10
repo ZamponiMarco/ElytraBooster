@@ -27,6 +27,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -61,7 +62,7 @@ public class Item implements Model {
         return new Item(id, item, boost);
     }
 
-    public void boostPlayer(Player player) {
+    public void boostPlayer(Player player, EquipmentSlot hand) {
         if (player.hasPermission("eb.boosters.boost") && player.getEquipment().getChestplate() != null
                 && player.getEquipment().getChestplate().getType().equals(Material.ELYTRA)) {
             PlayerBoostEvent event;
@@ -77,9 +78,17 @@ public class Item implements Model {
             if (!event.isCancelled()) {
                 boost.boostPlayer(player);
             }
-            int amount = player.getInventory().getItemInMainHand().getAmount();
+
+            ItemStack item;
+            System.out.println(hand);
+            if (hand.equals(EquipmentSlot.HAND)) {
+                item = player.getInventory().getItemInMainHand();
+            } else {
+                item = player.getInventory().getItemInOffHand();
+            }
+            int amount = item.getAmount();
             if (!player.getGameMode().equals(GameMode.CREATIVE)) {
-                player.getInventory().getItemInMainHand().setAmount(--amount);
+                item.setAmount(--amount);
             }
         }
     }

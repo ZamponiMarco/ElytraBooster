@@ -65,7 +65,7 @@ public class FireworkEntityDescription extends EntityDescription {
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    public Object clone() throws CloneNotSupportedException {
         return new FireworkEntityDescription();
     }
 
