@@ -1,4 +1,4 @@
-package com.github.jummes.elytrabooster.spawner.entityholder.entity;
+package com.github.jummes.elytrabooster.spawner.entityholder.entity.description;
 
 import com.github.jummes.elytrabooster.core.ElytraBooster;
 import com.github.jummes.libs.annotation.Enumerable;

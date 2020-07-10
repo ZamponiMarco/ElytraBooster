@@ -2,8 +2,8 @@ package com.github.jummes.elytrabooster.spawner.entityholder;
 
 import com.github.jummes.elytrabooster.boost.SimpleBoost;
 import com.github.jummes.elytrabooster.spawner.entityholder.entity.ActiveEntity;
-import com.github.jummes.elytrabooster.spawner.entityholder.entity.EntityDescription;
-import com.github.jummes.elytrabooster.spawner.entityholder.entity.FireworkEntityDescription;
+import com.github.jummes.elytrabooster.spawner.entityholder.entity.description.EntityDescription;
+import com.github.jummes.elytrabooster.spawner.entityholder.entity.description.FireworkEntityDescription;
 import com.github.jummes.libs.annotation.Serializable;
 import com.github.jummes.libs.model.Model;
 import com.github.jummes.libs.model.wrapper.LocationWrapper;

@@ -73,6 +73,9 @@ gui:
         - "&7&oThe volume of the sound."
   boost:
     trail:
+      description:
+        - "&7&oThe trail displayed behind the"
+        - "&7&oplayer when boosted."
       helix:
         description:
           - "&7&oSet an helix shaped trail."
@@ -87,6 +90,9 @@ gui:
           - "&7&oSet a simple particle trail."
       particle:
         - "&7&oThe particle used in the trail."
+    actions:
+      - "&7&oThe list of actions executed"
+      - "&7&oon a player when boosted."
     simple:
       description:
         - "&7&oA simple boost executed while flying"

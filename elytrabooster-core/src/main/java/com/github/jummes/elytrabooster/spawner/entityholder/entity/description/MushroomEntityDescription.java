@@ -1,10 +1,9 @@
-package com.github.jummes.elytrabooster.spawner.entityholder.entity;
+package com.github.jummes.elytrabooster.spawner.entityholder.entity.description;
 
 import com.github.jummes.libs.annotation.Enumerable;
 import com.github.jummes.libs.core.Libs;
 import org.bukkit.Location;
 import org.bukkit.Particle;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;

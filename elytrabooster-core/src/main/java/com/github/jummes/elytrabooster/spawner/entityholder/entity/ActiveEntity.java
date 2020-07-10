@@ -3,6 +3,7 @@ package com.github.jummes.elytrabooster.spawner.entityholder.entity;
 import com.github.jummes.elytrabooster.core.ElytraBooster;
 import com.github.jummes.elytrabooster.event.PlayerSimpleBoostEvent;
 import com.github.jummes.elytrabooster.spawner.entityholder.EntityHolder;
+import com.github.jummes.elytrabooster.spawner.entityholder.entity.description.EntityDescription;
 import com.github.jummes.libs.model.wrapper.LocationWrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
