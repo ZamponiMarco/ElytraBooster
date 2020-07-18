@@ -81,9 +81,15 @@ public class FlamePadVisual extends PadVisual {
     }
 
     @Override
+    public boolean isActive() {
+        return visualTaskId != 0;
+    }
+
+    @Override
     public void stopVisual() {
         item.remove();
         plugin.getServer().getScheduler().cancelTask(visualTaskId);
+        visualTaskId = 0;
     }
 
 }

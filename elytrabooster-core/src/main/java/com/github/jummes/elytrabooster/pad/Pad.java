@@ -72,11 +72,13 @@ public class Pad implements Model {
     }
 
     public void runBoosterTask() {
-        visual.startVisual(center.getWrapped());
+        if (!isActive())
+            visual.startVisual(center.getWrapped());
     }
 
     public void stopBoosterTask() {
-        visual.stopVisual();
+        if (isActive())
+            visual.stopVisual();
     }
 
     public void boostPlayer(Player player) {
@@ -113,11 +115,14 @@ public class Pad implements Model {
         }
     }
 
+    private boolean isActive() {
+        return visual.isActive();
+    }
+
     @Override
     public void onRemoval() {
         stopBoosterTask();
     }
-
 
     @Override
     public void beforeModify() {

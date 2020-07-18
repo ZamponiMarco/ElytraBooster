@@ -24,7 +24,7 @@ import java.net.URL;
  */
 public class UpdateChecker {
 
-    private static final int ID = 59002;
+    private static final int ID = 80682;
     private static final String ERR_MSG = "&cUpdate checker failed!";
     private static final String UPDATE_MSG = "&eA new update of ElytraBooster is available at:&6 https://www.spigotmc.org/resources/"
             + ID + "/updates";

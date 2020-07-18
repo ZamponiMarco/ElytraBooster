@@ -22,4 +22,6 @@ public abstract class PadVisual implements Model {
 
     public abstract void initializeVisual(Location center);
 
+    public abstract boolean isActive();
+
 }

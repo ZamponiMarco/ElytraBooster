@@ -61,8 +61,10 @@ public class Spawner implements Model {
     }
 
     public void runBoosterTask() {
-        this.spawnTaskNumber = plugin.getServer().getScheduler().runTaskTimer(plugin, this::spawnEntity, 0, cooldown)
-                .getTaskId();
+        if (!isActive()) {
+            this.spawnTaskNumber = plugin.getServer().getScheduler().runTaskTimer(plugin, this::spawnEntity, 0, cooldown)
+                    .getTaskId();
+        }
     }
 
     private void spawnEntity() {
@@ -72,8 +74,15 @@ public class Spawner implements Model {
     // ---
 
     public void stopBoosterTask() {
-        plugin.getServer().getScheduler().cancelTask(spawnTaskNumber);
-        holder.despawnAll();
+        if (isActive()) {
+            plugin.getServer().getScheduler().cancelTask(spawnTaskNumber);
+            spawnTaskNumber = 0;
+            holder.despawnAll();
+        }
+    }
+
+    private boolean isActive() {
+        return spawnTaskNumber != 0;
     }
 
     @Override

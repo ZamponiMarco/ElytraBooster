@@ -50,6 +50,7 @@ public class FireworkPadVisual extends PadVisual {
     public void stopVisual() {
         item.remove();
         plugin.getServer().getScheduler().cancelTask(visualTaskId);
+        visualTaskId = 0;
     }
 
     @Override
@@ -58,6 +59,11 @@ public class FireworkPadVisual extends PadVisual {
                 0.3, 0.1, null);
         playerLocation.getWorld().spawnParticle(Particle.END_ROD, playerLocation.clone().add(new Vector(0, 1, 0)), 10, 0.3, 1, 0.3, 0.1,
                 null);
+    }
+
+    @Override
+    public boolean isActive() {
+        return visualTaskId != 0;
     }
 
     @Override
