@@ -34,6 +34,7 @@ public class Spawner implements Model {
     @Serializable(headTexture = SHAPE_HEAD, description = "gui.spawner.volumeDescription")
     private Volume volume;
     @Serializable(headTexture = COOLDOWN_HEAD, description = "gui.spawner.cooldown")
+    @Serializable.Number(minValue = 0)
     private int cooldown;
     @Serializable(headTexture = SORTER_HEAD, description = "gui.spawner.holderDescription")
     private EntityHolder holder;

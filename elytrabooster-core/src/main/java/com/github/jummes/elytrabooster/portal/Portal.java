@@ -51,6 +51,7 @@ public class Portal implements Model {
     @Serializable(headTexture = OUTLINE_HEAD, description = "gui.portal.outlineDescription", recreateTooltip = true)
     private Outline outline;
     @Serializable(headTexture = COOLDOWN_HEAD, description = "gui.portal.cooldown")
+    @Serializable.Number(minValue = 0)
     private int cooldown;
     @Serializable(headTexture = SORTER_HEAD, description = "gui.portal.outline.sorter.description", recreateTooltip = true)
     private PointSorter sorter;

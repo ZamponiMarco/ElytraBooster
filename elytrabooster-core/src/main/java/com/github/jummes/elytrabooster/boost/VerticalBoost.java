@@ -27,8 +27,10 @@ public class VerticalBoost extends Boost {
     private static final String VERTICAL_VELOCITY_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTUxNDlkZGRhZGVkMjBkMjQ0ZTBiYjYyYTJkOWZhMGRjNmM2YTc4NjI1NTkzMjhhOTRmNzc3MjVmNTNjMzU4In19fQ=====";
 
     @Serializable(headTexture = VERTICAL_VELOCITY_HEAD, description = "gui.boost.vertical.vertical")
+    @Serializable.Number(minValue = 0)
     private double verticalVelocity;
     @Serializable(headTexture = HORIZONTAL_VELOCITY_HEAD, description = "gui.boost.vertical.horizontal")
+    @Serializable.Number(minValue = 0)
     private double horizontalVelocity;
 
     public VerticalBoost() {

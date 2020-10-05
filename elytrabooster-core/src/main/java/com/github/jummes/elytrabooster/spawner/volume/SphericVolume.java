@@ -27,8 +27,10 @@ public class SphericVolume extends Volume {
     @Serializable(headTexture = CENTER_HEAD, description = "gui.spawner.volume.spheric.center")
     private LocationWrapper center;
     @Serializable(headTexture = MIN_HEAD, description = "gui.spawner.volume.spheric.minRadius")
+    @Serializable.Number(minValue = 0)
     private double minRadius;
     @Serializable(headTexture = MAX_HEAD, description = "gui.spawner.volume.spheric.maxRadius")
+    @Serializable.Number(minValue = 0)
     private double maxRadius;
 
     public SphericVolume(Player p) {

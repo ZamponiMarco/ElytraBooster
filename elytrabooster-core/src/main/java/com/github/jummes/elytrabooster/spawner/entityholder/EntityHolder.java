@@ -26,6 +26,7 @@ public class EntityHolder implements Model {
     @Serializable(headTexture = DESCRIPTION_HEAD, description = "gui.spawner.entityHolder.entityDescription.description", recreateTooltip = true)
     private EntityDescription entityDescription;
     @Serializable(headTexture = MAX_HEAD, description = "gui.spawner.entityHolder.maxEntities")
+    @Serializable.Number(minValue = 0)
     private int maxEntities;
     @Serializable(headTexture = BOOST_HEAD, description = "gui.spawner.entityHolder.boost")
     private SimpleBoost boost;

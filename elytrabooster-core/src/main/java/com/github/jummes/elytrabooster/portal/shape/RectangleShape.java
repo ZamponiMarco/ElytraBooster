@@ -22,8 +22,10 @@ public class RectangleShape extends Shape {
     @Serializable(headTexture = CENTER_HEAD, description = "gui.portal.shape.rectangle.center")
     private LocationWrapper center;
     @Serializable(headTexture = HORIZONTAL_HEAD, description = "gui.portal.shape.rectangle.halfWidth")
+    @Serializable.Number(minValue = 0)
     private double halfWidth;
     @Serializable(headTexture = VERTICAL_HEAD, description = "gui.portal.shape.rectangle.halfHeight")
+    @Serializable.Number(minValue = 0)
     private double halfHeight;
 
     /**

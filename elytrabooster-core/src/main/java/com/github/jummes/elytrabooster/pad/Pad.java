@@ -42,6 +42,7 @@ public class Pad implements Model {
     @Serializable(headTexture = VISUAL_HEAD, description = "gui.pad.visual.description", recreateTooltip = true)
     protected PadVisual visual;
     @Serializable(headTexture = COOLDOWN_HEAD, description = "gui.pad.cooldown")
+    @Serializable.Number(minValue = 0)
     protected int cooldown;
 
     protected int currCooldown;

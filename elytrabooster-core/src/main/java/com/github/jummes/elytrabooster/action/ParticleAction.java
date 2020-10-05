@@ -33,10 +33,13 @@ public class ParticleAction extends AbstractAction {
     @Serializable(headTexture = TYPE_HEAD, stringValue = true, description = "gui.action.particle.type", fromListMapper = "particlesMapper", fromList = "getParticles")
     private Particle type;
     @Serializable(headTexture = COUNT_HEAD, description = "gui.action.particle.count")
+    @Serializable.Number(minValue = 0)
     private int count;
     @Serializable(headTexture = OFFSET_HEAD, description = "gui.action.particle.offset")
+    @Serializable.Number(minValue = 0)
     private double offset;
     @Serializable(headTexture = SPEED_HEAD, description = "gui.action.particle.speed")
+    @Serializable.Number(minValue = 0)
     private double speed;
     @Serializable(headTexture = FORCE_HEAD, description = "gui.action.particle.force")
     private boolean force;

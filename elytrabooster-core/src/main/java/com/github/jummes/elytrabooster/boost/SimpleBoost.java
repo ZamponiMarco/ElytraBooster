@@ -33,10 +33,13 @@ public class SimpleBoost extends Boost {
     private static final String BOOST_DURATION_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2Q1MWM4M2NjMWViY2E1YTFiNmU2Nzk0N2UyMGI0YTJhNmM5ZWZlYTBjZjQ2OTI5NDQ4ZTBlMzc0MTZkNTgzMyJ9fX0====";
 
     @Serializable(headTexture = BOOST_DURATION_HEAD, description = "gui.boost.simple.duration")
+    @Serializable.Number(minValue = 0)
     private final int boostDuration;
     @Serializable(headTexture = INITIAL_VELOCITY_HEAD, description = "gui.boost.simple.initial")
+    @Serializable.Number(minValue = 0)
     private final double initialVelocity;
     @Serializable(headTexture = FINAL_VELOCITY_HEAD, description = "gui.boost.simple.final")
+    @Serializable.Number(minValue = 0)
     private final double finalVelocity;
 
     public SimpleBoost() {
