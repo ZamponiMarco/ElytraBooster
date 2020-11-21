@@ -19,6 +19,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.lang.reflect.Field;
 import java.util.Map;
 
 @Getter
@@ -39,7 +40,7 @@ public class Pad implements Model {
     protected LocationWrapper center;
     @Serializable(headTexture = BOOST_HEAD, description = "gui.pad.boost")
     protected VerticalBoost boost;
-    @Serializable(headTexture = VISUAL_HEAD, description = "gui.pad.visual.description", recreateTooltip = true)
+    @Serializable(headTexture = VISUAL_HEAD, description = "gui.pad.visual.description", additionalDescription = {"gui.additional-tooltips.recreate"})
     protected PadVisual visual;
     @Serializable(headTexture = COOLDOWN_HEAD, description = "gui.pad.cooldown")
     @Serializable.Number(minValue = 0)
@@ -131,7 +132,7 @@ public class Pad implements Model {
     }
 
     @Override
-    public void onModify() {
+    public void onModify(Field field) {
         runBoosterTask();
     }
 

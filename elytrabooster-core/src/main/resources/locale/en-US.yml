@@ -318,3 +318,7 @@ gui:
       - "&7&oboost it had to be used while on"
       - "&7&oground, if it's a simple boost has"
       - "&7&oto be used while flying."
+  additional-tooltips:
+    recreate:
+      - "&6&l- Left click &eto modify."
+      - "&6&l- Right click &eto recreate."

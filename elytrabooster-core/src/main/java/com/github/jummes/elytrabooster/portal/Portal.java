@@ -25,6 +25,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -48,14 +49,14 @@ public class Portal implements Model {
     private String id;
     @Serializable(headTexture = BOOST_HEAD, description = "gui.portal.boost")
     private SimpleBoost boost;
-    @Serializable(headTexture = OUTLINE_HEAD, description = "gui.portal.outlineDescription", recreateTooltip = true)
+    @Serializable(headTexture = OUTLINE_HEAD, description = "gui.portal.outlineDescription", additionalDescription = {"gui.additional-tooltips.recreate"})
     private Outline outline;
     @Serializable(headTexture = COOLDOWN_HEAD, description = "gui.portal.cooldown")
     @Serializable.Number(minValue = 0)
     private int cooldown;
-    @Serializable(headTexture = SORTER_HEAD, description = "gui.portal.outline.sorter.description", recreateTooltip = true)
+    @Serializable(headTexture = SORTER_HEAD, description = "gui.portal.outline.sorter.description", additionalDescription = {"gui.additional-tooltips.recreate"})
     private PointSorter sorter;
-    @Serializable(headTexture = SHAPE_HEAD, description = "gui.portal.shapeDescription", recreateTooltip = true)
+    @Serializable(headTexture = SHAPE_HEAD, description = "gui.portal.shapeDescription", additionalDescription = {"gui.additional-tooltips.recreate"})
     private Shape shape;
 
     private Portal portal;
@@ -195,7 +196,7 @@ public class Portal implements Model {
     }
 
     @Override
-    public void onModify() {
+    public void onModify(Field field) {
         runBoosterTask();
     }
 }

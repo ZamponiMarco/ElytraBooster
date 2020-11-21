@@ -48,11 +48,11 @@ public class Item implements Model {
     private String id;
     @Serializable(displayItem = "getFlatItem", description = "gui.item.item")
     private ItemStackWrapper item;
-    @Serializable(headTexture = BOOST_HEAD, description = "gui.item.boost", recreateTooltip = true)
+    @Serializable(headTexture = BOOST_HEAD, description = "gui.item.boost", additionalDescription = {"gui.additional-tooltips.recreate"})
     private Boost boost;
 
     public Item() {
-        this(RandomStringUtils.randomAlphabetic(6), new ItemStackWrapper(new ItemStack(Material.FIREWORK_ROCKET)), new SimpleBoost());
+        this(RandomStringUtils.randomAlphabetic(6), new ItemStackWrapper(new ItemStack(Material.FIREWORK_ROCKET), true), new SimpleBoost());
     }
 
     public static Item deserialize(Map<String, Object> map) {

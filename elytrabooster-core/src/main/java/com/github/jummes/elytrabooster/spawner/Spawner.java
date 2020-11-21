@@ -14,6 +14,7 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.lang.reflect.Field;
 import java.util.Map;
 
 @Getter
@@ -103,7 +104,7 @@ public class Spawner implements Model {
     }
 
     @Override
-    public void onModify() {
+    public void onModify(Field field) {
         runBoosterTask();
     }
 
