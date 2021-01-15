@@ -1,0 +1,324 @@
+command:
+  reload:
+    start: "&cRecargando &6ElytraBooster"
+    success: "&aElytraBooster &6Recargado"
+gui:
+  action:
+    description:
+      - "&6&lClick izquierdo &epara modificar."
+      - "&6&lClick derecho &epara borrar."
+    damage:
+      description:
+        - "&7&oColoca el daño para aplicar"
+        - "&7&oal Jugador."
+      amount:
+        - "&7&oCantidad de daño."
+    effect:
+      description:
+        - "&7&oEstablecer el efecto que se aplica"
+        - "&7&oal Jugador."
+      type:
+        - "&7&oTipo de Efecto."
+      duration:
+        - "&7&oDuraccion de los Efectos."
+      level:
+        - "&7&oNivel del Efecto."
+      particles:
+        - "&7&oSi las particulas del efecto"
+        - "&7&ose muestran."
+      ambient:
+        - "&7&oSi las particulas del ambiente"
+        - "&7&ose muestran."
+      icon:
+        - "&7&oSi el efecto del icono se muestra."
+    heal:
+      description:
+        - "&7&oConfigurar la curacion que se aplica"
+        - "&7&oal Jugador."
+      amount:
+        - "&7&oCantidad de curacion a dar."
+    message:
+      description:
+        - "&7&oConfigura el mensaje para enviar"
+        - "&7&oal Jugador."
+      message:
+        - "&7&oMensaje enviado."
+    particle:
+      description:
+        - "&7&oColocar las particulas para que se muestren"
+        - "&7&oen el lugar."
+      type:
+        - "&7&oTipo de particulas."
+      count:
+        - "&7&oCantidad de particulas."
+      offset:
+        - "&7&oPosible desplazamiento de las particulas"
+        - "&7&oalrededor del centro del lugar."
+      speed:
+        - "&7&oVelocidad de las particulas."
+      force:
+        - "&7&oForzar las particulas"
+        - "&7&oa mostrarse."
+    sound:
+      description:
+        - "&7&oConfigura el sonido para reproducir"
+        - "&7&oen el lugar."
+      type:
+        - "&7&oTipo de sonido."
+      category:
+        - "&7&oCategoria usada para el sonido."
+      pitch:
+        - "&7&oTono del sonido."
+      volume:
+        - "&7&oVolumen del sonido."
+  boost:
+    trail:
+      description:
+        - "&7&oEl rastro que se muestra detras"
+        - "&7&odel Jugador cuando es impulsado."
+      helix:
+        description:
+          - "&7&oEstablecer un rastro en forma de Helice."
+      none:
+        description:
+          - "&7&oNo dejar rastro de impulso."
+      rainbow:
+        description:
+          - "&7&oColocar particulas en arcoiris."
+      simple:
+        description:
+          - "&7&oEstablecer un simple rastro de particulas."
+      particle:
+        - "&7&oParticulas usadas en el rastro."
+    actions:
+      - "&7&oLista de acciones ejecutadas"
+      - "&7&oen un jugador cuandos es potenciado."
+    simple:
+      description:
+        - "&7&oUn simple Boost ejecutado mientras"
+        - "&7&ovuela con elytras."
+      duration:
+        - "&7&oDuracion del impulso."
+      initial:
+        - "&7&oVelocidad inicial del impulso."
+      final:
+        - "&7&oVelocidad final del impulso."
+    vertical:
+      description:
+        - "&7&oUn impulso vertical, te eleva"
+        - "&7&odesde el suelo y abre automaticamente"
+        - "&7&olas Elytras cuando se alcanza"
+        - "&7&ola altura maxima."
+      vertical:
+        - "&7&oVelocidad del impulso vertical."
+      horizontal:
+        - "&7&oVelocidad del impulso horizontal."
+  pad:
+    description:
+      - "&6&lClick izquierdo &epara modificar."
+      - "&6&lClick derecho &epara borrar."
+    id:
+      - "&7&oLa ID para el pad."
+    center:
+      - "&7&oLocacion para el pad."
+      - "&6&lClick izquierdo &7&opara modificar."
+      - "&6&lClick derecho &7&opara moverlo a tu lugar."
+      - "&6&lClick de la mitad &7&opara teletransportarse a la ubicacion."
+    boost:
+      - "&7&oImpulso vertical proporcionado por"
+      - "&7&oel pad."
+    visual:
+      description:
+        - "&7&oEfectos visuales creados por"
+        - "&7&oel pad."
+      flame:
+        description:
+          - "&7&oColocar un pad con particulas de fuego."
+      firework:
+        description:
+          - "&7&oColocar un pad con particulas de fuergos artificiales."
+    cooldown:
+      - "&7&oCooldown entre cada uso de"
+      - "&7&olos pads."
+  portal:
+    description:
+      - "&6&lClick izquierdo &epara modificar."
+      - "&6&lClick derecho &epara borrar."
+    outline:
+      sorter:
+        description:
+          - "&7&oLos puntos del camino se ordenan cuando"
+          - "&7&oel portal esta en cooldown y"
+          - "&7&ose utiliza el contorno del"
+          - "&7&ocooldown."
+        closing:
+          description:
+            - "&7&oOrdenar los puntos para obtener una"
+            - "&7&oanimacion de cierre del cooldown."
+        none:
+          description:
+            - "&7&oNo clasificar los puntos. Normalmente produce"
+            - "&7&ouna animacion genial de todos modos."
+        random:
+          description:
+            - "&7&oOrdenar los puntos al azar."
+      block:
+        description:
+          - "&7&oEstablecer un contorno del portal hecho de"
+          - "&7&obloques."
+        outlineType:
+          - "&7&oMaterial para el contorno."
+        cooldownType:
+          - "&7&oMaterial usado en el cooldown."
+      particle:
+        description:
+          - "&7&oEstablecer un contorno del portal hecho en"
+          - "&7&oparticulas."
+        outlineType:
+          - "&7&oParticulas usadas como contorno."
+        cooldownType:
+          - "&7&oParticulas usadas cuando el cooldown esta activo."
+      none:
+        description:
+          - "&7&oNo se muestra el contorno del portal."
+    shape:
+      axis:
+        - "&7&oEl eje del portal."
+      circle:
+        description:
+          - "&7&oEstablecer una forma del circulo."
+        radius:
+          - "&7&oRadio del circulo."
+        center:
+          - "&7&oUbicacion central del circulo."
+          - "&6&lClick izquierdo &7&opara modificar."
+          - "&6&lClick derecho &7&opara mover a tu lugar."
+          - "&6&lClick de la mitad &7&opara teletransportarte al lugar."
+      rectangle:
+        description:
+          - "&7&oEstablecer una forma del rectangulo."
+        center:
+          - "&7&oUbicacion central del rectangulo."
+          - "&6&lClick izquierdo &7&opara modificar."
+          - "&6&lClick derecho &7&opara mover a tu lugar."
+          - "&6&lClick de la mitad &7&opara teletransportarte al lugar."
+        halfWidth:
+          - "&7&oLa mitad del ancho del rectángulo."
+        halfHeight:
+          - "&7&oLa mitad de la altura del rectángulo."
+      triangle:
+        description:
+          - "&7&oEstablecer una forma de triangulo."
+        pointOne:
+          - "&7&oUbicacion del primer punto"
+          - "&7&odel triangulo."
+          - "&6&lClick izquierdo &7&opara modificar."
+          - "&6&lClick derecho &7&opara mover a tu lugar."
+          - "&6&lClick de la mitad &7&opara teletransportarte al lugar."
+        pointTwo:
+          - "&7&oDistancia desde el primer punto del"
+          - "&7&otriangulo al segundo punto."
+        pointThree:
+          - "&7&oTDistancia desde el primer punto del"
+          - "&7&otriangulo al tercer punto."
+      composed:
+        description:
+          - "&7&oEstablecer una forma compuesta por otras formas."
+        center:
+          - "&7&oLa ubicación central de la forma compuesta."
+          - "&6&lClick izquierdo &7&opara modificar."
+          - "&6&lClick derecho &7&opara mover a tu lugar."
+          - "&6&lClick de la mitad &7&opara teletransportarte al lugar."
+        shapes:
+          - "&7&oLa lista de formas que componen la forma."
+        mode:
+          - "&7&oEl modo en que las formas serán compuestas."
+        shape:
+          - "&7&oUna de las formas que componen la forma final."
+    id:
+      - "&7&oLa ID para el portal."
+    boost:
+      - "&7&oEl impulso proporcionado por el"
+      - "&7&oportal."
+    outlineDescription:
+      - "&7&oEl contorno que define el"
+      - "&7&oportal."
+    cooldown:
+      - "&7&oEl cooldown entre los usos"
+      - "&7&odel portal."
+    shapeDescription:
+      - "&7&oLa forma del portal."
+  spawner:
+    description:
+      - "&6&lClick izquierdo &epara modificar."
+      - "&6&lClick derecho &epara borrar."
+    entityHolder:
+      entityDescription:
+        description:
+          - "&7&oLa forma en que la entidad se presenta"
+          - "&7&oen el juego."
+        firework:
+          description:
+            - "&7&oLas entidades son fuegos artificiales"
+        mushroom:
+          description:
+            - "&7&oLas entidades son los hongos de Mario"
+        potion:
+          description:
+            - "&7&oLas entidades son pociones de velocidad de vuelo"
+      maxEntities:
+        - "&7&oCantidad maxima de entidades"
+        - "&7&oque puede tener este titular."
+      boost:
+        - "&7&oEl impulso proporcionado por las entidades."
+    volume:
+      spheric:
+        description:
+          - "&7&oEstablecer el volumen espacial del Spawner."
+        center:
+          - "&7&oLa ubicación central de la esfera."
+          - "&6&lClick izquierdo &7&opara modificar."
+          - "&6&lClick derecho &7&opara mover a tu lugar."
+          - "&6&lClick de la mitad &7&opara teletransportarte al lugar."
+        minRadius:
+          - "&7&oDistancia minima de las entidades del"
+          - "&7&ocentro de la esfera."
+        maxRadius:
+          - "&7&oDistancia maxima de las entidades desde"
+          - "&7&oel centro de la esfera."
+    id:
+      - "&7&oLa ID del spawner."
+    volumeDescription:
+      - "&7&oEl volumen en que las entidades"
+      - "&7&oseran spawneadas."
+    cooldown:
+      - "&7&oEl intervalo de tiempo entre"
+      - "&7&odos entidades spawnean."
+    holderDescription:
+      - "&7&oInformacion sobre las entidades"
+      - "&7&oque seran spawneadas y el impulso"
+      - "&7&oque proporcionan."
+  item:
+    description:
+      - "&6&lClick izquierdo &epara modificar."
+      - "&6&lClick derecho &epara borrar."
+      - "&6&lClick de la mitad &epara obtener"
+      - "&euna copia del item en el inventario."
+    id:
+      - "&7&oEl ID para el item"
+    item:
+      - "&7&oEl item usado para crear el"
+      - "&7&oimpulso. Esto impulsará al"
+      - "&7&oJugador cuando haga click derecho sosteniendolo"
+      - "&7&oen las manos."
+      - "&6&lArrastra y suelta &eun item para configurarlo."
+    boost:
+      - "&7&oEl impulso se crea cuando se hace"
+      - "&7&oclick derecho en el mouse. Si es un impulso vertical"
+      - "&7&otiene que ser usado"
+      - "&7&oen la tierra, si es un impulso simple"
+      - "&7&otiene que ser usado en vuelo."
+  additional-tooltips:
+    recreate:
+      - "&6&l- Click izquierdo &epara modificar."
+      - "&6&l- Click derecho &epara recrear."

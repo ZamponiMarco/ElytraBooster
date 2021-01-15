@@ -18,7 +18,6 @@ public class ElytraBoosterReloadCommand extends AbstractCommand {
     protected void execute() {
         sender.sendMessage(Libs.getLocale().get("command.reload.start"));
         Bukkit.getScheduler().cancelTasks(ElytraBooster.getInstance());
-        Libs.getLocale().reloadData(ElytraBooster.getInstance().getConfig().getString("locale"));
         ElytraBooster.getInstance().getPortalManager().reloadData();
         ElytraBooster.getInstance().getSpawnerManager().reloadData();
         ElytraBooster.getInstance().getPadManager().reloadData();

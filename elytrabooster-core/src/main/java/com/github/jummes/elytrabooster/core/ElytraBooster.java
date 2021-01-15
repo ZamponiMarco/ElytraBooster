@@ -160,8 +160,9 @@ public class ElytraBooster extends JavaPlugin {
     }
 
     private void startupTasks() {
-        PluginLocale locale = new PluginLocale(instance, Lists.newArrayList("en-US"), "en-US");
-        Libs.initializeLibrary(instance, locale);
+        Libs.initializeLibrary(instance);
+        Libs.getLocale().registerLocaleFiles(instance, Lists.newArrayList("en-US", "es-ES"),
+                getConfig().getString("locale"));
 
         if (getConfig().getBoolean("updateChecker")) {
             new UpdateChecker(this).checkForUpdate();
