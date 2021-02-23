@@ -38,6 +38,10 @@ import com.github.jummes.elytrabooster.spawner.volume.Volume;
 import com.github.jummes.libs.command.PluginCommandExecutor;
 import com.github.jummes.libs.core.Libs;
 import com.github.jummes.libs.localization.PluginLocale;
+import com.github.jummes.libs.model.util.particle.options.BlockDataOptions;
+import com.github.jummes.libs.model.util.particle.options.DustDataOptions;
+import com.github.jummes.libs.model.util.particle.options.ItemStackOptions;
+import com.github.jummes.libs.model.util.particle.options.ParticleOptions;
 import com.google.common.collect.Lists;
 import lombok.Getter;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
@@ -113,6 +117,11 @@ public class ElytraBooster extends JavaPlugin {
 
         // Items
         ConfigurationSerialization.registerClass(Item.class);
+
+        ConfigurationSerialization.registerClass(ParticleOptions.class);
+        ConfigurationSerialization.registerClass(BlockDataOptions.class);
+        ConfigurationSerialization.registerClass(DustDataOptions.class);
+        ConfigurationSerialization.registerClass(ItemStackOptions.class);
     }
 
     private PortalManager portalManager;
@@ -168,10 +177,10 @@ public class ElytraBooster extends JavaPlugin {
             new UpdateChecker(this).checkForUpdate();
         }
 
-        portalManager = new PortalManager(Portal.class, "yaml", this);
-        spawnerManager = new SpawnerManager(Spawner.class, "yaml", this);
-        padManager = new PadManager(Pad.class, "yaml", this);
-        itemManager = new ItemManager(Item.class, "yaml", this);
+        portalManager = new PortalManager(Portal.class, "yaml", this, new HashMap<>());
+        spawnerManager = new SpawnerManager(Spawner.class, "yaml", this, new HashMap<>());
+        padManager = new PadManager(Pad.class, "yaml", this, new HashMap<>());
+        itemManager = new ItemManager(Item.class, "yaml", this, new HashMap<>());
         statusMap = new HashMap<>();
         PluginCommandExecutor ex = new PluginCommandExecutor(ElytraBoosterHelpCommand.class, "help");
         ex.registerCommand("reload", ElytraBoosterReloadCommand.class);

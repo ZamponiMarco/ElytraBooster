@@ -22,8 +22,10 @@ public class BoosterCommand extends AbstractCommand {
             switch (arguments[0]) {
                 case "list":
                     new BoosterListCommand(sender, "list", arguments.length > 1 ? Arrays.copyOfRange(arguments, 1, arguments.length) : new String[0], isSenderPlayer, subCommand).checkExecution();
+                    break;
                 case "near":
                     new BoosterNearCommand(sender, "near", arguments.length > 1 ? Arrays.copyOfRange(arguments, 1, arguments.length) : new String[0], isSenderPlayer, subCommand).checkExecution();
+                    break;
                 default:
                     new BoosterHelpCommand(sender, "help", arguments.length > 1 ? Arrays.copyOfRange(arguments, 1, arguments.length) : new String[0], isSenderPlayer, subCommand).checkExecution();
             }

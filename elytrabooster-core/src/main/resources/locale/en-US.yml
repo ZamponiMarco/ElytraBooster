@@ -257,6 +257,29 @@ gui:
         description:
           - "&7&oThe way the entity is rendered"
           - "&7&oin the game."
+        custom:
+          description:
+            - "&7&oSet a custom style for your spawned"
+            - "&7&oentities."
+          item:
+            - "&7&oThe item that is used as the display."
+            - "&6&l- Left click &eto modify."
+            - "&6&l- Right click &eto recreate."
+            - "&6&oDrag and drop&7 to"
+            - "&7&oset a specific item."
+          period:
+            - "&7&oThe period in ticks between the spawns"
+            - "&7&oof the particle."
+          particle:
+            - "&7&oThe particle to be spawned in the location"
+            - "&7&oof the entity."
+          move:
+            - "&7&oThe vector that describes where the particles"
+            - "&7&owill be spawned regarding to the entity location."
+        predefined:
+          description:
+            - "&7&oPredefined styles made to be"
+            - "&7&oready to use."
         firework:
           description:
             - "&7&oEntities are fireworks"

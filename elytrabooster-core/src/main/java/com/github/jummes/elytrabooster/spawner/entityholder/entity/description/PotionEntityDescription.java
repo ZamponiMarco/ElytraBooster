@@ -5,6 +5,7 @@ import com.github.jummes.libs.core.Libs;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.Item;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
@@ -16,9 +17,6 @@ public class PotionEntityDescription extends EntityDescription {
 
     private static final String POTION_HEAD = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTMxMDRmMTlhOTQ1YzYyZTEwMzJkZTZlNmM2MzQyMDY2NDdkOTRlZDljMGE1ODRlNmQ2YjZkM2E0NzVmNTIifX19==";
 
-    private Item item;
-    private int effectTaskNumber;
-
     public PotionEntityDescription() {
         super();
     }
@@ -29,39 +27,22 @@ public class PotionEntityDescription extends EntityDescription {
     }
 
     @Override
-    public void spawn(Location location) {
-        item = location.getWorld().dropItem(location, Libs.getWrapper().skullFromValue(POTION_HEAD));
-        item.setGravity(false);
-        item.setVelocity(new Vector());
-        item.setPickupDelay(32767);
-        item.setInvulnerable(true);
-        effectTaskNumber = runEffectTask(location);
+    protected ItemStack getHead() {
+        return Libs.getWrapper().skullFromValue(POTION_HEAD);
     }
 
     @Override
-    public void entityDespawn() {
-        item.remove();
-        plugin.getServer().getScheduler().cancelTask(effectTaskNumber);
-    }
-
-    private int runEffectTask(Location location) {
-        BukkitRunnable runnable = new BukkitRunnable() {
-            @Override
-            public void run() {
-                if (item.isDead()) {
-                    entityDespawn();
-                    spawn(location);
-                    this.cancel();
-                } else {
-                    location.getWorld().spawnParticle(Particle.SPELL_MOB, location, 0, 0.85, 1, 1, 1);
-                }
-            }
-        };
-        return runnable.runTaskTimer(plugin, 0, 10).getTaskId();
+    protected int getTaskPeriod() {
+        return 10;
     }
 
     @Override
-    public Object clone() {
+    protected void spawnParticle(Location location) {
+        location.getWorld().spawnParticle(Particle.SPELL_MOB, location, 0, 0.85, 1, 1, 1);
+    }
+
+    @Override
+    public EntityDescription clone() {
         return new PotionEntityDescription();
     }
 }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Handles data of the spawners
@@ -17,8 +18,8 @@ public class SpawnerManager extends ModelManager<Spawner> {
 
     private List<Spawner> spawners;
 
-    public SpawnerManager(Class<Spawner> classObject, String databaseType, JavaPlugin plugin) {
-        super(classObject, databaseType, plugin);
+    public SpawnerManager(Class<Spawner> classObject, String databaseType, JavaPlugin plugin, Map<String, Object> args) {
+        super(classObject, databaseType, plugin, args);
         this.spawners = database.loadObjects();
     }
 

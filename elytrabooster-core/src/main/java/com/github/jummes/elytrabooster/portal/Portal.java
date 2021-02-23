@@ -191,8 +191,9 @@ public class Portal implements Model {
     }
 
     @Override
-    public void beforeModify() {
+    public Object beforeModify(Field field, Object value) {
         stopBoosterTask();
+        return null;
     }
 
     @Override

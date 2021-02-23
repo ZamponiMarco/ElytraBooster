@@ -20,11 +20,7 @@ public class ActiveEntity {
 
     public ActiveEntity(EntityDescription description, LocationWrapper location, EntityHolder holder) {
         this.plugin = ElytraBooster.getInstance();
-        try {
-            this.description = (EntityDescription) description.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        this.description = description.clone();
         this.location = location;
         this.holder = holder;
         CHECK_INTERVAL = plugin.getConfig().getInt("spawnerCheckInterval", 1);
